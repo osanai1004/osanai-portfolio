@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	// TODO: Vercel デプロイ後、実際の URL に変更する（hreflang・canonical の生成に使用）
-	site: 'https://portfolio.vercel.app',
+	site: 'https://osanai-portfolio.vercel.app',
 	i18n: {
 		locales: ['ja', 'en'],
 		defaultLocale: 'ja',
