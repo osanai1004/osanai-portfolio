@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import type { Locale } from '../lib/site';
 import { useTranslations, type UiKey } from '../lib/i18n/ui';
+import { PROJECT_IMAGES, type ProjectVisual } from '../lib/brands';
 
 interface Props {
 	project: CollectionEntry<'projects'>;
@@ -11,56 +12,13 @@ interface Props {
 const { project, locale } = Astro.props;
 const t = useTranslations(locale);
 const typeLabel = t(`projects.type.${project.data.type}` as UiKey);
-const visual = project.data.visual;
+const visual = project.data.visual as ProjectVisual;
+const image = PROJECT_IMAGES[visual];
 ---
 
 <article class="project-card">
-	<div class={`visual visual-${visual}`} aria-hidden="true">
-		{
-			visual === 'saas' && (
-				<div class="mock mock-saas">
-					<div class="mock-bar" />
-					<div class="mock-rows">
-						<span />
-						<span />
-						<span />
-						<span />
-					</div>
-					<div class="mock-side" />
-				</div>
-			)
-		}
-		{
-			visual === 'web' && (
-				<div class="mock mock-web">
-					<div class="mock-browser">
-						<span class="dot" />
-						<span class="dot" />
-						<span class="dot" />
-					</div>
-					<div class="mock-hero-block" />
-					<div class="mock-cols">
-						<span />
-						<span />
-						<span />
-					</div>
-				</div>
-			)
-		}
-		{
-			visual === 'pwa' && (
-				<div class="mock mock-pwa">
-					<div class="mock-phone">
-						<div class="mock-notch" />
-						<div class="mock-screen">
-							<span />
-							<span />
-							<span class="accent" />
-						</div>
-					</div>
-				</div>
-			)
-		}
+	<div class="visual">
+		<img src={image.src} alt={image.alt} width="1200" height="675" loading="lazy" decoding="async" />
 	</div>
 	<div class="card-body">
 		<div class="card-head">
@@ -116,13 +74,22 @@ const visual = project.data.visual;
 	}
 
 	.visual {
-		position: relative;
-		height: 140px;
-		border-bottom: 1px solid var(--color-hairline);
-		background:
-			linear-gradient(180deg, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent 55%),
-			var(--color-surface-2);
+		aspect-ratio: 16 / 9;
 		overflow: hidden;
+		border-bottom: 1px solid var(--color-hairline);
+		background: var(--color-surface-2);
+	}
+
+	.visual img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.35s ease;
+	}
+
+	.project-card:hover .visual img {
+		transform: scale(1.03);
 	}
 
 	.card-body {
@@ -182,148 +149,17 @@ const visual = project.data.visual;
 		color: var(--color-primary-hover);
 	}
 
-	/* ---- Mock visuals ---- */
-	.mock {
-		position: absolute;
-		inset: 0;
-		display: grid;
-		place-items: center;
-		padding: var(--space-md);
-	}
-
-	.mock-saas {
-		display: grid;
-		grid-template-columns: 1fr 72px;
-		grid-template-rows: 18px 1fr;
-		gap: 8px;
-		width: min(88%, 280px);
-		height: 96px;
-	}
-
-	.mock-bar {
-		grid-column: 1 / -1;
-		border-radius: var(--rounded-xs);
-		background: color-mix(in srgb, var(--color-primary) 45%, var(--color-surface-3));
-	}
-
-	.mock-rows {
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-	}
-
-	.mock-rows span,
-	.mock-side {
-		border-radius: var(--rounded-xs);
-		background: var(--color-surface-3);
-		border: 1px solid var(--color-hairline);
-		flex: 1;
-	}
-
-	.mock-side {
-		background: color-mix(in srgb, var(--color-ink) 6%, var(--color-surface-3));
-	}
-
-	.mock-web {
-		width: min(88%, 280px);
-		height: 100px;
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		padding: 10px;
-		border-radius: var(--rounded-md);
-		background: var(--color-surface-3);
-		border: 1px solid var(--color-hairline);
-	}
-
-	.mock-browser {
-		display: flex;
-		gap: 5px;
-	}
-
-	.dot {
-		width: 7px;
-		height: 7px;
-		border-radius: 50%;
-		background: var(--color-hairline-strong);
-	}
-
-	.mock-hero-block {
-		height: 28px;
-		border-radius: var(--rounded-xs);
-		background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface-1));
-	}
-
-	.mock-cols {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 6px;
-		flex: 1;
-	}
-
-	.mock-cols span {
-		border-radius: var(--rounded-xs);
-		background: var(--color-surface-1);
-		border: 1px solid var(--color-hairline);
-	}
-
-	.mock-pwa {
-		width: 100%;
-		height: 100%;
-		display: grid;
-		place-items: center;
-	}
-
-	.mock-phone {
-		width: 72px;
-		height: 112px;
-		border-radius: 14px;
-		border: 1px solid var(--color-hairline-strong);
-		background: var(--color-surface-3);
-		padding: 8px 6px 6px;
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-		box-shadow: 0 12px 28px rgb(0 0 0 / 35%);
-	}
-
-	.mock-notch {
-		width: 28px;
-		height: 4px;
-		margin-inline: auto;
-		border-radius: var(--rounded-pill);
-		background: var(--color-hairline-strong);
-	}
-
-	.mock-screen {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		gap: 5px;
-		padding: 6px;
-		border-radius: 8px;
-		background: var(--color-surface-1);
-		border: 1px solid var(--color-hairline);
-	}
-
-	.mock-screen span {
-		height: 8px;
-		border-radius: 2px;
-		background: var(--color-surface-3);
-	}
-
-	.mock-screen .accent {
-		margin-top: auto;
-		height: 16px;
-		background: color-mix(in srgb, var(--color-primary) 55%, var(--color-surface-3));
-	}
-
 	@media (prefers-reduced-motion: reduce) {
-		.project-card {
+		.project-card,
+		.visual img {
 			transition: none;
 		}
 
 		.project-card:hover {
+			transform: none;
+		}
+
+		.project-card:hover .visual img {
 			transform: none;
 		}
 	}

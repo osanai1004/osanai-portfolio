@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Section from '../../components/Section.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
-import TechIcon from '../../components/TechIcon.astro';
+import BrandLogo from '../../components/BrandLogo.astro';
 import { LOCALES, SITE, type Locale } from '../../lib/site';
 import { useTranslations, type UiKey } from '../../lib/i18n/ui';
 import { HERO_STACK, SKILL_GROUPS } from '../../lib/profile';
@@ -52,11 +52,9 @@ const stats = [
 			<ul class="panel-stack">
 				{
 					HERO_STACK.map((item) => (
-						<li class="stack-item">
-							<span class="stack-icon">
-								<TechIcon id={item.id} size={20} />
-							</span>
-							<span class="body-sm">{item.label}</span>
+						<li class="stack-chip">
+							<BrandLogo id={item.id} size={14} />
+							<span class="chip-label">{item.label}</span>
 						</li>
 					))
 				}
@@ -86,18 +84,16 @@ const stats = [
 
 	<!-- Skills -->
 	<Section id="skills" eyebrow={t('skills.eyebrow')} title={t('skills.title')}>
-		<div class="skills-grid">
+		<div class="skills-board">
 			{
 				SKILL_GROUPS.map((group) => (
-					<div class="skill-card">
-						<h3 class="body-sm skill-category">{t(group.categoryKey as UiKey)}</h3>
-						<ul class="skill-items">
+					<div class="skill-row">
+						<h3 class="skill-category caption">{t(group.categoryKey as UiKey)}</h3>
+						<ul class="skill-chips">
 							{group.items.map((item) => (
-								<li class="skill-chip">
-									<span class="chip-icon">
-										<TechIcon id={item.id} size={18} />
-									</span>
-									<span class="body-sm">{item.label}</span>
+								<li class="stack-chip">
+									<BrandLogo id={item.id} size={14} />
+									<span class="chip-label">{item.label}</span>
 								</li>
 							))}
 						</ul>
@@ -167,6 +163,35 @@ const stats = [
 		border-color: var(--color-hairline-strong);
 	}
 
+	/* ---- Shared compact chip（Skills / Hero 共通） ---- */
+	.stack-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		height: 32px;
+		padding: 0 10px 0 9px;
+		border-radius: var(--rounded-md);
+		background: var(--color-surface-2);
+		border: 1px solid var(--color-hairline);
+		color: var(--color-ink);
+		transition:
+			border-color 0.15s ease,
+			background-color 0.15s ease;
+	}
+
+	.stack-chip:hover {
+		border-color: var(--color-hairline-strong);
+		background: var(--color-surface-3);
+	}
+
+	.chip-label {
+		font-size: 13px;
+		font-weight: 500;
+		line-height: 1;
+		letter-spacing: -0.01em;
+		white-space: nowrap;
+	}
+
 	/* ---- Hero ---- */
 	.hero {
 		display: grid;
@@ -231,30 +256,9 @@ const stats = [
 	}
 
 	.panel-stack {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: var(--space-xs);
-	}
-
-	.stack-item {
 		display: flex;
-		align-items: center;
-		gap: var(--space-sm);
-		padding: 10px var(--space-sm);
-		border-radius: var(--rounded-md);
-		background: var(--color-surface-2);
-		border: 1px solid var(--color-hairline);
-		color: var(--color-ink);
-	}
-
-	.stack-icon {
-		display: grid;
-		place-items: center;
-		width: 28px;
-		height: 28px;
-		border-radius: var(--rounded-sm);
-		color: var(--color-primary);
-		background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+		flex-wrap: wrap;
+		gap: 8px;
 	}
 
 	.reveal {
@@ -311,55 +315,35 @@ const stats = [
 		margin-top: var(--space-xxs);
 	}
 
-	/* ---- Skills ---- */
-	.skills-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: var(--space-md);
+	/* ---- Skills（コンパクトな行レイアウト） ---- */
+	.skills-board {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-lg);
+		padding: var(--space-xl);
+		background: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-xl);
 	}
 
-	.skill-card {
-		padding: var(--space-lg);
-		background-color: var(--color-surface-1);
-		border: 1px solid var(--color-hairline);
-		border-radius: var(--rounded-lg);
+	.skill-row {
+		display: grid;
+		grid-template-columns: 140px 1fr;
+		gap: var(--space-md);
+		align-items: center;
 	}
 
 	.skill-category {
-		font-weight: 500;
 		color: var(--color-ink-subtle);
-		margin-bottom: var(--space-md);
+		font-weight: 500;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
 	}
 
-	.skill-items {
+	.skill-chips {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--space-xs);
-	}
-
-	.skill-chip {
-		display: inline-flex;
-		align-items: center;
-		gap: var(--space-xs);
-		padding: 8px 10px;
-		border-radius: var(--rounded-md);
-		background: var(--color-surface-2);
-		border: 1px solid var(--color-hairline);
-		color: var(--color-ink);
-		transition:
-			border-color 0.15s ease,
-			background-color 0.15s ease;
-	}
-
-	.skill-chip:hover {
-		border-color: var(--color-hairline-strong);
-		background: var(--color-surface-3);
-	}
-
-	.chip-icon {
-		display: grid;
-		place-items: center;
-		color: var(--color-primary);
+		gap: 8px;
 	}
 
 	/* ---- Projects ---- */
@@ -413,13 +397,21 @@ const stats = [
 		}
 
 		.about-grid,
-		.skills-grid,
 		.projects-grid {
 			grid-template-columns: 1fr;
 		}
 
 		.about-grid {
 			gap: var(--space-xl);
+		}
+
+		.skill-row {
+			grid-template-columns: 1fr;
+			gap: var(--space-xs);
+		}
+
+		.skills-board {
+			padding: var(--space-lg);
 		}
 
 		.cta-banner {

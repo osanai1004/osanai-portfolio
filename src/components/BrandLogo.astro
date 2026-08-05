@@ -1,0 +1,40 @@
+---
+/**
+ * Simple Icons 由来の公式 SVG を CSS mask で着色して表示する。
+ * サイズは props で固定し、レイアウト側で揃える。
+ */
+import { BRANDS, type BrandId } from '../lib/brands';
+
+interface Props {
+	id: BrandId;
+	/** 表示サイズ（px）。Skills / Hero は 14、強調時のみ大きく */
+	size?: number;
+}
+
+const { id, size = 14 } = Astro.props;
+const brand = BRANDS[id];
+const isInk = brand.color === 'ink';
+---
+
+<span
+	class:list={['brand-logo', { 'brand-logo-ink': isInk }]}
+	style={`--logo-size: ${size}px; --brand: ${isInk ? 'var(--color-ink)' : brand.color}; -webkit-mask-image: url(/icons/${brand.file}); mask-image: url(/icons/${brand.file});`}
+	role="img"
+	aria-label={brand.label}
+></span>
+
+<style>
+	.brand-logo {
+		display: inline-block;
+		width: var(--logo-size);
+		height: var(--logo-size);
+		flex-shrink: 0;
+		background-color: var(--brand);
+		-webkit-mask-repeat: no-repeat;
+		mask-repeat: no-repeat;
+		-webkit-mask-position: center;
+		mask-position: center;
+		-webkit-mask-size: contain;
+		mask-size: contain;
+	}
+</style>

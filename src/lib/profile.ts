@@ -1,5 +1,10 @@
+import type { BrandId } from './brands';
+
 /** スキルデータ（言語非依存。カテゴリー名の翻訳は i18n 辞書側で行う） */
-export const SKILL_GROUPS = [
+export const SKILL_GROUPS: ReadonlyArray<{
+	categoryKey: 'skills.backend' | 'skills.infra' | 'skills.frontend' | 'skills.tools';
+	items: ReadonlyArray<{ id: BrandId; label: string }>;
+}> = [
 	{
 		categoryKey: 'skills.backend',
 		items: [
@@ -30,16 +35,14 @@ export const SKILL_GROUPS = [
 			{ id: 'ai', label: 'AI-assisted Dev' },
 		],
 	},
-] as const;
+];
 
 /** ヒーローパネルに表示するフォーカススタック */
-export const HERO_STACK = [
+export const HERO_STACK: ReadonlyArray<{ id: BrandId; label: string }> = [
 	{ id: 'laravel', label: 'Laravel' },
 	{ id: 'php', label: 'PHP' },
 	{ id: 'aws', label: 'AWS' },
 	{ id: 'docker', label: 'Docker' },
 	{ id: 'typescript', label: 'TypeScript' },
 	{ id: 'github', label: 'GitHub' },
-] as const;
-
-export type SkillId = (typeof SKILL_GROUPS)[number]['items'][number]['id'];
+];

@@ -2,6 +2,8 @@
 
 日本語 / 英語対応のポートフォリオサイト。Astro 7 による静的サイト生成（SSG）で、Vercel にデプロイする。
 
+- **ブランドアイコン**: [Simple Icons](https://simpleicons.org)（CC0-1.0）を `public/icons/` にセルフホスト
+- **プロジェクト画像**: AI 生成モックを `public/images/projects/` に配置（WebP）
 - **デザイン正本**: [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) の [`linear.app/DESIGN.md`](https://github.com/VoltAgent/awesome-design-md/blob/main/design-md/linear.app/DESIGN.md)（トークンは `src/styles/tokens.css` に反映済み）
 - **テーマ**: ダーク既定 + ライト切替（トグルの選択を `localStorage` に保存。Linear デザインの正本に合わせ、OS 設定に関わらず初回はダーク）
 - **多言語**: Astro 組み込み i18n。`/ja/` `/en/`（ルート `/` はブラウザ言語で自動振り分け）
