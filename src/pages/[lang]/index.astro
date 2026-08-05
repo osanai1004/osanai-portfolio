@@ -62,7 +62,7 @@ const stats = [
 	</section>
 
 	<!-- About -->
-	<Section id="about" eyebrow={t('about.eyebrow')} title={t('about.title')}>
+	<Section id="about" eyebrow={t('about.eyebrow')} title={t('about.title')} atmosphere="about">
 		<div class="about-grid">
 			<div class="about-body">
 				<p class="body-lg">{t('about.body1')}</p>
@@ -82,7 +82,7 @@ const stats = [
 	</Section>
 
 	<!-- Skills + Activity -->
-	<Section id="skills" eyebrow={t('skills.eyebrow')} title={t('skills.title')}>
+	<Section id="skills" eyebrow={t('skills.eyebrow')} title={t('skills.title')} atmosphere="skills">
 		<div class="skills-board">
 			{
 				SKILL_GROUPS.map((group) => (
@@ -303,9 +303,11 @@ const stats = [
 
 	.stat-card {
 		padding: var(--space-md) var(--space-lg);
-		background-color: var(--color-surface-1);
+		background-color: color-mix(in srgb, var(--color-surface-1) 88%, transparent);
+		backdrop-filter: blur(8px);
 		border: 1px solid var(--color-hairline);
 		border-radius: var(--rounded-lg);
+		box-shadow: 0 8px 28px color-mix(in srgb, #000 18%, transparent);
 	}
 
 	.stat-label {
@@ -322,9 +324,11 @@ const stats = [
 		flex-direction: column;
 		gap: var(--space-lg);
 		padding: var(--space-xl);
-		background: var(--color-surface-1);
+		background: color-mix(in srgb, var(--color-surface-1) 90%, transparent);
+		backdrop-filter: blur(8px);
 		border: 1px solid var(--color-hairline);
 		border-radius: var(--rounded-xl);
+		box-shadow: 0 10px 32px color-mix(in srgb, #000 16%, transparent);
 	}
 
 	.skill-row {
