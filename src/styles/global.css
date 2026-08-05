@@ -1,0 +1,152 @@
+@import '@fontsource-variable/inter';
+@import './tokens.css';
+
+/* ---- Reset ---- */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+	scroll-behavior: smooth;
+	scroll-padding-top: calc(var(--nav-height) + var(--space-lg));
+}
+
+body {
+	font-family: var(--font-sans);
+	font-size: var(--text-body-size);
+	font-weight: 400;
+	line-height: 1.5;
+	letter-spacing: -0.05px;
+	color: var(--color-ink);
+	background-color: var(--color-canvas);
+	min-height: 100dvh;
+}
+
+img,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button {
+	font: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	cursor: pointer;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+/* ---- Focus ring（DESIGN.md: 2px primary-focus outline at 50%） ---- */
+:focus-visible {
+	outline: 2px solid color-mix(in srgb, var(--color-primary-focus) 50%, transparent);
+	outline-offset: 2px;
+	border-radius: var(--rounded-xs);
+}
+
+/* ---- Typography utilities ---- */
+.display-lg {
+	font-size: var(--text-display-lg-size);
+	font-weight: 600;
+	line-height: 1.1;
+	letter-spacing: var(--text-display-lg-tracking);
+}
+
+.display-md {
+	font-size: var(--text-display-md-size);
+	font-weight: 600;
+	line-height: 1.15;
+	letter-spacing: var(--text-display-md-tracking);
+}
+
+.headline {
+	font-size: var(--text-headline-size);
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: var(--text-headline-tracking);
+}
+
+.card-title {
+	font-size: var(--text-card-title-size);
+	font-weight: 500;
+	line-height: 1.25;
+	letter-spacing: var(--text-card-title-tracking);
+}
+
+.body-lg {
+	font-size: var(--text-body-lg-size);
+	line-height: 1.5;
+	letter-spacing: -0.1px;
+}
+
+.body-sm {
+	font-size: var(--text-body-sm-size);
+	line-height: 1.5;
+}
+
+.caption {
+	font-size: var(--text-caption-size);
+	line-height: 1.4;
+}
+
+.eyebrow {
+	font-size: var(--text-eyebrow-size);
+	font-weight: 500;
+	line-height: 1.3;
+	letter-spacing: var(--text-eyebrow-tracking);
+	text-transform: uppercase;
+	color: var(--color-primary);
+}
+
+/* ---- Layout ---- */
+.container {
+	max-width: var(--content-max-width);
+	margin-inline: auto;
+	padding-inline: var(--space-lg);
+}
+
+/* ---- Theme transition ---- */
+body,
+body * {
+	transition:
+		background-color 0.15s ease,
+		border-color 0.15s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	body,
+	body * {
+		transition: none;
+	}
+}
+
+/* ---- Responsive display type（DESIGN.md: display scales down on mobile） ---- */
+@media (max-width: 768px) {
+	.display-lg {
+		font-size: 36px;
+		letter-spacing: -1px;
+	}
+
+	.display-md {
+		font-size: 30px;
+		letter-spacing: -0.6px;
+	}
+}

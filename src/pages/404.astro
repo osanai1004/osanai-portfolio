@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import { DEFAULT_LOCALE } from '../lib/site';
+import { useTranslations } from '../lib/i18n/ui';
+
+const t = useTranslations(DEFAULT_LOCALE);
+---
+
+<Base locale={DEFAULT_LOCALE}>
+	<section class="container not-found">
+		<p class="eyebrow">404</p>
+		<h1 class="display-md">{t('notFound.title')}</h1>
+		<p class="not-found-body">{t('notFound.body')}</p>
+		<a class="back-link body-sm" href={`/${DEFAULT_LOCALE}/`}>{t('notFound.cta')} →</a>
+	</section>
+</Base>
+
+<style>
+	.not-found {
+		padding-top: var(--space-section);
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--space-md);
+	}
+
+	.not-found-body {
+		color: var(--color-ink-muted);
+	}
+
+	.back-link {
+		font-weight: 500;
+		color: var(--color-primary);
+	}
+
+	.back-link:hover {
+		color: var(--color-primary-hover);
+	}
+</style>

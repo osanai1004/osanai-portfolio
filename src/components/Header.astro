@@ -1,0 +1,146 @@
+---
+import type { Locale } from '../lib/site';
+import { useTranslations } from '../lib/i18n/ui';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const otherLocale: Locale = locale === 'ja' ? 'en' : 'ja';
+const otherLocaleUrl = Astro.url.pathname.replace(
+	new RegExp(`^/${locale}(/|$)`),
+	`/${otherLocale}$1`,
+);
+
+const navItems = [
+	{ href: '#about', label: t('nav.about') },
+	{ href: '#skills', label: t('nav.skills') },
+	{ href: '#projects', label: t('nav.projects') },
+	{ href: '#contact', label: t('nav.contact') },
+];
+---
+
+<header class="header">
+	<div class="container header-inner">
+		<a class="brand" href={`/${locale}/`}>
+			<span class="brand-mark" aria-hidden="true"></span>
+			<span class="brand-name body-sm">{t('hero.name')}</span>
+		</a>
+		<nav class="nav" aria-label="Main">
+			{navItems.map((item) => <a class="nav-link body-sm" href={item.href}>{item.label}</a>)}
+		</nav>
+		<div class="actions">
+			<a
+				class="lang-switch body-sm"
+				href={otherLocaleUrl}
+				hreflang={otherLocale}
+				lang={otherLocale}
+				data-lang-switch={otherLocale}
+				aria-label={t('nav.switchLang')}
+			>
+				{t('nav.switchLangShort')}
+			</a>
+			<ThemeToggle locale={locale} />
+		</div>
+	</div>
+</header>
+
+<style>
+	.header {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		height: var(--nav-height);
+		background-color: color-mix(in srgb, var(--color-canvas) 85%, transparent);
+		backdrop-filter: blur(12px);
+		border-bottom: 1px solid var(--color-hairline);
+	}
+
+	.header-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-md);
+		height: 100%;
+	}
+
+	.brand {
+		display: flex;
+		align-items: center;
+		gap: var(--space-xs);
+		min-width: 0;
+	}
+
+	.brand-mark {
+		width: 18px;
+		height: 18px;
+		flex-shrink: 0;
+		border-radius: var(--rounded-sm);
+		background-color: var(--color-primary);
+	}
+
+	.brand-name {
+		font-weight: 500;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.nav {
+		display: flex;
+		gap: var(--space-lg);
+	}
+
+	.nav-link {
+		color: var(--color-ink-subtle);
+	}
+
+	.nav-link:hover {
+		color: var(--color-ink);
+	}
+
+	.actions {
+		display: flex;
+		align-items: center;
+		gap: var(--space-xs);
+	}
+
+	.lang-switch {
+		display: inline-flex;
+		align-items: center;
+		height: 32px;
+		padding-inline: var(--space-sm);
+		font-weight: 500;
+		color: var(--color-ink);
+		background-color: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-md);
+	}
+
+	.lang-switch:hover {
+		background-color: var(--color-surface-2);
+		border-color: var(--color-hairline-strong);
+	}
+
+	@media (max-width: 768px) {
+		.nav {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	// 言語切替時に選好を保存する（ルート `/` アクセス時のリダイレクト先判定に使う）
+	document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch]').forEach((link) => {
+		link.addEventListener('click', () => {
+			try {
+				localStorage.setItem('locale', link.dataset.langSwitch ?? '');
+			} catch {
+				/* localStorage 無効環境では保存しない */
+			}
+		});
+	});
+</script>

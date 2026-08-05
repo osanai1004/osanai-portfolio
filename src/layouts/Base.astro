@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { LOCALES, type Locale } from '../lib/site';
+import { useTranslations } from '../lib/i18n/ui';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+/** hreflang 用: 現在のパスの先頭ロケールを差し替えて各言語版 URL を得る */
+function localeUrl(target: Locale): URL {
+	const path = Astro.url.pathname.replace(new RegExp(`^/${locale}(/|$)`), `/${target}$1`);
+	return new URL(path, Astro.site);
+}
+---
+
+<!doctype html>
+<html lang={locale}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{t('meta.title')}</title>
+		<meta name="description" content={t('meta.description')} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonicalUrl} />
+		{LOCALES.map((l) => <link rel="alternate" hreflang={l} href={localeUrl(l)} />)}
+		<link rel="alternate" hreflang="x-default" href={localeUrl('ja')} />
+		<meta property="og:title" content={t('meta.title')} />
+		<meta property="og:description" content={t('meta.description')} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:locale" content={locale === 'ja' ? 'ja_JP' : 'en_US'} />
+		<script src="/theme-init.js" is:inline></script>
+	</head>
+	<body>
+		<Header locale={locale} />
+		<main id="main">
+			<slot />
+		</main>
+		<Footer locale={locale} />
+	</body>
+</html>

@@ -1,0 +1,13 @@
+# 依存パッケージの脆弱性・更新を自動検知して PR を作成する
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch

@@ -1,0 +1,92 @@
+---
+import type { Locale } from '../lib/site';
+import { useTranslations } from '../lib/i18n/ui';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<button class="theme-toggle" type="button" aria-label={t('nav.toggleTheme')} data-theme-toggle>
+	<svg
+		class="icon icon-sun"
+		aria-hidden="true"
+		width="16"
+		height="16"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+	>
+		<circle cx="12" cy="12" r="4"></circle>
+		<path
+			d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+		></path>
+	</svg>
+	<svg
+		class="icon icon-moon"
+		aria-hidden="true"
+		width="16"
+		height="16"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+	>
+		<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+	</svg>
+</button>
+
+<style>
+	.theme-toggle {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		color: var(--color-ink);
+		background-color: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-md);
+	}
+
+	.theme-toggle:hover {
+		background-color: var(--color-surface-2);
+		border-color: var(--color-hairline-strong);
+	}
+
+	/* ダーク時は太陽（ライトへ切替）、ライト時は月（ダークへ切替）を表示 */
+	.icon-moon {
+		display: none;
+	}
+
+	:global([data-theme='light']) .icon-sun {
+		display: none;
+	}
+
+	:global([data-theme='light']) .icon-moon {
+		display: block;
+	}
+</style>
+
+<script>
+	const THEME_KEY = 'theme';
+
+	document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((button) => {
+		button.addEventListener('click', () => {
+			const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+			document.documentElement.dataset.theme = next;
+			try {
+				localStorage.setItem(THEME_KEY, next);
+			} catch {
+				/* localStorage 無効環境では保存しない */
+			}
+		});
+	});
+</script>

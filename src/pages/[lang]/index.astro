@@ -1,0 +1,277 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Section from '../../components/Section.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { LOCALES, SITE, type Locale } from '../../lib/site';
+import { useTranslations, type UiKey } from '../../lib/i18n/ui';
+import { SKILL_GROUPS } from '../../lib/profile';
+
+export function getStaticPaths() {
+	return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const t = useTranslations(locale);
+
+const projects = (await getCollection('projects', (entry) => entry.id.startsWith(`${locale}/`))).sort(
+	(a, b) => a.data.order - b.data.order,
+);
+
+const stats = [
+	{ value: t('about.stat1.value'), label: t('about.stat1.label') },
+	{ value: t('about.stat2.value'), label: t('about.stat2.label') },
+	{ value: t('about.stat3.value'), label: t('about.stat3.label') },
+];
+---
+
+<Base locale={locale}>
+	<!-- Hero -->
+	<section class="hero container">
+		<p class="eyebrow">{t('hero.eyebrow')}</p>
+		<h1 class="display-lg hero-name">{t('hero.name')}</h1>
+		<p class="body-lg hero-tagline">{t('hero.tagline')}</p>
+		<div class="hero-actions">
+			<a class="button-primary" href="#projects">{t('hero.cta.projects')}</a>
+			<a class="button-secondary" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
+				{t('hero.cta.github')} ↗
+			</a>
+		</div>
+	</section>
+
+	<!-- About -->
+	<Section id="about" eyebrow={t('about.eyebrow')} title={t('about.title')}>
+		<div class="about-grid">
+			<div class="about-body">
+				<p class="body-lg">{t('about.body1')}</p>
+				<p>{t('about.body2')}</p>
+			</div>
+			<dl class="stats">
+				{
+					stats.map((stat) => (
+						<div class="stat-card">
+							<dt class="caption stat-label">{stat.label}</dt>
+							<dd class="headline stat-value">{stat.value}</dd>
+						</div>
+					))
+				}
+			</dl>
+		</div>
+	</Section>
+
+	<!-- Skills -->
+	<Section id="skills" eyebrow={t('skills.eyebrow')} title={t('skills.title')}>
+		<div class="skills-grid">
+			{
+				SKILL_GROUPS.map((group) => (
+					<div class="skill-card">
+						<h3 class="body-sm skill-category">{t(group.categoryKey as UiKey)}</h3>
+						<ul class="skill-items">
+							{group.items.map((item) => (
+								<li class="body-sm skill-item">{item}</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</Section>
+
+	<!-- Projects -->
+	<Section id="projects" eyebrow={t('projects.eyebrow')} title={t('projects.title')}>
+		<div class="projects-grid">
+			{projects.map((project) => <ProjectCard project={project} locale={locale} />)}
+		</div>
+	</Section>
+
+	<!-- Contact（DESIGN.md: cta-banner） -->
+	<section class="container contact-wrap" id="contact">
+		<div class="cta-banner">
+			<p class="eyebrow">{t('contact.eyebrow')}</p>
+			<h2 class="headline cta-title">{t('contact.title')}</h2>
+			<p class="cta-body">{t('contact.body')}</p>
+			<a class="button-primary" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
+				{t('contact.cta')} ↗
+			</a>
+		</div>
+	</section>
+</Base>
+
+<style>
+	/* ---- Buttons（DESIGN.md: button-primary / button-secondary） ---- */
+	.button-primary {
+		display: inline-flex;
+		align-items: center;
+		min-height: 40px;
+		padding: var(--space-xs) 14px;
+		font-size: var(--text-body-sm-size);
+		font-weight: 500;
+		line-height: 1.2;
+		color: var(--color-on-primary);
+		background-color: var(--color-primary);
+		border-radius: var(--rounded-md);
+	}
+
+	.button-primary:hover {
+		background-color: var(--color-primary-hover);
+	}
+
+	.button-secondary {
+		display: inline-flex;
+		align-items: center;
+		min-height: 40px;
+		padding: var(--space-xs) 14px;
+		font-size: var(--text-body-sm-size);
+		font-weight: 500;
+		line-height: 1.2;
+		color: var(--color-ink);
+		background-color: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-md);
+	}
+
+	.button-secondary:hover {
+		background-color: var(--color-surface-2);
+		border-color: var(--color-hairline-strong);
+	}
+
+	/* ---- Hero ---- */
+	.hero {
+		padding-top: var(--space-section);
+	}
+
+	.hero-name {
+		margin-top: var(--space-xs);
+	}
+
+	.hero-tagline {
+		max-width: 40em;
+		margin-top: var(--space-lg);
+		color: var(--color-ink-muted);
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-sm);
+		margin-top: var(--space-xl);
+	}
+
+	/* ---- About ---- */
+	.about-grid {
+		display: grid;
+		grid-template-columns: 3fr 2fr;
+		gap: var(--space-xxl);
+	}
+
+	.about-body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+		color: var(--color-ink-muted);
+	}
+
+	.stats {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+	}
+
+	.stat-card {
+		padding: var(--space-md) var(--space-lg);
+		background-color: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-lg);
+	}
+
+	.stat-label {
+		color: var(--color-ink-subtle);
+	}
+
+	.stat-value {
+		margin-top: var(--space-xxs);
+	}
+
+	/* ---- Skills ---- */
+	.skills-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--space-md);
+	}
+
+	.skill-card {
+		padding: var(--space-lg);
+		background-color: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-lg);
+	}
+
+	.skill-category {
+		font-weight: 500;
+		color: var(--color-ink-subtle);
+		margin-bottom: var(--space-sm);
+	}
+
+	.skill-items {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+	}
+
+	.skill-item {
+		padding-left: var(--space-md);
+		position: relative;
+	}
+
+	.skill-item::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0.55em;
+		width: 6px;
+		height: 6px;
+		border-radius: var(--rounded-pill);
+		background-color: var(--color-primary);
+	}
+
+	/* ---- Projects ---- */
+	.projects-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--space-md);
+	}
+
+	/* ---- Contact ---- */
+	.contact-wrap {
+		padding-top: var(--space-section);
+	}
+
+	.cta-banner {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--space-md);
+		padding: var(--space-xxl);
+		background-color: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-lg);
+	}
+
+	.cta-body {
+		max-width: 36em;
+		color: var(--color-ink-muted);
+	}
+
+	/* ---- Responsive（DESIGN.md: 2-up → 1-up below 768px） ---- */
+	@media (max-width: 768px) {
+		.about-grid,
+		.skills-grid,
+		.projects-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.about-grid {
+			gap: var(--space-xl);
+		}
+	}
+</style>

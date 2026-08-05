@@ -1,0 +1,20 @@
+---
+// ルート `/` は言語判定してリダイレクトする（JS 無効時は meta refresh で /ja/ へ）
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex" />
+		<title>Redirecting…</title>
+		<script src="/locale-redirect.js" is:inline></script>
+		<noscript>
+			<meta http-equiv="refresh" content="0;url=/ja/" />
+		</noscript>
+	</head>
+	<body>
+		<p><a href="/ja/">日本語</a> / <a href="/en/">English</a></p>
+	</body>
+</html>
