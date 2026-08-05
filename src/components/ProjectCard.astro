@@ -11,60 +11,135 @@ interface Props {
 const { project, locale } = Astro.props;
 const t = useTranslations(locale);
 const typeLabel = t(`projects.type.${project.data.type}` as UiKey);
+const visual = project.data.visual;
 ---
 
 <article class="project-card">
-	<div class="card-head">
-		<h3 class="card-title">{project.data.title}</h3>
-		<span class="status-badge caption">{typeLabel}</span>
+	<div class={`visual visual-${visual}`} aria-hidden="true">
+		{
+			visual === 'saas' && (
+				<div class="mock mock-saas">
+					<div class="mock-bar" />
+					<div class="mock-rows">
+						<span />
+						<span />
+						<span />
+						<span />
+					</div>
+					<div class="mock-side" />
+				</div>
+			)
+		}
+		{
+			visual === 'web' && (
+				<div class="mock mock-web">
+					<div class="mock-browser">
+						<span class="dot" />
+						<span class="dot" />
+						<span class="dot" />
+					</div>
+					<div class="mock-hero-block" />
+					<div class="mock-cols">
+						<span />
+						<span />
+						<span />
+					</div>
+				</div>
+			)
+		}
+		{
+			visual === 'pwa' && (
+				<div class="mock mock-pwa">
+					<div class="mock-phone">
+						<div class="mock-notch" />
+						<div class="mock-screen">
+							<span />
+							<span />
+							<span class="accent" />
+						</div>
+					</div>
+				</div>
+			)
+		}
 	</div>
-	<p class="body-sm summary">{project.data.summary}</p>
-	<ul class="tech-list" aria-label="Tech stack">
-		{project.data.tech.map((item) => <li class="tech-item caption">{item}</li>)}
-	</ul>
-	{
-		project.data.links && (
-			<div class="links">
-				{project.data.links.site && (
-					<a class="link body-sm" href={project.data.links.site} rel="noopener noreferrer" target="_blank">
-						{t('projects.link.site')} ↗
-					</a>
-				)}
-				{project.data.links.github && (
-					<a class="link body-sm" href={project.data.links.github} rel="noopener noreferrer" target="_blank">
-						{t('projects.link.github')} ↗
-					</a>
-				)}
-			</div>
-		)
-	}
+	<div class="card-body">
+		<div class="card-head">
+			<h3 class="card-title">{project.data.title}</h3>
+			<span class="status-badge caption">{typeLabel}</span>
+		</div>
+		<p class="body-sm summary">{project.data.summary}</p>
+		<ul class="tech-list" aria-label="Tech stack">
+			{project.data.tech.map((item) => <li class="tech-item caption">{item}</li>)}
+		</ul>
+		{
+			project.data.links && (
+				<div class="links">
+					{project.data.links.site && (
+						<a class="link body-sm" href={project.data.links.site} rel="noopener noreferrer" target="_blank">
+							{t('projects.link.site')} ↗
+						</a>
+					)}
+					{project.data.links.github && (
+						<a
+							class="link body-sm"
+							href={project.data.links.github}
+							rel="noopener noreferrer"
+							target="_blank"
+						>
+							{t('projects.link.github')} ↗
+						</a>
+					)}
+				</div>
+			)
+		}
+	</div>
 </article>
 
 <style>
-	/* DESIGN.md: feature-card — surface-1 / hairline 1px / rounded-lg / padding 24px */
 	.project-card {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-md);
-		padding: var(--space-lg);
+		overflow: hidden;
 		background-color: var(--color-surface-1);
 		border: 1px solid var(--color-hairline);
-		border-radius: var(--rounded-lg);
+		border-radius: var(--rounded-xl);
+		transition:
+			background-color 0.15s ease,
+			border-color 0.15s ease,
+			transform 0.2s ease;
 	}
 
 	.project-card:hover {
 		background-color: var(--color-surface-2);
 		border-color: var(--color-hairline-strong);
+		transform: translateY(-2px);
+	}
+
+	.visual {
+		position: relative;
+		height: 140px;
+		border-bottom: 1px solid var(--color-hairline);
+		background:
+			linear-gradient(180deg, color-mix(in srgb, var(--color-primary) 8%, transparent), transparent 55%),
+			var(--color-surface-2);
+		overflow: hidden;
+	}
+
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+		padding: var(--space-lg);
+		flex-grow: 1;
 	}
 
 	.card-head {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		justify-content: space-between;
 		gap: var(--space-sm);
 	}
 
-	/* DESIGN.md: status-badge — surface-2 / ink-muted / pill */
 	.status-badge {
 		flex-shrink: 0;
 		padding: 2px var(--space-xs);
@@ -105,5 +180,151 @@ const typeLabel = t(`projects.type.${project.data.type}` as UiKey);
 
 	.link:hover {
 		color: var(--color-primary-hover);
+	}
+
+	/* ---- Mock visuals ---- */
+	.mock {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		padding: var(--space-md);
+	}
+
+	.mock-saas {
+		display: grid;
+		grid-template-columns: 1fr 72px;
+		grid-template-rows: 18px 1fr;
+		gap: 8px;
+		width: min(88%, 280px);
+		height: 96px;
+	}
+
+	.mock-bar {
+		grid-column: 1 / -1;
+		border-radius: var(--rounded-xs);
+		background: color-mix(in srgb, var(--color-primary) 45%, var(--color-surface-3));
+	}
+
+	.mock-rows {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.mock-rows span,
+	.mock-side {
+		border-radius: var(--rounded-xs);
+		background: var(--color-surface-3);
+		border: 1px solid var(--color-hairline);
+		flex: 1;
+	}
+
+	.mock-side {
+		background: color-mix(in srgb, var(--color-ink) 6%, var(--color-surface-3));
+	}
+
+	.mock-web {
+		width: min(88%, 280px);
+		height: 100px;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		padding: 10px;
+		border-radius: var(--rounded-md);
+		background: var(--color-surface-3);
+		border: 1px solid var(--color-hairline);
+	}
+
+	.mock-browser {
+		display: flex;
+		gap: 5px;
+	}
+
+	.dot {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: var(--color-hairline-strong);
+	}
+
+	.mock-hero-block {
+		height: 28px;
+		border-radius: var(--rounded-xs);
+		background: color-mix(in srgb, var(--color-primary) 35%, var(--color-surface-1));
+	}
+
+	.mock-cols {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 6px;
+		flex: 1;
+	}
+
+	.mock-cols span {
+		border-radius: var(--rounded-xs);
+		background: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+	}
+
+	.mock-pwa {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		place-items: center;
+	}
+
+	.mock-phone {
+		width: 72px;
+		height: 112px;
+		border-radius: 14px;
+		border: 1px solid var(--color-hairline-strong);
+		background: var(--color-surface-3);
+		padding: 8px 6px 6px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+		box-shadow: 0 12px 28px rgb(0 0 0 / 35%);
+	}
+
+	.mock-notch {
+		width: 28px;
+		height: 4px;
+		margin-inline: auto;
+		border-radius: var(--rounded-pill);
+		background: var(--color-hairline-strong);
+	}
+
+	.mock-screen {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		padding: 6px;
+		border-radius: 8px;
+		background: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+	}
+
+	.mock-screen span {
+		height: 8px;
+		border-radius: 2px;
+		background: var(--color-surface-3);
+	}
+
+	.mock-screen .accent {
+		margin-top: auto;
+		height: 16px;
+		background: color-mix(in srgb, var(--color-primary) 55%, var(--color-surface-3));
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.project-card {
+			transition: none;
+		}
+
+		.project-card:hover {
+			transform: none;
+		}
 	}
 </style>

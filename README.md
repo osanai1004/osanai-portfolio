@@ -32,7 +32,7 @@ Node.js 22.12 以上が必要。
 
 ## コンテンツの更新方法
 
-- **プロジェクト追加**: `src/content/projects/ja/` と `en/` に同名の `.md` を追加（frontmatter は `src/content.config.ts` のスキーマ準拠）
+- **プロジェクト追加**: `src/content/projects/ja/` と `en/` に同名の `.md` を追加（frontmatter は `src/content.config.ts` のスキーマ準拠）。`title` はプロダクト固有名ではなく「何に取り組んでいるか」が伝わる見出しにする
 - **文言修正**: `src/lib/i18n/ui.ts` の辞書を編集（ja / en 両方）
 - **スキル更新**: `src/lib/profile.ts` を編集
 - **デザイン調整**: `src/styles/tokens.css` の CSS 変数を編集（DESIGN.md のトークン名を維持）

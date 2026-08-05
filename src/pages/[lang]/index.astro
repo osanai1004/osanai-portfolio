@@ -3,9 +3,10 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Section from '../../components/Section.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import TechIcon from '../../components/TechIcon.astro';
 import { LOCALES, SITE, type Locale } from '../../lib/site';
 import { useTranslations, type UiKey } from '../../lib/i18n/ui';
-import { SKILL_GROUPS } from '../../lib/profile';
+import { HERO_STACK, SKILL_GROUPS } from '../../lib/profile';
 
 export function getStaticPaths() {
 	return LOCALES.map((lang) => ({ params: { lang } }));
@@ -28,15 +29,39 @@ const stats = [
 <Base locale={locale}>
 	<!-- Hero -->
 	<section class="hero container">
-		<p class="eyebrow">{t('hero.eyebrow')}</p>
-		<h1 class="display-lg hero-name">{t('hero.name')}</h1>
-		<p class="body-lg hero-tagline">{t('hero.tagline')}</p>
-		<div class="hero-actions">
-			<a class="button-primary" href="#projects">{t('hero.cta.projects')}</a>
-			<a class="button-secondary" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
-				{t('hero.cta.github')} ↗
-			</a>
+		<div class="hero-copy reveal">
+			<p class="eyebrow">{t('hero.eyebrow')}</p>
+			<h1 class="display-lg hero-name">{t('hero.name')}</h1>
+			<p class="body-lg hero-tagline">{t('hero.tagline')}</p>
+			<div class="hero-actions">
+				<a class="button-primary" href="#projects">{t('hero.cta.projects')}</a>
+				<a class="button-secondary" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
+					{t('hero.cta.github')} ↗
+				</a>
+			</div>
 		</div>
+
+		<aside class="hero-panel reveal reveal-delay" aria-label={t('hero.panel.label')}>
+			<div class="panel-chrome">
+				<span class="chrome-dot"></span>
+				<span class="chrome-dot"></span>
+				<span class="chrome-dot"></span>
+				<span class="chrome-title caption">{t('hero.panel.label')}</span>
+			</div>
+			<p class="panel-role body-sm">{t('hero.panel.role')}</p>
+			<ul class="panel-stack">
+				{
+					HERO_STACK.map((item) => (
+						<li class="stack-item">
+							<span class="stack-icon">
+								<TechIcon id={item.id} size={20} />
+							</span>
+							<span class="body-sm">{item.label}</span>
+						</li>
+					))
+				}
+			</ul>
+		</aside>
 	</section>
 
 	<!-- About -->
@@ -68,7 +93,12 @@ const stats = [
 						<h3 class="body-sm skill-category">{t(group.categoryKey as UiKey)}</h3>
 						<ul class="skill-items">
 							{group.items.map((item) => (
-								<li class="body-sm skill-item">{item}</li>
+								<li class="skill-chip">
+									<span class="chip-icon">
+										<TechIcon id={item.id} size={18} />
+									</span>
+									<span class="body-sm">{item.label}</span>
+								</li>
 							))}
 						</ul>
 					</div>
@@ -84,12 +114,14 @@ const stats = [
 		</div>
 	</Section>
 
-	<!-- Contact（DESIGN.md: cta-banner） -->
+	<!-- Contact -->
 	<section class="container contact-wrap" id="contact">
 		<div class="cta-banner">
-			<p class="eyebrow">{t('contact.eyebrow')}</p>
-			<h2 class="headline cta-title">{t('contact.title')}</h2>
-			<p class="cta-body">{t('contact.body')}</p>
+			<div class="cta-copy">
+				<p class="eyebrow">{t('contact.eyebrow')}</p>
+				<h2 class="headline cta-title">{t('contact.title')}</h2>
+				<p class="cta-body">{t('contact.body')}</p>
+			</div>
 			<a class="button-primary" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
 				{t('contact.cta')} ↗
 			</a>
@@ -98,7 +130,7 @@ const stats = [
 </Base>
 
 <style>
-	/* ---- Buttons（DESIGN.md: button-primary / button-secondary） ---- */
+	/* ---- Buttons ---- */
 	.button-primary {
 		display: inline-flex;
 		align-items: center;
@@ -137,7 +169,12 @@ const stats = [
 
 	/* ---- Hero ---- */
 	.hero {
-		padding-top: var(--space-section);
+		display: grid;
+		grid-template-columns: 1.15fr 0.85fr;
+		gap: var(--space-xxl);
+		align-items: center;
+		padding-top: calc(var(--space-section) - 16px);
+		min-height: calc(100dvh - var(--nav-height) - var(--space-xxl));
 	}
 
 	.hero-name {
@@ -145,7 +182,7 @@ const stats = [
 	}
 
 	.hero-tagline {
-		max-width: 40em;
+		max-width: 36em;
 		margin-top: var(--space-lg);
 		color: var(--color-ink-muted);
 	}
@@ -155,6 +192,88 @@ const stats = [
 		flex-wrap: wrap;
 		gap: var(--space-sm);
 		margin-top: var(--space-xl);
+	}
+
+	.hero-panel {
+		position: relative;
+		padding: var(--space-lg);
+		background-color: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-xl);
+		box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-ink) 8%, transparent);
+	}
+
+	.panel-chrome {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		margin-bottom: var(--space-md);
+	}
+
+	.chrome-dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--color-hairline-strong);
+	}
+
+	.chrome-title {
+		margin-left: auto;
+		color: var(--color-ink-tertiary);
+		font-family: var(--font-mono);
+	}
+
+	.panel-role {
+		color: var(--color-ink-subtle);
+		margin-bottom: var(--space-md);
+		padding-bottom: var(--space-md);
+		border-bottom: 1px solid var(--color-hairline);
+	}
+
+	.panel-stack {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-xs);
+	}
+
+	.stack-item {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+		padding: 10px var(--space-sm);
+		border-radius: var(--rounded-md);
+		background: var(--color-surface-2);
+		border: 1px solid var(--color-hairline);
+		color: var(--color-ink);
+	}
+
+	.stack-icon {
+		display: grid;
+		place-items: center;
+		width: 28px;
+		height: 28px;
+		border-radius: var(--rounded-sm);
+		color: var(--color-primary);
+		background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+	}
+
+	.reveal {
+		animation: rise 0.55s ease both;
+	}
+
+	.reveal-delay {
+		animation-delay: 0.12s;
+	}
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(12px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	/* ---- About ---- */
@@ -209,35 +328,44 @@ const stats = [
 	.skill-category {
 		font-weight: 500;
 		color: var(--color-ink-subtle);
-		margin-bottom: var(--space-sm);
+		margin-bottom: var(--space-md);
 	}
 
 	.skill-items {
 		display: flex;
-		flex-direction: column;
+		flex-wrap: wrap;
 		gap: var(--space-xs);
 	}
 
-	.skill-item {
-		padding-left: var(--space-md);
-		position: relative;
+	.skill-chip {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-xs);
+		padding: 8px 10px;
+		border-radius: var(--rounded-md);
+		background: var(--color-surface-2);
+		border: 1px solid var(--color-hairline);
+		color: var(--color-ink);
+		transition:
+			border-color 0.15s ease,
+			background-color 0.15s ease;
 	}
 
-	.skill-item::before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 0.55em;
-		width: 6px;
-		height: 6px;
-		border-radius: var(--rounded-pill);
-		background-color: var(--color-primary);
+	.skill-chip:hover {
+		border-color: var(--color-hairline-strong);
+		background: var(--color-surface-3);
+	}
+
+	.chip-icon {
+		display: grid;
+		place-items: center;
+		color: var(--color-primary);
 	}
 
 	/* ---- Projects ---- */
 	.projects-grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		gap: var(--space-md);
 	}
 
@@ -248,13 +376,21 @@ const stats = [
 
 	.cta-banner {
 		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: var(--space-md);
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-xl);
 		padding: var(--space-xxl);
-		background-color: var(--color-surface-1);
+		background:
+			linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 42%),
+			var(--color-surface-1);
 		border: 1px solid var(--color-hairline);
-		border-radius: var(--rounded-lg);
+		border-radius: var(--rounded-xl);
+	}
+
+	.cta-copy {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
 	}
 
 	.cta-body {
@@ -262,8 +398,20 @@ const stats = [
 		color: var(--color-ink-muted);
 	}
 
-	/* ---- Responsive（DESIGN.md: 2-up → 1-up below 768px） ---- */
+	@media (max-width: 1024px) {
+		.projects-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
 	@media (max-width: 768px) {
+		.hero {
+			grid-template-columns: 1fr;
+			min-height: auto;
+			gap: var(--space-xl);
+			padding-top: var(--space-xxl);
+		}
+
 		.about-grid,
 		.skills-grid,
 		.projects-grid {
@@ -272,6 +420,18 @@ const stats = [
 
 		.about-grid {
 			gap: var(--space-xl);
+		}
+
+		.cta-banner {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reveal,
+		.reveal-delay {
+			animation: none;
 		}
 	}
 </style>
