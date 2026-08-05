@@ -44,6 +44,14 @@ const hasAtmosphere = atmosphere !== 'none';
 		padding-block: var(--space-section);
 		margin-top: calc(var(--space-xl) * -1);
 		overflow: hidden;
+		/* 真っ黒のキャンバスと差がつくよう、帯そのものに色を乗せる */
+		background:
+			linear-gradient(
+				180deg,
+				color-mix(in srgb, var(--color-surface-1) 55%, transparent),
+				color-mix(in srgb, var(--color-surface-2) 70%, transparent) 48%,
+				color-mix(in srgb, var(--color-surface-1) 45%, transparent)
+			);
 	}
 
 	.section-inner {
@@ -67,58 +75,60 @@ const hasAtmosphere = atmosphere !== 'none';
 	.atmosphere-glow {
 		position: absolute;
 		border-radius: 50%;
-		filter: blur(48px);
-		opacity: 0.55;
+		filter: blur(40px);
+		opacity: 0.9;
 		will-change: transform;
 	}
 
 	.atmosphere-glow-a {
-		width: min(52vw, 520px);
-		height: min(52vw, 520px);
+		width: min(64vw, 640px);
+		height: min(64vw, 640px);
 		top: -12%;
 		right: -8%;
 		background: radial-gradient(
 			circle at 40% 40%,
-			color-mix(in srgb, var(--color-primary) 34%, transparent),
-			transparent 68%
+			color-mix(in srgb, var(--color-primary) 55%, transparent),
+			color-mix(in srgb, var(--color-primary) 18%, transparent) 42%,
+			transparent 70%
 		);
-		animation: drift-a 18s ease-in-out infinite alternate;
+		animation: drift-a 16s ease-in-out infinite alternate;
 	}
 
 	.atmosphere-glow-b {
-		width: min(44vw, 440px);
-		height: min(44vw, 440px);
+		width: min(54vw, 540px);
+		height: min(54vw, 540px);
 		bottom: -18%;
 		left: -6%;
 		background: radial-gradient(
 			circle at 50% 50%,
-			color-mix(in srgb, var(--color-success) 18%, transparent),
-			transparent 70%
+			color-mix(in srgb, var(--color-success) 32%, transparent),
+			color-mix(in srgb, var(--color-primary-hover) 12%, transparent) 48%,
+			transparent 72%
 		);
-		animation: drift-b 22s ease-in-out infinite alternate;
+		animation: drift-b 20s ease-in-out infinite alternate;
 	}
 
 	.atmosphere-grid {
 		position: absolute;
 		inset: 0;
-		opacity: 0.35;
+		opacity: 0.55;
 		background-image:
-			radial-gradient(color-mix(in srgb, var(--color-ink) 14%, transparent) 1px, transparent 1px),
+			radial-gradient(color-mix(in srgb, var(--color-ink) 22%, transparent) 1.2px, transparent 1.2px),
 			linear-gradient(
 				to right,
-				color-mix(in srgb, var(--color-hairline-strong) 55%, transparent) 1px,
+				color-mix(in srgb, var(--color-hairline-strong) 70%, transparent) 1px,
 				transparent 1px
 			),
 			linear-gradient(
 				to bottom,
-				color-mix(in srgb, var(--color-hairline-strong) 45%, transparent) 1px,
+				color-mix(in srgb, var(--color-hairline-strong) 60%, transparent) 1px,
 				transparent 1px
 			);
 		background-size:
-			18px 18px,
-			72px 72px,
-			72px 72px;
-		mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 20%, transparent 78%);
+			16px 16px,
+			64px 64px,
+			64px 64px;
+		mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 28%, transparent 82%);
 	}
 
 	.atmosphere-fade {
@@ -145,8 +155,9 @@ const hasAtmosphere = atmosphere !== 'none';
 		right: auto;
 		background: radial-gradient(
 			circle at 45% 45%,
-			color-mix(in srgb, var(--color-primary) 30%, transparent),
-			transparent 70%
+			color-mix(in srgb, var(--color-primary) 58%, transparent),
+			color-mix(in srgb, var(--color-primary) 16%, transparent) 46%,
+			transparent 72%
 		);
 	}
 
@@ -156,14 +167,14 @@ const hasAtmosphere = atmosphere !== 'none';
 		bottom: 4%;
 		background: radial-gradient(
 			circle at 50% 50%,
-			color-mix(in srgb, var(--color-primary-hover) 16%, transparent),
+			color-mix(in srgb, var(--color-primary-hover) 36%, transparent),
 			transparent 72%
 		);
 	}
 
 	.atmosphere-about .atmosphere-grid {
 		transform: rotate(-4deg) scale(1.08);
-		opacity: 0.28;
+		opacity: 0.48;
 	}
 
 	/* Skills: 右寄りの技術感 + やや強いドット */
@@ -172,8 +183,8 @@ const hasAtmosphere = atmosphere !== 'none';
 		right: 8%;
 		background: radial-gradient(
 			circle at 40% 40%,
-			color-mix(in srgb, var(--color-primary) 28%, transparent),
-			transparent 68%
+			color-mix(in srgb, var(--color-primary) 52%, transparent),
+			transparent 70%
 		);
 	}
 
@@ -182,25 +193,35 @@ const hasAtmosphere = atmosphere !== 'none';
 		bottom: -20%;
 		background: radial-gradient(
 			circle at 50% 50%,
-			color-mix(in srgb, var(--color-success) 14%, transparent),
-			transparent 70%
+			color-mix(in srgb, var(--color-success) 34%, transparent),
+			transparent 72%
 		);
 	}
 
 	.atmosphere-skills .atmosphere-grid {
-		opacity: 0.4;
+		opacity: 0.62;
 		background-size:
-			16px 16px,
-			64px 64px,
-			64px 64px;
+			14px 14px,
+			56px 56px,
+			56px 56px;
+	}
+
+	:global(:root[data-theme='light']) .section-band {
+		background:
+			linear-gradient(
+				180deg,
+				color-mix(in srgb, var(--color-surface-3) 80%, transparent),
+				color-mix(in srgb, var(--color-surface-1) 92%, transparent) 50%,
+				color-mix(in srgb, var(--color-surface-3) 70%, transparent)
+			);
 	}
 
 	:global(:root[data-theme='light']) .atmosphere-glow {
-		opacity: 0.4;
+		opacity: 0.7;
 	}
 
 	:global(:root[data-theme='light']) .atmosphere-grid {
-		opacity: 0.22;
+		opacity: 0.38;
 	}
 
 	@keyframes drift-a {
