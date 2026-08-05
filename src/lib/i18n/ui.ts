@@ -49,7 +49,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': '課題解決として届けられること',
 		'strengths.lead':
-			'プロダクト名よりも、「どんな課題を、どう解き、どんな価値を出せるか」。採用・協業の判断材料になる強みをまとめています。',
+			'いま担当している自社 SaaS 開発・仕様FIX・チームリードの実務に即して、「どんな課題をどう解くか」をまとめています。',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'お気軽にご連絡ください',
 		'contact.body':
@@ -106,7 +106,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': 'Problems I can help solve',
 		'strengths.lead':
-			'Not a product catalog — a clear view of the outcomes I can own: how I use technology and domain judgment to remove friction for teams and customers.',
+			'Grounded in the SaaS work, spec-fix sessions, and team lead coaching I do today — focused on the problems I can help solve.',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'Let’s connect',
 		'contact.body':
