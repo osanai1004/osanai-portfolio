@@ -19,12 +19,17 @@ const locale = Astro.params.lang as Locale;
 const t = useTranslations(locale);
 const strengths = getStrengths();
 
-const stats = [
-	{ value: t('about.stat1.value'), label: t('about.stat1.label') },
-	{ value: t('about.stat2.value'), label: t('about.stat2.label') },
-	{ value: t('about.stat3.value'), label: t('about.stat3.label') },
-	{ value: t('about.stat4.value'), label: t('about.stat4.label') },
-];
+const timeline = [1, 2, 3, 4].map((n) => ({
+	period: t(`about.tl${n}.period` as UiKey),
+	title: t(`about.tl${n}.title` as UiKey),
+	desc: t(`about.tl${n}.desc` as UiKey),
+	current: n === 4,
+}));
+
+const qaItems = [1, 2, 3].map((n) => ({
+	q: t(`about.qa${n}.q` as UiKey),
+	a: t(`about.qa${n}.a` as UiKey),
+}));
 ---
 
 <Base locale={locale}>
@@ -68,22 +73,41 @@ const stats = [
 
 	<!-- About -->
 	<Section id="about" eyebrow={t('about.eyebrow')} title={t('about.title')} atmosphere="about">
+		<p class="about-intro body-lg">{t('about.intro')}</p>
 		<div class="about-grid">
-			<div class="about-body">
-				<p class="body-lg">{t('about.body1')}</p>
-				<p>{t('about.body2')}</p>
-				<p>{t('about.body3')}</p>
+			<div class="about-col">
+				<p class="caption about-col-label">{t('about.timelineLabel')}</p>
+				<ol class="timeline">
+					{
+						timeline.map((item) => (
+							<li class:list={['timeline-item', item.current && 'timeline-current']}>
+								<span class="timeline-marker" aria-hidden="true" />
+								<p class="caption timeline-period">{item.period}</p>
+								<h3 class="body-lg timeline-title">{item.title}</h3>
+								<p class="body-sm timeline-desc">{item.desc}</p>
+							</li>
+						))
+					}
+				</ol>
 			</div>
-			<dl class="stats">
-				{
-					stats.map((stat) => (
-						<div class="stat-card">
-							<dt class="caption stat-label">{stat.label}</dt>
-							<dd class="headline stat-value">{stat.value}</dd>
-						</div>
-					))
-				}
-			</dl>
+			<div class="about-col">
+				<p class="caption about-col-label">{t('about.qaLabel')}</p>
+				<dl class="qa-list">
+					{
+						qaItems.map((item) => (
+							<div class="qa-card">
+								<dt class="qa-q">
+									<span class="qa-mark" aria-hidden="true">
+										Q
+									</span>
+									<span class="qa-q-text">{item.q}</span>
+								</dt>
+								<dd class="body-sm qa-a">{item.a}</dd>
+							</div>
+						))
+					}
+				</dl>
+			</div>
 		</div>
 	</Section>
 
@@ -296,26 +320,107 @@ const stats = [
 	}
 
 	/* ---- About ---- */
-	.about-grid {
-		display: grid;
-		grid-template-columns: 3fr 2fr;
-		gap: var(--space-xxl);
-	}
-
-	.about-body {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-md);
+	.about-intro {
+		max-width: 44em;
+		margin-top: calc(var(--space-md) * -1);
+		margin-bottom: var(--space-xl);
 		color: var(--color-ink-muted);
 	}
 
-	.stats {
+	.about-grid {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: var(--space-xxl);
+		align-items: start;
+	}
+
+	.about-col-label {
+		margin-bottom: var(--space-md);
+		color: var(--color-ink-subtle);
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	/* ---- About: タイムライン ---- */
+	.timeline {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-lg);
+		padding-left: 2px;
+	}
+
+	.timeline-item {
+		position: relative;
+		padding-left: 28px;
+	}
+
+	/* 縦のライン（最後のノードまで） */
+	.timeline-item::before {
+		content: '';
+		position: absolute;
+		top: 18px;
+		bottom: calc(var(--space-lg) * -1);
+		left: 5px;
+		width: 1px;
+		background: linear-gradient(
+			to bottom,
+			var(--color-hairline-strong),
+			var(--color-hairline)
+		);
+	}
+
+	.timeline-item:last-child::before {
+		display: none;
+	}
+
+	.timeline-marker {
+		position: absolute;
+		top: 5px;
+		left: 0;
+		width: 11px;
+		height: 11px;
+		border-radius: 50%;
+		background: var(--color-surface-2);
+		border: 1px solid var(--color-hairline-strong);
+	}
+
+	.timeline-current .timeline-marker {
+		background: var(--color-primary);
+		border-color: var(--color-primary);
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 22%, transparent);
+	}
+
+	.timeline-period {
+		color: var(--color-ink-tertiary);
+		font-family: var(--font-mono);
+	}
+
+	.timeline-current .timeline-period {
+		color: var(--color-primary);
+	}
+
+	.timeline-title {
+		margin-top: var(--space-xxs);
+		font-weight: 600;
+		letter-spacing: -0.01em;
+	}
+
+	.timeline-desc {
+		margin-top: var(--space-xxs);
+		max-width: 38em;
+		color: var(--color-ink-muted);
+	}
+
+	/* ---- About: Q&A ---- */
+	.qa-list {
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-sm);
 	}
 
-	.stat-card {
+	.qa-card {
 		padding: var(--space-md) var(--space-lg);
 		background-color: color-mix(in srgb, var(--color-surface-1) 88%, transparent);
 		backdrop-filter: blur(8px);
@@ -324,12 +429,34 @@ const stats = [
 		box-shadow: 0 8px 28px color-mix(in srgb, #000 18%, transparent);
 	}
 
-	.stat-label {
-		color: var(--color-ink-subtle);
+	.qa-q {
+		display: flex;
+		align-items: baseline;
+		gap: 10px;
+		font-weight: 600;
+		letter-spacing: -0.01em;
 	}
 
-	.stat-value {
-		margin-top: var(--space-xxs);
+	.qa-mark {
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 22px;
+		height: 22px;
+		border-radius: 6px;
+		background: color-mix(in srgb, var(--color-primary) 14%, transparent);
+		color: var(--color-primary);
+		font-size: 12px;
+		font-weight: 700;
+		font-family: var(--font-mono);
+		transform: translateY(3px);
+	}
+
+	.qa-a {
+		margin-top: var(--space-xs);
+		padding-left: 32px;
+		color: var(--color-ink-muted);
 	}
 
 	/* ---- Skills（コンパクトな行レイアウト） ---- */
@@ -429,6 +556,14 @@ const stats = [
 
 		.about-grid {
 			gap: var(--space-xl);
+		}
+
+		.timeline {
+			gap: var(--space-md);
+		}
+
+		.timeline-item::before {
+			bottom: calc(var(--space-md) * -1);
 		}
 
 		.skill-row {

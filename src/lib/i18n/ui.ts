@@ -23,20 +23,35 @@ export const ui = {
 		'hero.panel.role': 'Team Lead · Product Engineering',
 		'about.eyebrow': 'About',
 		'about.title': '営業 7 年から、エンジニアリングの世界へ',
-		'about.body1':
-			'株式会社MOL CAREERでエンジニアチームリーダーとして、B2B 外国人材マッチング SaaS の開発とチームマネジメントを担当しています。',
-		'about.body2':
-			'前職は法人向けフィールドセールス約 7 年。商談した企業は延べ 300 社、その大半が経営者・役職者との直接交渉です。扱っていたのは設備投資クラスの有形商材。導入判断には確かな根拠が求められるため、「効果が出なければ購入不要」のテスト導入を自ら設計・提案し、実測データで検証したうえで契約いただく——いま振り返れば PoC（概念実証）そのものの検証型営業でした。結果として、新規開拓した大手ホテルチェーンから全国の店舗・施設への一括導入を任せていただくなど、小さな検証を大きな信頼に変える経験を積み重ねてきました。',
-		'about.body3':
-			'この経験から染みついているのは、「意思決定者は何を見て判断するか」から逆算する習慣です。プロダクトを作ることは目的ではなく、事業課題を解決する手段——だから実装の前に「誰の・どんな課題を・なぜ今解くのか」を固めることにこだわります。2025 年に開発職へ転身し、現在は技術とビジネスの両輪を併せ持つ「π 字型キャリア」として、CTO への段階的な移行に取り組んでいます。',
-		'about.stat1.value': '7年+',
-		'about.stat1.label': '法人営業（フィールドセールス）',
-		'about.stat2.value': '延べ300社',
-		'about.stat2.label': '経営層・役職者との商談',
-		'about.stat3.value': '2025〜',
-		'about.stat3.label': 'エンジニアとしてのキャリア',
-		'about.stat4.value': 'チームリード',
-		'about.stat4.label': 'エンジニアチームの育成・マネジメント',
+		'about.intro':
+			'株式会社MOL CAREERのエンジニアチームリーダー。営業出身の回り道キャリアだからこそ、「誰の・どんな課題を・なぜ今解くのか」から逆算してプロダクトを作ります。',
+		'about.timelineLabel': 'Career',
+		'about.tl1.period': '〜2025',
+		'about.tl1.title': '法人フィールドセールス 7 年',
+		'about.tl1.desc':
+			'延べ 300 社と商談。その大半が経営者・役職者との直接交渉。扱っていたのは設備投資クラスの有形商材。',
+		'about.tl2.period': '〜2025',
+		'about.tl2.title': 'いま思えば、PoC 型の営業',
+		'about.tl2.desc':
+			'「効果が出なければ購入不要」のテスト導入を自ら設計し、実測データで検証してから契約。新規開拓した大手ホテルチェーンの全国一括導入につながった。',
+		'about.tl3.period': '2025',
+		'about.tl3.title': '開発職へ転身',
+		'about.tl3.desc':
+			'働きながらの独学を経てエンジニアに。営業で染みついた「意思決定者から逆算する習慣」を、今度は作る側で活かす。',
+		'about.tl4.period': '現在',
+		'about.tl4.title': 'エンジニアチームリーダー',
+		'about.tl4.desc':
+			'B2B 外国人材マッチング SaaS の開発・仕様FIX・チームマネジメントを担当。CTO への段階的な移行に取り組み中。',
+		'about.qaLabel': 'Q&A',
+		'about.qa1.q': 'なぜ営業からエンジニアに？',
+		'about.qa1.a':
+			'経営者との商談で「課題は見えているのに、解決手段を自分では作れない」場面が何度もあったからです。提案で終わらせず、自分の手で解決まで届けたくて作る側に回りました。',
+		'about.qa2.q': '開発でいちばん大事にしていること',
+		'about.qa2.a':
+			'プロダクトは目的ではなく、事業課題を解決する手段だということ。実装の前に「誰の・どんな課題を・なぜ今解くのか」を固めてから作り始めます。',
+		'about.qa3.q': 'チームリーダーとして意識していること',
+		'about.qa3.a':
+			'正解を配るのではなく、判断材料（背景・優先度・受け入れ条件）を揃えて渡すこと。手戻りの多くは技術ではなく認識ズレから生まれるので、作る前に仕様を固める場を大事にしています。',
 		'skills.eyebrow': 'Skills',
 		'skills.title': '技術スタック',
 		'skills.backend': 'バックエンド',
@@ -84,20 +99,35 @@ export const ui = {
 		'hero.panel.role': 'Team Lead · Product Engineering',
 		'about.eyebrow': 'About',
 		'about.title': 'From 7 years in sales to engineering',
-		'about.body1':
-			'I lead the engineering team at MOL CAREER Inc., building a B2B SaaS for global talent matching while managing the team.',
-		'about.body2':
-			'Before engineering, I spent about seven years in B2B field sales — negotiating with roughly 300 companies, almost always directly with executives and decision-makers. I sold tangible, capital-investment-grade equipment, where purchase decisions rightly demand solid evidence. So I designed risk-free trial installations (“no results, no purchase”) and verified the value with real measured data before contracts were signed — in hindsight, running proofs of concept before I knew the term. As a result, a major hotel chain I had opened as a new account went on to entrust us with a nationwide rollout across their properties — the kind of trust that is only earned by proving value honestly.',
-		'about.body3':
-			'What stayed with me is the habit of working backwards from what decision-makers actually care about. Building a product is never the goal — it is a means to solve a business problem. That is why I insist on nailing down “whose problem, which problem, and why now” before writing code. I moved into engineering in 2025, and I am now working toward a CTO role with both technical depth and business breadth.',
-		'about.stat1.value': '7+ yrs',
-		'about.stat1.label': 'B2B field sales',
-		'about.stat2.value': '300+',
-		'about.stat2.label': 'Companies negotiated with executives',
-		'about.stat3.value': 'Since 2025',
-		'about.stat3.label': 'Engineering career',
-		'about.stat4.value': 'Team lead',
-		'about.stat4.label': 'Growing and managing an engineering team',
+		'about.intro':
+			'Engineering team leader at MOL CAREER Inc. My roundabout path through sales is exactly why I build products by working backwards from “whose problem, which problem, and why now.”',
+		'about.timelineLabel': 'Career',
+		'about.tl1.period': 'Until 2025',
+		'about.tl1.title': '7 years in B2B field sales',
+		'about.tl1.desc':
+			'Negotiated with roughly 300 companies — almost always directly with executives and decision-makers — selling capital-investment-grade tangible equipment.',
+		'about.tl2.period': 'Until 2025',
+		'about.tl2.title': 'PoC-style sales, before I knew the term',
+		'about.tl2.desc':
+			'Designed “no results, no purchase” trial installations and verified value with measured data before contracts — which led a newly opened major hotel chain to a nationwide rollout.',
+		'about.tl3.period': '2025',
+		'about.tl3.title': 'Switched to engineering',
+		'about.tl3.desc':
+			'Taught myself to code while working full-time, then moved into engineering — bringing the habit of working backwards from decision-makers to the building side.',
+		'about.tl4.period': 'Now',
+		'about.tl4.title': 'Engineering team leader',
+		'about.tl4.desc':
+			'Leading development, spec-fix sessions, and team management for a B2B global-talent-matching SaaS, while working toward a CTO role.',
+		'about.qaLabel': 'Q&A',
+		'about.qa1.q': 'Why move from sales to engineering?',
+		'about.qa1.a':
+			'In executive meetings I kept running into problems I could frame but not build the solution for. I wanted to carry solutions past the proposal stage and deliver them with my own hands.',
+		'about.qa2.q': 'What matters most in development?',
+		'about.qa2.a':
+			'A product is never the goal — it is a means to solve a business problem. I nail down “whose problem, which problem, and why now” before writing code.',
+		'about.qa3.q': 'What do you focus on as a team leader?',
+		'about.qa3.a':
+			'Handing the team what they need to decide — background, priorities, acceptance criteria — instead of handing out answers. Most rework comes from misalignment, not technology, so we fix the spec before we build.',
 		'skills.eyebrow': 'Skills',
 		'skills.title': 'Tech stack',
 		'skills.backend': 'Backend',
