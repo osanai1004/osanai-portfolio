@@ -38,12 +38,19 @@ Node.js 22.12 以上が必要。
 - **スキル更新**: `src/lib/profile.ts` を編集
 - **デザイン調整**: `src/styles/tokens.css` の CSS 変数を編集（DESIGN.md のトークン名を維持）
 
+## GitHub Contributions（草）
+
+- 表示: Skills セクション直下（`/api/contributions`）
+- 更新: ページ表示時に取得。CDN キャッシュ最大1時間（`s-maxage=3600`）
+- データ源: Vercel 環境変数 `GITHUB_TOKEN`（または `GH_TOKEN`）があれば GitHub GraphQL。未設定時は ghchart プロキシにフォールバック
+- Vercel → Project → Settings → Environment Variables に Fine-grained / classic PAT（`read:user` 程度）を追加し再デプロイ
+
 ## セキュリティ
 
 - `vercel.json` で CSP（`script-src 'self'` / `style-src 'self'` の厳格設定）・HSTS・`X-Content-Type-Options` 等のヘッダーを設定
 - インラインスクリプト・インラインスタイル禁止（`astro.config.mjs` で外部ファイル出力を強制。テーマ初期化も `public/theme-init.js` に外出し）
 - 外部リソースの読み込みゼロ（フォントは `@fontsource-variable/inter` でセルフホスト）
-- フォーム・API・秘密情報なし（完全静的サイト）
+- ページ本体は SSG（静的生成）。草グラフ用に `/api/contributions` のみサーバーレス（トークンは Vercel 環境変数）
 - Dependabot（`.github/dependabot.yml`）で依存の脆弱性を自動検知
 
 ## デプロイ（Vercel）

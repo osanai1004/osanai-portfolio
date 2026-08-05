@@ -4,6 +4,7 @@ import Section from '../../components/Section.astro';
 import StrengthCard from '../../components/StrengthCard.astro';
 import BrandLogo from '../../components/BrandLogo.astro';
 import PersonName from '../../components/PersonName.astro';
+import Contributions from '../../components/Contributions.astro';
 import { LOCALES, SITE, type Locale } from '../../lib/site';
 import { useTranslations, type UiKey } from '../../lib/i18n/ui';
 import { HERO_STACK, SKILL_GROUPS } from '../../lib/profile';
@@ -80,7 +81,7 @@ const stats = [
 		</div>
 	</Section>
 
-	<!-- Skills -->
+	<!-- Skills + Activity -->
 	<Section id="skills" eyebrow={t('skills.eyebrow')} title={t('skills.title')}>
 		<div class="skills-board">
 			{
@@ -99,6 +100,7 @@ const stats = [
 				))
 			}
 		</div>
+		<Contributions locale={locale} />
 	</Section>
 
 	<!-- Strengths（課題解決・強み） -->

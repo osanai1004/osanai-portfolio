@@ -39,6 +39,11 @@ export const ui = {
 		'skills.infra': 'クラウド・インフラ',
 		'skills.frontend': 'フロントエンド',
 		'skills.tools': 'CI/CD・開発ツール',
+		'activity.eyebrow': 'Activity',
+		'activity.title': 'GitHub Contributions',
+		'activity.lead': '直近1年のコントリビューション。ページ表示時に最新寄りを取得します（最大1時間キャッシュ）。',
+		'activity.link': 'GitHub で見る',
+		'activity.alt': 'GitHub のコントリビューショングラフ',
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': '課題解決として届けられること',
 		'strengths.lead':
@@ -48,7 +53,6 @@ export const ui = {
 		'contact.body':
 			'お仕事のご相談・技術の話題など、GitHub からお声がけください。プロフィールに活動履歴をまとめています。',
 		'contact.cta': 'GitHub で見る',
-		'footer.builtWith': 'Built with Astro. Design tokens based on Linear (awesome-design-md).',
 		'notFound.title': 'ページが見つかりません',
 		'notFound.body': 'お探しのページは移動または削除された可能性があります。',
 		'notFound.cta': 'トップへ戻る',
@@ -90,6 +94,11 @@ export const ui = {
 		'skills.infra': 'Cloud & Infrastructure',
 		'skills.frontend': 'Frontend',
 		'skills.tools': 'CI/CD & Tooling',
+		'activity.eyebrow': 'Activity',
+		'activity.title': 'GitHub Contributions',
+		'activity.lead': 'Contributions from the last year. Fetched on page load (cached up to 1 hour).',
+		'activity.link': 'View on GitHub',
+		'activity.alt': 'GitHub contribution graph',
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': 'Problems I can help solve',
 		'strengths.lead':
@@ -99,7 +108,6 @@ export const ui = {
 		'contact.body':
 			'For work inquiries or tech conversations, reach out via GitHub — my profile is the best summary of what I’m up to.',
 		'contact.cta': 'Find me on GitHub',
-		'footer.builtWith': 'Built with Astro. Design tokens based on Linear (awesome-design-md).',
 		'notFound.title': 'Page not found',
 		'notFound.body': 'The page you are looking for may have been moved or removed.',
 		'notFound.cta': 'Back to top',

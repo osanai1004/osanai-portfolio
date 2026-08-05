@@ -1,0 +1,128 @@
+---
+import { SITE, type Locale } from '../lib/site';
+import { useTranslations } from '../lib/i18n/ui';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="contributions" aria-labelledby="contributions-heading">
+	<div class="contrib-head">
+		<div>
+			<p class="eyebrow">{t('activity.eyebrow')}</p>
+			<h3 class="headline" id="contributions-heading">{t('activity.title')}</h3>
+			<p class="body-sm contrib-lead">{t('activity.lead')}</p>
+		</div>
+		<a class="body-sm github-link" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
+			{t('activity.link')} ↗
+		</a>
+	</div>
+	<div class="chart-wrap">
+		<img
+			class="chart"
+			src="/api/contributions?theme=dark"
+			alt={t('activity.alt')}
+			width="746"
+			height="112"
+			loading="lazy"
+			decoding="async"
+			data-contrib-chart
+		/>
+	</div>
+</section>
+
+<style>
+	.contributions {
+		margin-top: var(--space-lg);
+		padding: var(--space-xl);
+		background: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-xl);
+	}
+
+	.contrib-head {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: var(--space-lg);
+		margin-bottom: var(--space-lg);
+	}
+
+	.contrib-lead {
+		margin-top: var(--space-xs);
+		max-width: 40em;
+		color: var(--color-ink-muted);
+	}
+
+	.github-link {
+		flex-shrink: 0;
+		font-weight: 500;
+		color: var(--color-primary);
+		white-space: nowrap;
+	}
+
+	.github-link:hover {
+		color: var(--color-primary-hover);
+	}
+
+	.chart-wrap {
+		overflow-x: auto;
+		padding-bottom: 2px;
+	}
+
+	.chart {
+		display: block;
+		width: max(100%, 640px);
+		height: auto;
+	}
+
+	@media (max-width: 768px) {
+		.contributions {
+			padding: var(--space-lg);
+		}
+
+		.contrib-head {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+</style>
+
+<script>
+	const THEME_KEY = 'theme';
+
+	function currentTheme(): 'dark' | 'light' {
+		const fromDom = document.documentElement.dataset.theme;
+		if (fromDom === 'light' || fromDom === 'dark') return fromDom;
+		try {
+			const stored = localStorage.getItem(THEME_KEY);
+			if (stored === 'light' || stored === 'dark') return stored;
+		} catch {
+			/* ignore */
+		}
+		return 'dark';
+	}
+
+	function syncCharts() {
+		const theme = currentTheme();
+		document.querySelectorAll<HTMLImageElement>('[data-contrib-chart]').forEach((img) => {
+			const next = `/api/contributions?theme=${theme}`;
+			try {
+				const current = new URL(img.src, location.origin).searchParams.get('theme');
+				if (current !== theme) img.src = next;
+			} catch {
+				img.src = next;
+			}
+		});
+	}
+
+	syncCharts();
+
+	// テーマトグル後に追従
+	const observer = new MutationObserver(syncCharts);
+	observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+</script>
