@@ -1,0 +1,194 @@
+---
+/**
+ * 青紫 / 緑の発光のみ（グリッド・つぶつぶなし）
+ */
+interface Props {
+	variant?: 'hero' | 'about' | 'skills';
+}
+
+const { variant = 'about' } = Astro.props;
+---
+
+<div class:list={['atmosphere', `atmosphere-${variant}`]} aria-hidden="true">
+	<div class="atmosphere-glow atmosphere-glow-a"></div>
+	<div class="atmosphere-glow atmosphere-glow-b"></div>
+	<div class="atmosphere-fade atmosphere-fade-top"></div>
+	<div class="atmosphere-fade atmosphere-fade-bottom"></div>
+</div>
+
+<style>
+	.atmosphere {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		pointer-events: none;
+		overflow: hidden;
+	}
+
+	.atmosphere-glow {
+		position: absolute;
+		border-radius: 50%;
+		filter: blur(40px);
+		opacity: 0.9;
+		will-change: transform;
+	}
+
+	.atmosphere-glow-a {
+		width: min(64vw, 640px);
+		height: min(64vw, 640px);
+		top: -12%;
+		right: -8%;
+		background: radial-gradient(
+			circle at 40% 40%,
+			color-mix(in srgb, var(--color-primary) 55%, transparent),
+			color-mix(in srgb, var(--color-primary) 18%, transparent) 42%,
+			transparent 70%
+		);
+		animation: drift-a 16s ease-in-out infinite alternate;
+	}
+
+	.atmosphere-glow-b {
+		width: min(54vw, 540px);
+		height: min(54vw, 540px);
+		bottom: -18%;
+		left: -6%;
+		background: radial-gradient(
+			circle at 50% 50%,
+			color-mix(in srgb, var(--color-success) 32%, transparent),
+			color-mix(in srgb, var(--color-primary-hover) 12%, transparent) 48%,
+			transparent 72%
+		);
+		animation: drift-b 20s ease-in-out infinite alternate;
+	}
+
+	.atmosphere-fade {
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 88px;
+	}
+
+	.atmosphere-fade-top {
+		top: 0;
+		background: linear-gradient(to bottom, var(--color-canvas), transparent);
+	}
+
+	.atmosphere-fade-bottom {
+		bottom: 0;
+		background: linear-gradient(to top, var(--color-canvas), transparent);
+	}
+
+	/* Hero: 名前周りを照らす */
+	.atmosphere-hero .atmosphere-fade-top {
+		height: 48px;
+	}
+
+	.atmosphere-hero .atmosphere-glow-a {
+		top: -18%;
+		left: -8%;
+		right: auto;
+		width: min(70vw, 720px);
+		height: min(70vw, 720px);
+		background: radial-gradient(
+			circle at 45% 45%,
+			color-mix(in srgb, var(--color-primary) 62%, transparent),
+			color-mix(in srgb, var(--color-primary) 18%, transparent) 44%,
+			transparent 72%
+		);
+	}
+
+	.atmosphere-hero .atmosphere-glow-b {
+		right: -6%;
+		left: auto;
+		bottom: -10%;
+		width: min(58vw, 560px);
+		height: min(58vw, 560px);
+		background: radial-gradient(
+			circle at 50% 50%,
+			color-mix(in srgb, var(--color-success) 36%, transparent),
+			color-mix(in srgb, var(--color-primary-hover) 14%, transparent) 50%,
+			transparent 72%
+		);
+	}
+
+	/* About */
+	.atmosphere-about .atmosphere-glow-a {
+		top: 8%;
+		left: -10%;
+		right: auto;
+		background: radial-gradient(
+			circle at 45% 45%,
+			color-mix(in srgb, var(--color-primary) 58%, transparent),
+			color-mix(in srgb, var(--color-primary) 16%, transparent) 46%,
+			transparent 72%
+		);
+	}
+
+	.atmosphere-about .atmosphere-glow-b {
+		right: -4%;
+		left: auto;
+		bottom: 4%;
+		background: radial-gradient(
+			circle at 50% 50%,
+			color-mix(in srgb, var(--color-primary-hover) 36%, transparent),
+			transparent 72%
+		);
+	}
+
+	/* Skills */
+	.atmosphere-skills .atmosphere-glow-a {
+		top: -8%;
+		right: 8%;
+		background: radial-gradient(
+			circle at 40% 40%,
+			color-mix(in srgb, var(--color-primary) 52%, transparent),
+			transparent 70%
+		);
+	}
+
+	.atmosphere-skills .atmosphere-glow-b {
+		left: 18%;
+		bottom: -20%;
+		background: radial-gradient(
+			circle at 50% 50%,
+			color-mix(in srgb, var(--color-success) 34%, transparent),
+			transparent 72%
+		);
+	}
+
+	:global(:root[data-theme='light']) .atmosphere-glow {
+		opacity: 0.7;
+	}
+
+	@keyframes drift-a {
+		from {
+			transform: translate3d(0, 0, 0) scale(1);
+		}
+		to {
+			transform: translate3d(-28px, 22px, 0) scale(1.06);
+		}
+	}
+
+	@keyframes drift-b {
+		from {
+			transform: translate3d(0, 0, 0) scale(1.04);
+		}
+		to {
+			transform: translate3d(24px, -18px, 0) scale(1);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.atmosphere-glow {
+			filter: blur(36px);
+			opacity: 0.55;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.atmosphere-glow-a,
+		.atmosphere-glow-b {
+			animation: none;
+		}
+	}
+</style>

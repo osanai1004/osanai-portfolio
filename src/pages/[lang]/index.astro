@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Section from '../../components/Section.astro';
+import Atmosphere from '../../components/Atmosphere.astro';
 import StrengthCard from '../../components/StrengthCard.astro';
 import BrandLogo from '../../components/BrandLogo.astro';
 import PersonName from '../../components/PersonName.astro';
@@ -27,38 +28,41 @@ const stats = [
 
 <Base locale={locale}>
 	<!-- Hero -->
-	<section class="hero container">
-		<div class="hero-copy reveal">
-			<p class="eyebrow">{t('hero.eyebrow')}</p>
-			<h1 class="display-lg hero-name"><PersonName locale={locale} variant="hero" /></h1>
-			<p class="body-lg hero-tagline">{t('hero.tagline')}</p>
-			<div class="hero-actions">
-				<a class="button-primary" href="#strengths">{t('hero.cta.strengths')}</a>
-				<a class="button-secondary" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
-					{t('hero.cta.github')} ↗
-				</a>
+	<section class="hero-band">
+		<Atmosphere variant="hero" />
+		<div class="hero container">
+			<div class="hero-copy reveal">
+				<p class="eyebrow">{t('hero.eyebrow')}</p>
+				<h1 class="display-lg hero-name"><PersonName locale={locale} variant="hero" /></h1>
+				<p class="body-lg hero-tagline">{t('hero.tagline')}</p>
+				<div class="hero-actions">
+					<a class="button-primary" href="#strengths">{t('hero.cta.strengths')}</a>
+					<a class="button-secondary" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
+						{t('hero.cta.github')} ↗
+					</a>
+				</div>
 			</div>
-		</div>
 
-		<aside class="hero-panel reveal reveal-delay" aria-label={t('hero.panel.label')}>
-			<div class="panel-chrome">
-				<span class="chrome-dot"></span>
-				<span class="chrome-dot"></span>
-				<span class="chrome-dot"></span>
-				<span class="chrome-title caption">{t('hero.panel.label')}</span>
-			</div>
-			<p class="panel-role body-sm">{t('hero.panel.role')}</p>
-			<ul class="panel-stack">
-				{
-					HERO_STACK.map((item) => (
-						<li class="stack-chip">
-							<BrandLogo id={item.id} size={16} />
-							<span class="chip-label">{item.label}</span>
-						</li>
-					))
-				}
-			</ul>
-		</aside>
+			<aside class="hero-panel reveal reveal-delay" aria-label={t('hero.panel.label')}>
+				<div class="panel-chrome">
+					<span class="chrome-dot"></span>
+					<span class="chrome-dot"></span>
+					<span class="chrome-dot"></span>
+					<span class="chrome-title caption">{t('hero.panel.label')}</span>
+				</div>
+				<p class="panel-role body-sm">{t('hero.panel.role')}</p>
+				<ul class="panel-stack">
+					{
+						HERO_STACK.map((item) => (
+							<li class="stack-chip">
+								<BrandLogo id={item.id} size={16} />
+								<span class="chip-label">{item.label}</span>
+							</li>
+						))
+					}
+				</ul>
+			</aside>
+		</div>
 	</section>
 
 	<!-- About -->
@@ -194,7 +198,15 @@ const stats = [
 	}
 
 	/* ---- Hero ---- */
+	.hero-band {
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+	}
+
 	.hero {
+		position: relative;
+		z-index: 1;
 		display: grid;
 		grid-template-columns: 1.15fr 0.85fr;
 		gap: var(--space-xxl);

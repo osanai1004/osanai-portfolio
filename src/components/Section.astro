@@ -1,4 +1,6 @@
 ---
+import Atmosphere from './Atmosphere.astro';
+
 interface Props {
 	id: string;
 	eyebrow: string;
@@ -15,17 +17,7 @@ const hasAtmosphere = atmosphere !== 'none';
 	class:list={['section', hasAtmosphere && 'section-band', hasAtmosphere && `atmosphere-${atmosphere}`]}
 	id={id}
 >
-	{
-		hasAtmosphere && (
-			<div class="atmosphere" aria-hidden="true">
-				<div class="atmosphere-glow atmosphere-glow-a"></div>
-				<div class="atmosphere-glow atmosphere-glow-b"></div>
-				<div class="atmosphere-grid"></div>
-				<div class="atmosphere-fade atmosphere-fade-top"></div>
-				<div class="atmosphere-fade atmosphere-fade-bottom"></div>
-			</div>
-		)
-	}
+	{hasAtmosphere && <Atmosphere variant={atmosphere} />}
 	<div class="container section-inner">
 		<p class="eyebrow">{eyebrow}</p>
 		<h2 class="display-md section-title">{title}</h2>
@@ -44,7 +36,6 @@ const hasAtmosphere = atmosphere !== 'none';
 		padding-block: var(--space-section);
 		margin-top: calc(var(--space-xl) * -1);
 		overflow: hidden;
-		/* 真っ黒のキャンバスと差がつくよう、帯そのものに色を乗せる */
 		background:
 			linear-gradient(
 				180deg,
@@ -64,148 +55,6 @@ const hasAtmosphere = atmosphere !== 'none';
 		margin-bottom: var(--space-xl);
 	}
 
-	.atmosphere {
-		position: absolute;
-		inset: 0;
-		z-index: 0;
-		pointer-events: none;
-		overflow: hidden;
-	}
-
-	.atmosphere-glow {
-		position: absolute;
-		border-radius: 50%;
-		filter: blur(40px);
-		opacity: 0.9;
-		will-change: transform;
-	}
-
-	.atmosphere-glow-a {
-		width: min(64vw, 640px);
-		height: min(64vw, 640px);
-		top: -12%;
-		right: -8%;
-		background: radial-gradient(
-			circle at 40% 40%,
-			color-mix(in srgb, var(--color-primary) 55%, transparent),
-			color-mix(in srgb, var(--color-primary) 18%, transparent) 42%,
-			transparent 70%
-		);
-		animation: drift-a 16s ease-in-out infinite alternate;
-	}
-
-	.atmosphere-glow-b {
-		width: min(54vw, 540px);
-		height: min(54vw, 540px);
-		bottom: -18%;
-		left: -6%;
-		background: radial-gradient(
-			circle at 50% 50%,
-			color-mix(in srgb, var(--color-success) 32%, transparent),
-			color-mix(in srgb, var(--color-primary-hover) 12%, transparent) 48%,
-			transparent 72%
-		);
-		animation: drift-b 20s ease-in-out infinite alternate;
-	}
-
-	.atmosphere-grid {
-		position: absolute;
-		inset: 0;
-		opacity: 0.55;
-		background-image:
-			radial-gradient(color-mix(in srgb, var(--color-ink) 22%, transparent) 1.2px, transparent 1.2px),
-			linear-gradient(
-				to right,
-				color-mix(in srgb, var(--color-hairline-strong) 70%, transparent) 1px,
-				transparent 1px
-			),
-			linear-gradient(
-				to bottom,
-				color-mix(in srgb, var(--color-hairline-strong) 60%, transparent) 1px,
-				transparent 1px
-			);
-		background-size:
-			16px 16px,
-			64px 64px,
-			64px 64px;
-		mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 28%, transparent 82%);
-	}
-
-	.atmosphere-fade {
-		position: absolute;
-		left: 0;
-		right: 0;
-		height: 88px;
-	}
-
-	.atmosphere-fade-top {
-		top: 0;
-		background: linear-gradient(to bottom, var(--color-canvas), transparent);
-	}
-
-	.atmosphere-fade-bottom {
-		bottom: 0;
-		background: linear-gradient(to top, var(--color-canvas), transparent);
-	}
-
-	/* About: 左寄りの光 + 斜めの薄い帯 */
-	.atmosphere-about .atmosphere-glow-a {
-		top: 8%;
-		left: -10%;
-		right: auto;
-		background: radial-gradient(
-			circle at 45% 45%,
-			color-mix(in srgb, var(--color-primary) 58%, transparent),
-			color-mix(in srgb, var(--color-primary) 16%, transparent) 46%,
-			transparent 72%
-		);
-	}
-
-	.atmosphere-about .atmosphere-glow-b {
-		right: -4%;
-		left: auto;
-		bottom: 4%;
-		background: radial-gradient(
-			circle at 50% 50%,
-			color-mix(in srgb, var(--color-primary-hover) 36%, transparent),
-			transparent 72%
-		);
-	}
-
-	.atmosphere-about .atmosphere-grid {
-		transform: rotate(-4deg) scale(1.08);
-		opacity: 0.48;
-	}
-
-	/* Skills: 右寄りの技術感 + やや強いドット */
-	.atmosphere-skills .atmosphere-glow-a {
-		top: -8%;
-		right: 8%;
-		background: radial-gradient(
-			circle at 40% 40%,
-			color-mix(in srgb, var(--color-primary) 52%, transparent),
-			transparent 70%
-		);
-	}
-
-	.atmosphere-skills .atmosphere-glow-b {
-		left: 18%;
-		bottom: -20%;
-		background: radial-gradient(
-			circle at 50% 50%,
-			color-mix(in srgb, var(--color-success) 34%, transparent),
-			transparent 72%
-		);
-	}
-
-	.atmosphere-skills .atmosphere-grid {
-		opacity: 0.62;
-		background-size:
-			14px 14px,
-			56px 56px,
-			56px 56px;
-	}
-
 	:global(:root[data-theme='light']) .section-band {
 		background:
 			linear-gradient(
@@ -216,48 +65,10 @@ const hasAtmosphere = atmosphere !== 'none';
 			);
 	}
 
-	:global(:root[data-theme='light']) .atmosphere-glow {
-		opacity: 0.7;
-	}
-
-	:global(:root[data-theme='light']) .atmosphere-grid {
-		opacity: 0.38;
-	}
-
-	@keyframes drift-a {
-		from {
-			transform: translate3d(0, 0, 0) scale(1);
-		}
-		to {
-			transform: translate3d(-28px, 22px, 0) scale(1.06);
-		}
-	}
-
-	@keyframes drift-b {
-		from {
-			transform: translate3d(0, 0, 0) scale(1.04);
-		}
-		to {
-			transform: translate3d(24px, -18px, 0) scale(1);
-		}
-	}
-
 	@media (max-width: 768px) {
 		.section-band {
 			padding-block: var(--space-xxl);
 			margin-top: 0;
-		}
-
-		.atmosphere-glow {
-			filter: blur(36px);
-			opacity: 0.4;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.atmosphere-glow-a,
-		.atmosphere-glow-b {
-			animation: none;
 		}
 	}
 </style>
