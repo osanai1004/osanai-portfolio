@@ -1,40 +1,100 @@
 ---
 /**
- * Simple Icons 由来の公式 SVG を CSS mask で着色して表示する。
- * サイズは props で固定し、レイアウト側で揃える。
+ * Simple Icons 由来の公式 SVG を <img> で表示（CSP の style-src 'self' に適合）。
+ * 色は SVG 自体にブランドカラーを焼き込み済み。
  */
 import { BRANDS, type BrandId } from '../lib/brands';
 
 interface Props {
 	id: BrandId;
-	/** 表示サイズ（px）。Skills / Hero は 14、強調時のみ大きく */
+	/** 表示サイズ（px） */
 	size?: number;
 }
 
-const { id, size = 14 } = Astro.props;
+const { id, size = 16 } = Astro.props;
 const brand = BRANDS[id];
-const isInk = brand.color === 'ink';
+const needsThemeSwap = brand.color === 'ink';
 ---
 
-<span
-	class:list={['brand-logo', { 'brand-logo-ink': isInk }]}
-	style={`--logo-size: ${size}px; --brand: ${isInk ? 'var(--color-ink)' : brand.color}; -webkit-mask-image: url(/icons/${brand.file}); mask-image: url(/icons/${brand.file});`}
-	role="img"
-	aria-label={brand.label}
-></span>
+{
+	needsThemeSwap ? (
+		<span class="brand-logo-wrap">
+			<img
+				class="brand-logo logo-dark"
+				src={`/icons/${brand.file}`}
+				alt=""
+				width={size}
+				height={size}
+				decoding="async"
+			/>
+			<img
+				class="brand-logo logo-light"
+				src={`/icons/${id}-light.svg`}
+				alt=""
+				width={size}
+				height={size}
+				decoding="async"
+			/>
+			<span class="sr-only">{brand.label}</span>
+		</span>
+	) : (
+		<img
+			class="brand-logo"
+			src={`/icons/${brand.file}`}
+			alt={brand.label}
+			width={size}
+			height={size}
+			decoding="async"
+		/>
+	)
+}
 
 <style>
 	.brand-logo {
-		display: inline-block;
-		width: var(--logo-size);
-		height: var(--logo-size);
+		display: block;
+		width: 16px;
+		height: 16px;
 		flex-shrink: 0;
-		background-color: var(--brand);
-		-webkit-mask-repeat: no-repeat;
-		mask-repeat: no-repeat;
-		-webkit-mask-position: center;
-		mask-position: center;
-		-webkit-mask-size: contain;
-		mask-size: contain;
+		object-fit: contain;
+	}
+
+	/* size は width/height 属性で指定。CSS は既定 16px に固定して揃える */
+	.brand-logo-wrap {
+		display: inline-flex;
+		width: 16px;
+		height: 16px;
+		flex-shrink: 0;
+		position: relative;
+	}
+
+	.brand-logo-wrap .brand-logo {
+		position: absolute;
+		inset: 0;
+		width: 16px;
+		height: 16px;
+	}
+
+	.logo-light {
+		display: none;
+	}
+
+	:global([data-theme='light']) .logo-dark {
+		display: none;
+	}
+
+	:global([data-theme='light']) .logo-light {
+		display: block;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
 	}
 </style>
