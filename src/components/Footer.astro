@@ -1,18 +1,12 @@
 ---
-import { SITE, type Locale } from '../lib/site';
+import { SITE } from '../lib/site';
 
-interface Props {
-	locale: Locale;
-}
-
-const { locale } = Astro.props;
 const year = new Date().getFullYear();
-const displayName = locale === 'ja' ? SITE.nameJaReadable : SITE.nameEn;
 ---
 
 <footer class="footer">
 	<div class="container footer-inner">
-		<p class="caption">© {year} {displayName}</p>
+		<p class="caption">© {year} {SITE.nameEn}</p>
 	</div>
 </footer>
 
