@@ -30,7 +30,7 @@ export const STRENGTHS: Strength[] = [
 		order: 1,
 		tech: ['laravel', 'typescript', 'react'],
 		image: '/images/strengths/bridge.webp',
-		imageAlt: 'Business and engineering bridge illustration',
+		imageAlt: 'Sales and engineering turning messy requests into a clear spec',
 		copy: {
 			ja: {
 				title: '営業要望を、実装できる仕様に落とす',
@@ -57,7 +57,7 @@ export const STRENGTHS: Strength[] = [
 		order: 2,
 		tech: ['php', 'laravel', 'aws', 'docker'],
 		image: '/images/strengths/saas.webp',
-		imageAlt: 'Reliable SaaS systems illustration',
+		imageAlt: 'Handing a reliable SaaS product to trusting people in the field',
 		copy: {
 			ja: {
 				title: 'B2B SaaS を、現場の信頼を落とさず届ける',
@@ -84,7 +84,7 @@ export const STRENGTHS: Strength[] = [
 		order: 3,
 		tech: ['github', 'cursor', 'typescript'],
 		image: '/images/strengths/lead.webp',
-		imageAlt: 'Team leadership and AI-assisted delivery illustration',
+		imageAlt: 'A team lead helping a small group ship with less rework',
 		copy: {
 			ja: {
 				title: '少人数チームの手戻りを減らす',
