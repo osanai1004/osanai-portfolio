@@ -68,7 +68,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': '課題解決として届けられること',
 		'strengths.lead':
-			'いま担当している自社 SaaS 開発・仕様FIX・チームリードの実務に即して、「どんな課題をどう解くか」をまとめています。',
+			'キャリアの延長線上で、いま提供できる価値です。「意図を掘る」「検証してから届ける」「判断材料を渡す」——営業で染みついた習慣を、そのまま開発現場の課題解決に変えています。',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'お気軽にご連絡ください',
 		'contact.body':
@@ -144,7 +144,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': 'Problems I can help solve',
 		'strengths.lead':
-			'Grounded in the SaaS work, spec-fix sessions, and team lead coaching I do today — focused on the problems I can help solve.',
+			'The value I deliver today is a straight line from that career: dig out the intent, verify before shipping, hand over context — sales-honed habits turned into everyday problem-solving.',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'Let’s connect',
 		'contact.body':
