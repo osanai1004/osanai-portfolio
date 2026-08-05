@@ -107,10 +107,13 @@ async function fetchFromGhChart(theme) {
 export default async function handler(req, res) {
 	const theme = req.query?.theme === 'light' ? 'light' : 'dark';
 	const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+	const generatedAt = new Date().toISOString();
 
 	res.setHeader('Content-Type', 'image/svg+xml; charset=utf-8');
 	res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
 	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Expose-Headers', 'X-Contributions-Generated-At');
+	res.setHeader('X-Contributions-Generated-At', generatedAt);
 
 	try {
 		if (token) {

@@ -15,7 +15,15 @@ const t = useTranslations(locale);
 		<div>
 			<p class="eyebrow">{t('activity.eyebrow')}</p>
 			<h3 class="headline" id="contributions-heading">{t('activity.title')}</h3>
-			<p class="body-sm contrib-lead">{t('activity.lead')}</p>
+			<p
+				class="body-sm contrib-lead"
+				data-contrib-lead
+				data-lead={t('activity.lead')}
+				data-updated={t('activity.updated')}
+				data-cache-note={t('activity.cacheNote')}
+			>
+				{t('activity.lead')}（{t('activity.cacheNote')}）
+			</p>
 		</div>
 		<a class="body-sm github-link" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
 			{t('activity.link')} ↗
@@ -107,6 +115,36 @@ const t = useTranslations(locale);
 		return 'dark';
 	}
 
+	function formatDate(iso: string): string | null {
+		const d = new Date(iso);
+		if (Number.isNaN(d.getTime())) return null;
+		const yyyy = d.getFullYear();
+		const mm = String(d.getMonth() + 1).padStart(2, '0');
+		const dd = String(d.getDate()).padStart(2, '0');
+		return `${yyyy}-${mm}-${dd}`;
+	}
+
+	function setLead(dateIso: string | null) {
+		document.querySelectorAll<HTMLElement>('[data-contrib-lead]').forEach((el) => {
+			const lead = el.dataset.lead ?? '';
+			const updatedTpl = el.dataset.updated ?? 'Updated: {date}';
+			const cacheNote = el.dataset.cacheNote ?? '';
+			const date = dateIso ? formatDate(dateIso) : null;
+			const note = date ? updatedTpl.replace('{date}', date) : cacheNote;
+			el.textContent = note ? `${lead}（${note}）` : lead;
+		});
+	}
+
+	async function refreshLead(theme: 'dark' | 'light') {
+		try {
+			const res = await fetch(`/api/contributions?theme=${theme}`, { method: 'HEAD' });
+			const generated = res.headers.get('x-contributions-generated-at') ?? res.headers.get('date');
+			setLead(generated);
+		} catch {
+			setLead(null);
+		}
+	}
+
 	function syncCharts() {
 		const theme = currentTheme();
 		document.querySelectorAll<HTMLImageElement>('[data-contrib-chart]').forEach((img) => {
@@ -118,6 +156,7 @@ const t = useTranslations(locale);
 				img.src = next;
 			}
 		});
+		void refreshLead(theme);
 	}
 
 	syncCharts();
