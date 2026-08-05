@@ -18,12 +18,3 @@ export const BRANDS = {
 } as const;
 
 export type BrandId = keyof typeof BRANDS;
-
-/** プロジェクトカード画像（AI生成・public/images/projects/・WebP） */
-export const PROJECT_IMAGES = {
-	saas: { src: '/images/projects/saas.webp', alt: 'B2B SaaS dashboard mockup' },
-	web: { src: '/images/projects/web.webp', alt: 'Corporate website mockup' },
-	pwa: { src: '/images/projects/pwa.webp', alt: 'Mobile PWA mockup' },
-} as const;
-
-export type ProjectVisual = keyof typeof PROJECT_IMAGES;

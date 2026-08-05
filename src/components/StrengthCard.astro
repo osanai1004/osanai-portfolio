@@ -1,0 +1,165 @@
+---
+import type { Locale } from '../lib/site';
+import type { Strength } from '../lib/strengths';
+import BrandLogo from './BrandLogo.astro';
+
+interface Props {
+	strength: Strength;
+	locale: Locale;
+}
+
+const { strength, locale } = Astro.props;
+const copy = strength.copy[locale];
+const labels =
+	locale === 'ja'
+		? { problem: '課題', approach: 'アプローチ', outcome: '届けられること' }
+		: { problem: 'Problem', approach: 'Approach', outcome: 'What I deliver' };
+---
+
+<article class="strength-card">
+	<div class="visual">
+		<img
+			src={strength.image}
+			alt={strength.imageAlt}
+			width="1200"
+			height="675"
+			loading="lazy"
+			decoding="async"
+		/>
+	</div>
+	<div class="card-body">
+		<h3 class="card-title">{copy.title}</h3>
+		<dl class="points">
+			<div class="point">
+				<dt class="caption">{labels.problem}</dt>
+				<dd class="body-sm">{copy.problem}</dd>
+			</div>
+			<div class="point">
+				<dt class="caption">{labels.approach}</dt>
+				<dd class="body-sm">{copy.approach}</dd>
+			</div>
+			<div class="point">
+				<dt class="caption">{labels.outcome}</dt>
+				<dd class="body-sm outcome">{copy.outcome}</dd>
+			</div>
+		</dl>
+		<ul class="tech-list" aria-label="Tech">
+			{
+				strength.tech.map((id) => (
+					<li class="tech-chip">
+						<BrandLogo id={id} size={14} />
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</article>
+
+<style>
+	.strength-card {
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+		background-color: var(--color-surface-1);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-xl);
+		transition:
+			background-color 0.15s ease,
+			border-color 0.15s ease,
+			transform 0.2s ease;
+	}
+
+	.strength-card:hover {
+		background-color: var(--color-surface-2);
+		border-color: var(--color-hairline-strong);
+		transform: translateY(-2px);
+	}
+
+	.visual {
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		border-bottom: 1px solid var(--color-hairline);
+		background: var(--color-surface-2);
+	}
+
+	.visual img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		transition: transform 0.35s ease;
+	}
+
+	.strength-card:hover .visual img {
+		transform: scale(1.03);
+	}
+
+	.card-body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+		padding: var(--space-lg);
+		flex-grow: 1;
+	}
+
+	.points {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+	}
+
+	.point {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.point dt {
+		color: var(--color-primary);
+		font-weight: 500;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.point dd {
+		color: var(--color-ink-muted);
+	}
+
+	.outcome {
+		color: var(--color-ink) !important;
+	}
+
+	.tech-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 6px;
+		margin-top: auto;
+		padding-top: var(--space-xs);
+	}
+
+	.tech-chip {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 28px;
+		height: 28px;
+		border-radius: var(--rounded-md);
+		background: var(--color-surface-2);
+		border: 1px solid var(--color-hairline);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.strength-card,
+		.visual img {
+			transition: none;
+		}
+
+		.strength-card:hover {
+			transform: none;
+		}
+
+		.strength-card:hover .visual img {
+			transform: none;
+		}
+	}
+</style>

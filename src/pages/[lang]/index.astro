@@ -1,13 +1,13 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Section from '../../components/Section.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
+import StrengthCard from '../../components/StrengthCard.astro';
 import BrandLogo from '../../components/BrandLogo.astro';
 import PersonName from '../../components/PersonName.astro';
 import { LOCALES, SITE, type Locale } from '../../lib/site';
 import { useTranslations, type UiKey } from '../../lib/i18n/ui';
 import { HERO_STACK, SKILL_GROUPS } from '../../lib/profile';
+import { getStrengths } from '../../lib/strengths';
 
 export function getStaticPaths() {
 	return LOCALES.map((lang) => ({ params: { lang } }));
@@ -15,10 +15,7 @@ export function getStaticPaths() {
 
 const locale = Astro.params.lang as Locale;
 const t = useTranslations(locale);
-
-const projects = (await getCollection('projects', (entry) => entry.id.startsWith(`${locale}/`))).sort(
-	(a, b) => a.data.order - b.data.order,
-);
+const strengths = getStrengths();
 
 const stats = [
 	{ value: t('about.stat1.value'), label: t('about.stat1.label') },
@@ -35,7 +32,7 @@ const stats = [
 			<h1 class="display-lg hero-name"><PersonName locale={locale} variant="hero" /></h1>
 			<p class="body-lg hero-tagline">{t('hero.tagline')}</p>
 			<div class="hero-actions">
-				<a class="button-primary" href="#projects">{t('hero.cta.projects')}</a>
+				<a class="button-primary" href="#strengths">{t('hero.cta.strengths')}</a>
 				<a class="button-secondary" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
 					{t('hero.cta.github')} ↗
 				</a>
@@ -104,10 +101,11 @@ const stats = [
 		</div>
 	</Section>
 
-	<!-- Projects -->
-	<Section id="projects" eyebrow={t('projects.eyebrow')} title={t('projects.title')}>
-		<div class="projects-grid">
-			{projects.map((project) => <ProjectCard project={project} locale={locale} />)}
+	<!-- Strengths（課題解決・強み） -->
+	<Section id="strengths" eyebrow={t('strengths.eyebrow')} title={t('strengths.title')}>
+		<p class="strengths-lead body-sm">{t('strengths.lead')}</p>
+		<div class="strengths-grid">
+			{strengths.map((strength) => <StrengthCard strength={strength} locale={locale} />)}
 		</div>
 	</Section>
 
@@ -347,8 +345,15 @@ const stats = [
 		gap: 8px;
 	}
 
-	/* ---- Projects ---- */
-	.projects-grid {
+	/* ---- Strengths ---- */
+	.strengths-lead {
+		max-width: 46em;
+		margin-top: calc(var(--space-md) * -1);
+		margin-bottom: var(--space-xl);
+		color: var(--color-ink-muted);
+	}
+
+	.strengths-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: var(--space-md);
@@ -384,7 +389,7 @@ const stats = [
 	}
 
 	@media (max-width: 1024px) {
-		.projects-grid {
+		.strengths-grid {
 			grid-template-columns: repeat(2, 1fr);
 		}
 	}
@@ -398,7 +403,7 @@ const stats = [
 		}
 
 		.about-grid,
-		.projects-grid {
+		.strengths-grid {
 			grid-template-columns: 1fr;
 		}
 

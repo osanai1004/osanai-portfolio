@@ -3,12 +3,12 @@ import { SITE, type Locale } from '../site';
 /** UI 文言の翻訳辞書（表示層はこの辞書経由でのみ文言を参照する） */
 export const ui = {
 	ja: {
-		'meta.title': `${SITE.nameJaReadable} | Portfolio`,
+		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'B2B SaaS をつくるエンジニアチームリーダー、小山内つかさのポートフォリオ。PHP / Laravel / React / AWS を軸に、チームビルディングとプロダクト開発に取り組んでいます。',
+			'エンジニアチームリーダー・小山内つかさのポートフォリオ。ビジネスと技術をつなぎ、B2B SaaS の課題解決とチームづくりができることを伝えています。',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
-		'nav.projects': 'Projects',
+		'nav.strengths': 'Strengths',
 		'nav.contact': 'Contact',
 		'nav.toggleTheme': 'テーマを切り替える',
 		'nav.switchLang': 'English',
@@ -16,8 +16,8 @@ export const ui = {
 		'hero.eyebrow': 'Engineering Team Leader',
 		'hero.name': SITE.nameJaReadable,
 		'hero.tagline':
-			'B2B SaaS を Laravel と AWS でつくる、営業出身のエンジニアチームリーダー。技術とビジネスの両輪で、プロダクトとチームを育てています。',
-		'hero.cta.projects': '取り組んでいること',
+			'営業で培った課題整理力と、Laravel / React / AWS の実装力で、曖昧な要望を「届くプロダクト」に変えます。技術自慢ではなく、解決できることにフォーカスしています。',
+		'hero.cta.strengths': '強みを見る',
 		'hero.cta.github': 'GitHub',
 		'hero.panel.label': 'Focus stack',
 		'hero.panel.role': 'Team Lead · Product Engineering',
@@ -39,13 +39,10 @@ export const ui = {
 		'skills.infra': 'クラウド・インフラ',
 		'skills.frontend': 'フロントエンド',
 		'skills.tools': 'CI/CD・開発ツール',
-		'projects.eyebrow': 'Projects',
-		'projects.title': '取り組んでいること',
-		'projects.type.work': '業務',
-		'projects.type.freelance': 'フリーランス',
-		'projects.type.personal': '個人開発',
-		'projects.link.site': 'サイトを見る',
-		'projects.link.github': 'GitHub',
+		'strengths.eyebrow': 'Strengths',
+		'strengths.title': '課題解決として届けられること',
+		'strengths.lead':
+			'プロダクト名よりも、「どんな課題を、どう解き、どんな価値を出せるか」。採用・協業の判断材料になる強みをまとめています。',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'お気軽にご連絡ください',
 		'contact.body':
@@ -59,10 +56,10 @@ export const ui = {
 	en: {
 		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'Portfolio of Tsukasa Osanai, an engineering team leader building B2B SaaS with PHP, Laravel, React, and AWS — combining product development with team building.',
+			'Portfolio of Tsukasa Osanai — an engineering team leader who bridges business and technology to ship B2B SaaS outcomes, not just features.',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
-		'nav.projects': 'Projects',
+		'nav.strengths': 'Strengths',
 		'nav.contact': 'Contact',
 		'nav.toggleTheme': 'Toggle theme',
 		'nav.switchLang': '日本語',
@@ -70,8 +67,8 @@ export const ui = {
 		'hero.eyebrow': 'Engineering Team Leader',
 		'hero.name': SITE.nameEn,
 		'hero.tagline':
-			'A sales-turned-engineer leading a product team that builds B2B SaaS with Laravel and AWS — growing both the product and the people behind it.',
-		'hero.cta.projects': 'What I work on',
+			'I turn ambiguous business needs into shipped product — combining sales-honed problem framing with hands-on Laravel, React, and AWS delivery. Less about tools for their own sake; more about the outcomes I can own.',
+		'hero.cta.strengths': 'See strengths',
 		'hero.cta.github': 'GitHub',
 		'hero.panel.label': 'Focus stack',
 		'hero.panel.role': 'Team Lead · Product Engineering',
@@ -93,13 +90,10 @@ export const ui = {
 		'skills.infra': 'Cloud & Infrastructure',
 		'skills.frontend': 'Frontend',
 		'skills.tools': 'CI/CD & Tooling',
-		'projects.eyebrow': 'Projects',
-		'projects.title': 'What I work on',
-		'projects.type.work': 'Work',
-		'projects.type.freelance': 'Freelance',
-		'projects.type.personal': 'Personal',
-		'projects.link.site': 'Visit site',
-		'projects.link.github': 'GitHub',
+		'strengths.eyebrow': 'Strengths',
+		'strengths.title': 'Problems I can help solve',
+		'strengths.lead':
+			'Not a product catalog — a clear view of the outcomes I can own: how I use technology and domain judgment to remove friction for teams and customers.',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'Let’s connect',
 		'contact.body':
