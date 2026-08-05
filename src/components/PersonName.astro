@@ -1,0 +1,67 @@
+---
+/**
+ * 氏名表示
+ * - ja: 漢字 + ルビ（読み仮名）で初見の読みやすさを担保
+ * - en: Tsukasa Osanai
+ * - compact: ヘッダー向け（ja は読みやすい「小山内つかさ」）
+ */
+import { SITE, type Locale } from '../lib/site';
+
+interface Props {
+	locale: Locale;
+	/** hero: 大きな見出し用ルビ / compact: ヘッダー用 */
+	variant?: 'hero' | 'compact';
+}
+
+const { locale, variant = 'hero' } = Astro.props;
+---
+
+{
+	locale === 'en' ? (
+		<span class:list={['person-name', variant]}>{SITE.nameEn}</span>
+	) : variant === 'compact' ? (
+		<span class:list={['person-name', variant]}>{SITE.nameJaReadable}</span>
+	) : (
+		<span class:list={['person-name', variant]}>
+			<ruby>
+				{SITE.familyKanji}
+				<rp>(</rp>
+				<rt>{SITE.familyReading}</rt>
+				<rp>)</rp>
+			</ruby>
+			{' '}
+			<ruby>
+				{SITE.givenKanji}
+				<rp>(</rp>
+				<rt>{SITE.givenReading}</rt>
+				<rp>)</rp>
+			</ruby>
+		</span>
+	)
+}
+
+<style>
+	.person-name {
+		display: inline;
+	}
+
+	.person-name :global(ruby) {
+		ruby-align: center;
+	}
+
+	.person-name :global(rt) {
+		font-size: 0.32em;
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		color: var(--color-ink-subtle);
+	}
+
+	.person-name.hero :global(rt) {
+		font-size: 0.28em;
+		margin-bottom: 0.15em;
+	}
+
+	.person-name.compact {
+		font-weight: 500;
+	}
+</style>

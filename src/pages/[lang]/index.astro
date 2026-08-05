@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Section from '../../components/Section.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import BrandLogo from '../../components/BrandLogo.astro';
+import PersonName from '../../components/PersonName.astro';
 import { LOCALES, SITE, type Locale } from '../../lib/site';
 import { useTranslations, type UiKey } from '../../lib/i18n/ui';
 import { HERO_STACK, SKILL_GROUPS } from '../../lib/profile';
@@ -31,7 +32,7 @@ const stats = [
 	<section class="hero container">
 		<div class="hero-copy reveal">
 			<p class="eyebrow">{t('hero.eyebrow')}</p>
-			<h1 class="display-lg hero-name">{t('hero.name')}</h1>
+			<h1 class="display-lg hero-name"><PersonName locale={locale} variant="hero" /></h1>
 			<p class="body-lg hero-tagline">{t('hero.tagline')}</p>
 			<div class="hero-actions">
 				<a class="button-primary" href="#projects">{t('hero.cta.projects')}</a>

@@ -9,7 +9,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const year = new Date().getFullYear();
-const displayName = locale === 'ja' ? SITE.nameJa : SITE.nameEn;
+const displayName = locale === 'ja' ? SITE.nameJaReadable : SITE.nameEn;
 ---
 
 <footer class="footer">

@@ -3,9 +3,9 @@ import { SITE, type Locale } from '../site';
 /** UI 文言の翻訳辞書（表示層はこの辞書経由でのみ文言を参照する） */
 export const ui = {
 	ja: {
-		'meta.title': `${SITE.nameJa} | エンジニアチームリーダー`,
+		'meta.title': `${SITE.nameJaReadable} | Portfolio`,
 		'meta.description':
-			'B2B SaaS をつくるエンジニアチームリーダー、小山内 僚のポートフォリオ。PHP / Laravel / AWS を軸に、チームビルディングとプロダクト開発に取り組んでいます。',
+			'B2B SaaS をつくるエンジニアチームリーダー、小山内つかさのポートフォリオ。PHP / Laravel / React / AWS を軸に、チームビルディングとプロダクト開発に取り組んでいます。',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.projects': 'Projects',
@@ -14,7 +14,7 @@ export const ui = {
 		'nav.switchLang': 'English',
 		'nav.switchLangShort': 'EN',
 		'hero.eyebrow': 'Engineering Team Leader',
-		'hero.name': SITE.nameJa,
+		'hero.name': SITE.nameJaReadable,
 		'hero.tagline':
 			'B2B SaaS を Laravel と AWS でつくる、営業出身のエンジニアチームリーダー。技術とビジネスの両輪で、プロダクトとチームを育てています。',
 		'hero.cta.projects': '取り組んでいること',
@@ -57,9 +57,9 @@ export const ui = {
 		'notFound.cta': 'トップへ戻る',
 	},
 	en: {
-		'meta.title': `${SITE.nameEn} | Engineering Team Leader`,
+		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'Portfolio of Tsukasa Osanai, an engineering team leader building B2B SaaS with PHP, Laravel, and AWS — combining product development with team building.',
+			'Portfolio of Tsukasa Osanai, an engineering team leader building B2B SaaS with PHP, Laravel, React, and AWS — combining product development with team building.',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.projects': 'Projects',

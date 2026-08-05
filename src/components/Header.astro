@@ -2,6 +2,7 @@
 import type { Locale } from '../lib/site';
 import { useTranslations } from '../lib/i18n/ui';
 import ThemeToggle from './ThemeToggle.astro';
+import PersonName from './PersonName.astro';
 
 interface Props {
 	locale: Locale;
@@ -27,7 +28,7 @@ const navItems = [
 	<div class="container header-inner">
 		<a class="brand" href={`/${locale}/`}>
 			<span class="brand-mark" aria-hidden="true"></span>
-			<span class="brand-name body-sm">{t('hero.name')}</span>
+			<span class="brand-name body-sm"><PersonName locale={locale} variant="compact" /></span>
 		</a>
 		<nav class="nav" aria-label="Main">
 			{navItems.map((item) => <a class="nav-link body-sm" href={item.href}>{item.label}</a>)}

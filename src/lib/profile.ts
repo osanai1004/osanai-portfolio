@@ -1,6 +1,11 @@
 import type { BrandId } from './brands';
 
-/** スキルデータ（言語非依存。カテゴリー名の翻訳は i18n 辞書側で行う） */
+/**
+ * 掲載方針（主要技術に絞る）
+ * - 日常的に書いている / 設計判断しているもの
+ * - 採用・技術者へのシグナルになるもの
+ * - 一度触っただけの周辺ツールは載せない
+ */
 export const SKILL_GROUPS: ReadonlyArray<{
 	categoryKey: 'skills.backend' | 'skills.infra' | 'skills.frontend' | 'skills.tools';
 	items: ReadonlyArray<{ id: BrandId; label: string }>;
@@ -22,9 +27,10 @@ export const SKILL_GROUPS: ReadonlyArray<{
 	{
 		categoryKey: 'skills.frontend',
 		items: [
-			{ id: 'astro', label: 'Astro' },
-			{ id: 'nextjs', label: 'Next.js' },
 			{ id: 'typescript', label: 'TypeScript' },
+			{ id: 'react', label: 'React' },
+			{ id: 'nextjs', label: 'Next.js' },
+			{ id: 'astro', label: 'Astro' },
 		],
 	},
 	{
@@ -32,17 +38,17 @@ export const SKILL_GROUPS: ReadonlyArray<{
 		items: [
 			{ id: 'github', label: 'GitHub' },
 			{ id: 'actions', label: 'GitHub Actions' },
-			{ id: 'ai', label: 'AI-assisted Dev' },
+			{ id: 'cursor', label: 'Cursor' },
 		],
 	},
 ];
 
-/** ヒーローパネルに表示するフォーカススタック */
+/** ヒーローパネルに表示するフォーカススタック（モダンさのシグナルを優先） */
 export const HERO_STACK: ReadonlyArray<{ id: BrandId; label: string }> = [
 	{ id: 'laravel', label: 'Laravel' },
-	{ id: 'php', label: 'PHP' },
+	{ id: 'typescript', label: 'TypeScript' },
+	{ id: 'react', label: 'React' },
 	{ id: 'aws', label: 'AWS' },
 	{ id: 'docker', label: 'Docker' },
-	{ id: 'typescript', label: 'TypeScript' },
-	{ id: 'github', label: 'GitHub' },
+	{ id: 'cursor', label: 'Cursor' },
 ];

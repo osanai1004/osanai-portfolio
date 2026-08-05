@@ -9,11 +9,12 @@ export const BRANDS = {
 	aws: { label: 'AWS', color: '#FF9900', file: 'aws.svg' },
 	docker: { label: 'Docker', color: '#2496ED', file: 'docker.svg' },
 	astro: { label: 'Astro', color: '#BC52EE', file: 'astro.svg' },
+	react: { label: 'React', color: '#61DAFB', file: 'react.svg' },
 	nextjs: { label: 'Next.js', color: 'ink', file: 'nextjs.svg' },
 	typescript: { label: 'TypeScript', color: '#3178C6', file: 'typescript.svg' },
 	github: { label: 'GitHub', color: 'ink', file: 'github.svg' },
 	actions: { label: 'GitHub Actions', color: '#2088FF', file: 'actions.svg' },
-	ai: { label: 'AI-assisted Dev', color: '#D97757', file: 'ai.svg' },
+	cursor: { label: 'Cursor', color: 'ink', file: 'cursor.svg' },
 } as const;
 
 export type BrandId = keyof typeof BRANDS;

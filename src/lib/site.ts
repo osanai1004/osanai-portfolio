@@ -2,11 +2,24 @@
 export const SITE = {
 	/** 表示名（英語） */
 	nameEn: 'Tsukasa Osanai',
-	/** 表示名（日本語） */
+	/** 表示名（日本語・漢字） */
 	nameJa: '小山内 僚',
-	/** GitHub プロフィール URL（コンタクト導線） */
+	/**
+	 * タブ・ヘッダー向けの読みやすい表記（日本語圏向け）
+	 * 漢字「僚」は初見で読めないことがあるため、ひらがな表記を併用する
+	 */
+	nameJaReadable: '小山内つかさ',
+	/** 姓の読み */
+	familyReading: 'おさない',
+	/** 名の読み */
+	givenReading: 'つかさ',
+	/** 姓（漢字） */
+	familyKanji: '小山内',
+	/** 名（漢字） */
+	givenKanji: '僚',
+	/** GitHub プロフィール URL（コンタクト導線・公開情報） */
 	githubUrl: 'https://github.com/osanai1004', // pragma: allowlist secret
-	/** GitHub ユーザー名（表示用） */
+	/** GitHub ユーザー名（表示用・公開情報） */
 	githubUser: 'osanai1004', // pragma: allowlist secret
 } as const;
 
