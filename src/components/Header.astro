@@ -1,5 +1,5 @@
 ---
-import type { Locale } from '../lib/site';
+import { SITE, type Locale } from '../lib/site';
 import { useTranslations } from '../lib/i18n/ui';
 import ThemeToggle from './ThemeToggle.astro';
 import PersonName from './PersonName.astro';
@@ -27,7 +27,14 @@ const navItems = [
 <header class="header">
 	<div class="container header-inner">
 		<a class="brand" href={`/${locale}/`}>
-			<span class="brand-mark" aria-hidden="true"></span>
+			<img
+				class="brand-mark"
+				src={SITE.avatarPath}
+				alt=""
+				width="28"
+				height="28"
+				decoding="async"
+			/>
 			<span class="brand-name body-sm"><PersonName locale={locale} variant="compact" /></span>
 		</a>
 		<nav class="nav" aria-label="Main">
@@ -76,11 +83,13 @@ const navItems = [
 	}
 
 	.brand-mark {
-		width: 18px;
-		height: 18px;
+		width: 28px;
+		height: 28px;
 		flex-shrink: 0;
-		border-radius: var(--rounded-sm);
-		background-color: var(--color-primary);
+		border-radius: 50%;
+		object-fit: cover;
+		border: 1px solid var(--color-hairline-strong);
+		background-color: var(--color-surface-2);
 	}
 
 	.brand-name {

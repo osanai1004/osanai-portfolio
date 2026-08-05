@@ -5,7 +5,7 @@ export const ui = {
 	ja: {
 		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'エンジニアチームリーダー・小山内つかさのポートフォリオ。ビジネスと技術をつなぎ、B2B SaaS の課題解決とチームづくりができることを伝えています。',
+			'小山内つかさ（Tsukasa Osanai）— エンジニアチームリーダー。営業経験×Laravel / React / AWS で、曖昧な要望を届く B2B SaaS に変えます。',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.strengths': 'Strengths',
@@ -62,7 +62,7 @@ export const ui = {
 	en: {
 		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'Portfolio of Tsukasa Osanai — an engineering team leader who bridges business and technology to ship B2B SaaS outcomes, not just features.',
+			'Tsukasa Osanai — Engineering Team Leader. Bridging sales-honed discovery with Laravel / React / AWS to ship B2B SaaS that teams can trust.',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.strengths': 'Strengths',

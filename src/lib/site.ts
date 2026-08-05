@@ -21,6 +21,10 @@ export const SITE = {
 	githubUrl: 'https://github.com/osanai1004', // pragma: allowlist secret
 	/** GitHub ユーザー名（表示用・公開情報） */
 	githubUser: 'osanai1004', // pragma: allowlist secret
+	/** GitHub アバター（ヘッダー・favicon 用） */
+	avatarPath: '/images/avatar.png',
+	/** OGP（URL共有プレビュー）画像 */
+	ogImagePath: '/images/og.png',
 } as const;
 
 export const LOCALES = ['ja', 'en'] as const;
