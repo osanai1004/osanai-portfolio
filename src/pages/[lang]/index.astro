@@ -236,8 +236,10 @@ const qaItems = [1, 2, 3].map((n) => ({
 		display: grid;
 		grid-template-columns: 1.15fr 0.85fr;
 		gap: var(--space-xxl);
-		align-items: center;
+		/* center だと全文が画面中央に浮き、スクロール済みに見える */
+		align-items: start;
 		padding-top: calc(var(--space-section) - 16px);
+		padding-bottom: var(--space-xxl);
 		min-height: calc(100dvh - var(--nav-height) - var(--space-xxl));
 	}
 

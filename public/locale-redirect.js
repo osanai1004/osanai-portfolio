@@ -14,5 +14,7 @@
 			: (navigator.language || '').toLowerCase().indexOf('en') === 0
 				? 'en'
 				: 'ja';
-	location.replace('/' + locale + '/');
+	// ハッシュは維持（#about 等）。スクロール位置の復元は scroll-init.js 側で抑止する
+	var hash = location.hash || '';
+	location.replace('/' + locale + '/' + hash);
 })();
