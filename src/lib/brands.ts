@@ -15,6 +15,9 @@ export const BRANDS = {
 	github: { label: 'GitHub', color: 'ink', file: 'github.svg' },
 	actions: { label: 'GitHub Actions', color: '#2088FF', file: 'actions.svg' },
 	cursor: { label: 'Cursor', color: 'ink', file: 'cursor.svg' },
+	vercel: { label: 'Vercel', color: 'ink', file: 'vercel.svg' },
+	supabase: { label: 'Supabase', color: '#3FCF8E', file: 'supabase.svg' },
+	cloudflare: { label: 'Cloudflare', color: '#F38020', file: 'cloudflare.svg' },
 } as const;
 
 export type BrandId = keyof typeof BRANDS;
