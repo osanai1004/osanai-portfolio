@@ -1,7 +1,14 @@
 ---
 import type { Locale } from '../lib/site';
 import { useTranslations } from '../lib/i18n/ui';
-import { HERO_TERMINAL_STEPS, formatHeroTerminalTranscript } from '../lib/hero-terminal';
+import {
+	HERO_TERMINAL_VARIANTS,
+	HERO_TERMINAL_SCRIPTS,
+	HERO_TERMINAL_CHROME,
+	HERO_TERMINAL_SWITCH,
+	formatHeroTerminalTranscript,
+	type HeroTerminalStep,
+} from '../lib/hero-terminal';
 
 interface Props {
 	locale: Locale;
@@ -10,39 +17,66 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const prompt = t('hero.terminal.prompt');
-const transcript = formatHeroTerminalTranscript(t);
+
+function renderSteps(steps: readonly HeroTerminalStep[]) {
+	return steps.map((step) => {
+		if (step.kind === 'blank') {
+			return <p class="term-line term-blank" data-term-line="blank">&nbsp;</p>;
+		}
+		if (step.kind === 'command') {
+			return (
+				<p class="term-line term-command" data-term-line="command">
+					<span class="term-prompt">{prompt}</span>
+					<span class="term-cmd" data-term-type>
+						{t(step.cmdKey)}
+					</span>
+				</p>
+			);
+		}
+		return (
+			<p
+				class:list={['term-line', 'term-output', `term-output-${step.tone}`]}
+				data-term-line="output"
+				data-term-tone={step.tone}
+			>
+				<span data-term-type>{t(step.textKey)}</span>
+			</p>
+		);
+	});
+}
 ---
 
 <div class="hero-terminal" data-hero-terminal>
-	<pre class="sr-only">{transcript}</pre>
-	<div class="hero-terminal-screen" data-terminal-screen aria-hidden="true">
+	<div class="cli-switcher" role="tablist" aria-label={t('hero.cli.nav')}>
 		{
-			HERO_TERMINAL_STEPS.map((step) => {
-				if (step.kind === 'blank') {
-					return <p class="term-line term-blank" data-term-line="blank">&nbsp;</p>;
-				}
-				if (step.kind === 'command') {
-					return (
-						<p class="term-line term-command" data-term-line="command">
-							<span class="term-prompt">{prompt}</span>
-							<span class="term-cmd" data-term-type>
-								{t(step.cmdKey)}
-							</span>
-						</p>
-					);
-				}
-				return (
-					<p
-						class:list={['term-line', 'term-output', `term-output-${step.tone}`]}
-						data-term-line="output"
-						data-term-tone={step.tone}
-					>
-						<span data-term-type>{t(step.textKey)}</span>
-					</p>
-				);
-			})
+			HERO_TERMINAL_VARIANTS.map((variant) => (
+				<button
+					class="cli-tab"
+					type="button"
+					role="tab"
+					data-cli-tab={variant}
+					aria-selected={variant === 'a' ? 'true' : 'false'}
+				>
+					{t(HERO_TERMINAL_SWITCH[variant])}
+				</button>
+			))
 		}
 	</div>
+	{
+		HERO_TERMINAL_VARIANTS.map((variant) => (
+			<div class="cli-pane" data-cli-pane={variant} hidden={variant !== 'a'}>
+				<pre class="sr-only">{formatHeroTerminalTranscript(t, HERO_TERMINAL_SCRIPTS[variant])}</pre>
+				<div
+					class="hero-terminal-screen"
+					data-terminal-screen
+					data-cli-chrome={t(HERO_TERMINAL_CHROME[variant])}
+					aria-hidden="true"
+				>
+					{renderSteps(HERO_TERMINAL_SCRIPTS[variant])}
+				</div>
+			</div>
+		))
+	}
 </div>
 
 <style>
@@ -50,8 +84,38 @@ const transcript = formatHeroTerminalTranscript(t);
 		position: relative;
 	}
 
+	.cli-switcher {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-xxs);
+		margin-bottom: var(--space-sm);
+	}
+
+	.cli-tab {
+		min-height: 32px;
+		padding-inline: var(--space-sm);
+		font-family: var(--font-mono);
+		font-size: var(--text-caption-size);
+		font-weight: 500;
+		color: var(--color-ink-subtle);
+		background-color: var(--color-surface-2);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--rounded-md);
+	}
+
+	.cli-tab:hover {
+		color: var(--color-ink);
+		border-color: var(--color-hairline-strong);
+	}
+
+	.cli-tab[aria-selected='true'] {
+		color: var(--color-ink);
+		border-color: var(--color-hairline-strong);
+		background-color: var(--color-surface-3);
+	}
+
 	.hero-terminal-screen {
-		min-height: calc(var(--text-body-sm-size) * 1.55 * 10);
+		min-height: calc(var(--text-body-sm-size) * 1.55 * 12);
 		font-family: var(--font-mono);
 		font-size: var(--text-body-sm-size);
 		line-height: 1.55;
@@ -138,6 +202,10 @@ const transcript = formatHeroTerminalTranscript(t);
 	const OUTPUT_CHAR_MS = 24;
 	const LINE_PAUSE_MS = 280;
 	const LOOP_PAUSE_MS = 2200;
+	const CLI_QUERY = 'cli';
+	const CLI_VARIANTS = ['a', 'b', 'c'] as const;
+
+	type CliVariant = (typeof CLI_VARIANTS)[number];
 
 	function prefersReducedMotion(): boolean {
 		return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -147,6 +215,24 @@ const transcript = formatHeroTerminalTranscript(t);
 		return new Promise((resolve) => {
 			window.setTimeout(resolve, ms);
 		});
+	}
+
+	function parseVariant(value: string | null): CliVariant {
+		return CLI_VARIANTS.find((item) => item === value) ?? 'a';
+	}
+
+	function variantFromLocation(): CliVariant {
+		return parseVariant(new URL(window.location.href).searchParams.get(CLI_QUERY));
+	}
+
+	function writeVariantToUrl(variant: CliVariant): void {
+		const url = new URL(window.location.href);
+		if (variant === 'a') {
+			url.searchParams.delete(CLI_QUERY);
+		} else {
+			url.searchParams.set(CLI_QUERY, variant);
+		}
+		window.history.replaceState({}, '', url);
 	}
 
 	function appendCaret(target: HTMLElement): HTMLElement {
@@ -174,6 +260,7 @@ const transcript = formatHeroTerminalTranscript(t);
 	async function playSession(
 		lines: HTMLElement[],
 		texts: Map<HTMLElement, string>,
+		isCurrent: () => boolean,
 	): Promise<void> {
 		for (const line of lines) {
 			line.hidden = true;
@@ -184,6 +271,9 @@ const transcript = formatHeroTerminalTranscript(t);
 		}
 
 		for (const line of lines) {
+			if (!isCurrent()) {
+				return;
+			}
 			line.hidden = false;
 			const typed = line.querySelector<HTMLElement>('[data-term-type]');
 			if (typed) {
@@ -195,39 +285,99 @@ const transcript = formatHeroTerminalTranscript(t);
 		}
 
 		const lastTyped = lines.at(-1)?.querySelector<HTMLElement>('[data-term-type]');
-		if (lastTyped) {
+		if (lastTyped && isCurrent()) {
 			appendCaret(lastTyped);
 		}
 	}
 
-	async function runTerminal(root: HTMLElement): Promise<void> {
-		const screen = root.querySelector<HTMLElement>('[data-terminal-screen]');
-		if (!screen) {
-			return;
+	function bindTerminal(root: HTMLElement): void {
+		const panes = Array.from(root.querySelectorAll<HTMLElement>('[data-cli-pane]'));
+		const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-cli-tab]'));
+		const chrome = document.querySelector<HTMLElement>('[data-cli-chrome-title]');
+		const snapshots = new Map<HTMLElement, Map<HTMLElement, string>>();
+		let playId = 0;
+
+		for (const pane of panes) {
+			const screen = pane.querySelector<HTMLElement>('[data-terminal-screen]');
+			if (!screen) {
+				continue;
+			}
+			const texts = new Map<HTMLElement, string>();
+			for (const typed of screen.querySelectorAll<HTMLElement>('[data-term-type]')) {
+				texts.set(typed, typed.textContent ?? '');
+			}
+			snapshots.set(screen, texts);
 		}
-		if (prefersReducedMotion()) {
+
+		function showPane(variant: CliVariant): HTMLElement | null {
+			let active: HTMLElement | null = null;
+			for (const pane of panes) {
+				const isActive = pane.dataset.cliPane === variant;
+				pane.hidden = !isActive;
+				if (isActive) {
+					active = pane;
+				}
+			}
+			for (const tab of tabs) {
+				tab.setAttribute('aria-selected', tab.dataset.cliTab === variant ? 'true' : 'false');
+			}
+			const screen = active?.querySelector<HTMLElement>('[data-terminal-screen]') ?? null;
+			if (chrome && screen?.dataset.cliChrome) {
+				chrome.textContent = screen.dataset.cliChrome;
+			}
+			return screen;
+		}
+
+		async function runScreen(screen: HTMLElement): Promise<void> {
+			const id = ++playId;
+			const isCurrent = () => id === playId;
+
+			if (prefersReducedMotion()) {
+				screen.dataset.playing = 'true';
+				return;
+			}
+
+			const lines = Array.from(screen.querySelectorAll<HTMLElement>('[data-term-line]'));
+			const texts = snapshots.get(screen) ?? new Map<HTMLElement, string>();
 			screen.dataset.playing = 'true';
-			return;
+			if (lines.length === 0) {
+				return;
+			}
+
+			while (document.contains(root) && isCurrent()) {
+				clearCarets(screen);
+				await playSession(lines, texts, isCurrent);
+				if (!isCurrent()) {
+					return;
+				}
+				await wait(LOOP_PAUSE_MS);
+			}
 		}
 
-		const lines = Array.from(screen.querySelectorAll<HTMLElement>('[data-term-line]'));
-		const texts = new Map<HTMLElement, string>();
-		for (const typed of screen.querySelectorAll<HTMLElement>('[data-term-type]')) {
-			texts.set(typed, typed.textContent ?? '');
-		}
-		screen.dataset.playing = 'true';
-		if (lines.length === 0) {
-			return;
+		function activate(variant: CliVariant, writeUrl: boolean): void {
+			const screen = showPane(variant);
+			if (writeUrl) {
+				writeVariantToUrl(variant);
+			}
+			if (screen) {
+				void runScreen(screen);
+			}
 		}
 
-		while (document.contains(root)) {
-			clearCarets(screen);
-			await playSession(lines, texts);
-			await wait(LOOP_PAUSE_MS);
-		}
+		tabs.forEach((tab) => {
+			tab.addEventListener('click', () => {
+				activate(parseVariant(tab.dataset.cliTab ?? 'a'), true);
+			});
+		});
+
+		window.addEventListener('popstate', () => {
+			activate(variantFromLocation(), false);
+		});
+
+		activate(variantFromLocation(), false);
 	}
 
 	document.querySelectorAll<HTMLElement>('[data-hero-terminal]').forEach((root) => {
-		void runTerminal(root);
+		bindTerminal(root);
 	});
 </script>
