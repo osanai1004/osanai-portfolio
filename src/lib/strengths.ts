@@ -34,7 +34,7 @@ export const STRENGTHS: Strength[] = [
 				problem:
 					'現場の要望は熱量がある一方で、「本当に解きたい課題」が言語化されないまま開発に入ると、手戻りや認識ズレが起きやすい。',
 				approach:
-					'延べ 300 社の商談で染みついた「意思決定者は何を見て判断するか」の逆算で、要望の裏にある意図・優先度・受け入れ条件を掘り、仕様FIXの場で裁断する。',
+					'延べ 数百社の商談で染みついた「意思決定者は何を見て判断するか」の逆算で、要望の裏にある意図・優先度・受け入れ条件を掘り、仕様FIXの場で裁断する。',
 				outcome:
 					'「作ってほしいもの」を、「今やる範囲／後回し／やらない」まで含めた、チームが迷わない実装の切り口にできる。',
 			},
@@ -43,7 +43,7 @@ export const STRENGTHS: Strength[] = [
 				problem:
 					'Requests arrive with energy, but when the real problem is never articulated, coding starts on fuzzy ground — and rework follows.',
 				approach:
-					'Negotiating with some 300 companies taught me to work backwards from what decision-makers judge by. I dig into the intent, priority, and acceptance criteria behind each request, then cut scope in spec-fix sessions.',
+					'Negotiating with hundreds of companies taught me to work backwards from what decision-makers judge by. I dig into the intent, priority, and acceptance criteria behind each request, then cut scope in spec-fix sessions.',
 				outcome:
 					'I turn “build this” into a clear slice: what we do now, what waits, and what we won’t do — so the team can execute without guessing.',
 			},
@@ -84,20 +84,20 @@ export const STRENGTHS: Strength[] = [
 			ja: {
 				title: '判断材料を渡して、チームの手戻りを減らす',
 				problem:
-					'属人化した実装や、レビュー待ち・仕様待ちで、少人数チームのスループットが落ちやすい。',
+					'少人数だと、仕様が固まる前に実装が走り、レビューで初めてズレが分かる。速さの問題というより、認識ズレの後始末が重い。',
 				approach:
 					'正解を配るのではなく、背景・優先度・受け入れ条件という判断材料を揃えて渡す。実装仕様FIXの型づくり、1on1 とチケット伴走、Cursor 等の AI 活用で、考える時間と手を動かす時間の両方を短くする。',
 				outcome:
-					'自分だけが速く書くのではなく、メンバーが迷わず着手・レビュー・届け先まで進める状態に近づけられる。',
+					'自分が全部書くのではなく、着手前にズレを潰せる状態に近づける。速さより、後からやり直さないこと。',
 			},
 			en: {
 				title: 'Hand the team context, not answers — and cut rework',
 				problem:
-					'Small teams stall when knowledge is siloed, or when work piles up waiting on review and unclear specs.',
+					'On a small team, implementation often starts before the spec is settled — and the gap only shows up in review. The real cost is not speed, but cleaning up misalignment.',
 				approach:
 					'Instead of handing out answers, I hand over what people need to decide: background, priorities, acceptance criteria. A lightweight spec-fix rhythm, 1:1 ticket coaching, and AI tools like Cursor shorten both thinking and typing time.',
 				outcome:
-					'The win is not “I code faster alone” — it’s a team that can start, review, and ship with less friction.',
+					'The win is not writing everything myself — it’s catching the gap before work starts. Less about speed, more about not redoing it later.',
 			},
 		},
 	},
