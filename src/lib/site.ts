@@ -25,6 +25,8 @@ export const SITE = {
 	avatarPath: '/images/avatar.png',
 	/** OGP（URL共有プレビュー）画像 */
 	ogImagePath: '/images/og.png',
+	/** 所属企業の公式サイト（About の社名リンク） */
+	companyUrl: 'https://www.molcareer.com',
 } as const;
 
 export const LOCALES = ['ja', 'en'] as const;
