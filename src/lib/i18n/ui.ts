@@ -32,8 +32,10 @@ export const ui = {
 		'hero.terminal.out.focus': '誰の · どんな · なぜ今',
 		'about.eyebrow': 'About',
 		'about.title': '営業 7 年から、エンジニアリングの世界へ',
-		'about.intro':
-			'株式会社MOL CAREERのエンジニアチームリーダー。営業出身の回り道キャリアだからこそ、「誰の・どんな課題を・なぜ今解くのか」から逆算してプロダクトを作ります。',
+		'about.intro.before': '株式会社',
+		'about.intro.company': 'MOLキャリア',
+		'about.intro.after':
+			'のエンジニアチームリーダー。営業出身の回り道キャリアだからこそ、「誰の・どんな課題を・なぜ今解くのか」から逆算してプロダクトを作ります。',
 		'about.timelineLabel': 'Career',
 		'about.tl1.period': '〜2025',
 		'about.tl1.title': '法人フィールドセールス 7 年',
@@ -117,8 +119,10 @@ export const ui = {
 		'hero.terminal.out.focus': 'whose · which · why now',
 		'about.eyebrow': 'About',
 		'about.title': 'From 7 years in sales to engineering',
-		'about.intro':
-			'Engineering team leader at MOL CAREER Inc. My roundabout path through sales is exactly why I build products by working backwards from “whose problem, which problem, and why now.”',
+		'about.intro.before': 'Engineering team leader at ',
+		'about.intro.company': 'MOL CAREER',
+		'about.intro.after':
+			' Inc. My roundabout path through sales is exactly why I build products by working backwards from “whose problem, which problem, and why now.”',
 		'about.timelineLabel': 'Career',
 		'about.tl1.period': 'Until 2025',
 		'about.tl1.title': '7 years in B2B field sales',
