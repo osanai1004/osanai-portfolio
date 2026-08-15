@@ -15,6 +15,7 @@ export const SKILL_GROUPS: ReadonlyArray<{
 		items: [
 			{ id: 'php', label: 'PHP' },
 			{ id: 'laravel', label: 'Laravel' },
+			{ id: 'supabase', label: 'Supabase' },
 		],
 	},
 	{
@@ -22,6 +23,8 @@ export const SKILL_GROUPS: ReadonlyArray<{
 		items: [
 			{ id: 'aws', label: 'AWS' },
 			{ id: 'docker', label: 'Docker' },
+			{ id: 'vercel', label: 'Vercel' },
+			{ id: 'cloudflare', label: 'Cloudflare' },
 		],
 	},
 	{

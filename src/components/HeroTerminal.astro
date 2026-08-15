@@ -1,0 +1,234 @@
+---
+import type { Locale } from '../lib/site';
+import { useTranslations } from '../lib/i18n/ui';
+import { HERO_TERMINAL_STEPS, formatHeroTerminalTranscript } from '../lib/hero-terminal';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const prompt = t('hero.terminal.prompt');
+const transcript = formatHeroTerminalTranscript(t);
+---
+
+<div class="hero-terminal" data-hero-terminal>
+	<pre class="sr-only">{transcript}</pre>
+	<div class="hero-terminal-screen" data-terminal-screen aria-hidden="true">
+		{
+			HERO_TERMINAL_STEPS.map((step) => {
+				if (step.kind === 'blank') {
+					return (
+						<p class="term-line term-blank" data-term-line="blank">
+							&nbsp;
+						</p>
+					);
+				}
+				if (step.kind === 'command') {
+					return (
+						<p class="term-line term-command" data-term-line="command">
+							<span class="term-prompt">{prompt}</span>
+							<span class="term-cmd" data-term-type>
+								{t(step.cmdKey)}
+							</span>
+						</p>
+					);
+				}
+				return (
+					<p
+						class:list={['term-line', 'term-output', `term-output-${step.tone}`]}
+						data-term-line="output"
+						data-term-tone={step.tone}
+					>
+						<span data-term-type>{t(step.textKey)}</span>
+					</p>
+				);
+			})
+		}
+	</div>
+</div>
+
+<style>
+	.hero-terminal {
+		position: relative;
+	}
+
+	.hero-terminal-screen {
+		min-height: calc(var(--text-body-sm-size) * 1.55 * 10);
+		font-family: var(--font-mono);
+		font-size: var(--text-body-sm-size);
+		line-height: 1.55;
+		white-space: pre-wrap;
+		overflow-wrap: anywhere;
+	}
+
+	:global(html[data-terminal-motion='on']) .hero-terminal-screen:not([data-playing]) {
+		visibility: hidden;
+	}
+
+	.term-line {
+		margin: 0;
+	}
+
+	.term-blank {
+		min-height: 1.55em;
+	}
+
+	.term-prompt {
+		color: var(--color-primary);
+		margin-right: 0.6ch;
+	}
+
+	.term-cmd {
+		color: var(--color-ink);
+	}
+
+	.term-output-ink {
+		color: var(--color-ink);
+	}
+
+	.term-output-muted {
+		color: var(--color-ink-muted);
+	}
+
+	.term-output-success {
+		color: var(--color-success);
+	}
+
+	.hero-terminal :global(.term-caret) {
+		display: inline-block;
+		width: 0.55ch;
+		height: 1.05em;
+		margin-left: 1px;
+		background-color: var(--color-ink);
+		vertical-align: -0.15em;
+		animation: caret-blink 1s steps(1, end) infinite;
+	}
+
+	@keyframes caret-blink {
+		0%,
+		49% {
+			opacity: 1;
+		}
+		50%,
+		100% {
+			opacity: 0;
+		}
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.term-caret {
+			animation: none;
+			opacity: 1;
+		}
+	}
+</style>
+
+<script>
+	const COMMAND_CHAR_MS = 38;
+	const OUTPUT_CHAR_MS = 24;
+	const LINE_PAUSE_MS = 280;
+	const LOOP_PAUSE_MS = 2200;
+
+	function prefersReducedMotion(): boolean {
+		return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	}
+
+	function wait(ms: number): Promise<void> {
+		return new Promise((resolve) => {
+			window.setTimeout(resolve, ms);
+		});
+	}
+
+	function appendCaret(target: HTMLElement): HTMLElement {
+		const caret = document.createElement('span');
+		caret.className = 'term-caret';
+		caret.setAttribute('aria-hidden', 'true');
+		target.append(caret);
+		return caret;
+	}
+
+	function clearCarets(screen: HTMLElement): void {
+		screen.querySelectorAll('.term-caret').forEach((caret) => caret.remove());
+	}
+
+	async function typeInto(target: HTMLElement, text: string, charMs: number): Promise<void> {
+		target.textContent = '';
+		const caret = appendCaret(target);
+		for (const char of text) {
+			caret.before(document.createTextNode(char));
+			await wait(charMs);
+		}
+		caret.remove();
+	}
+
+	async function playSession(lines: HTMLElement[], texts: Map<HTMLElement, string>): Promise<void> {
+		for (const line of lines) {
+			line.hidden = true;
+			const typed = line.querySelector<HTMLElement>('[data-term-type]');
+			if (typed) {
+				typed.textContent = '';
+			}
+		}
+
+		for (const line of lines) {
+			line.hidden = false;
+			const typed = line.querySelector<HTMLElement>('[data-term-type]');
+			if (typed) {
+				const text = texts.get(typed) ?? '';
+				const charMs = line.dataset.termLine === 'command' ? COMMAND_CHAR_MS : OUTPUT_CHAR_MS;
+				await typeInto(typed, text, charMs);
+			}
+			await wait(LINE_PAUSE_MS);
+		}
+
+		const lastTyped = lines.at(-1)?.querySelector<HTMLElement>('[data-term-type]');
+		if (lastTyped) {
+			appendCaret(lastTyped);
+		}
+	}
+
+	async function runTerminal(root: HTMLElement): Promise<void> {
+		const screen = root.querySelector<HTMLElement>('[data-terminal-screen]');
+		if (!screen) {
+			return;
+		}
+		if (prefersReducedMotion()) {
+			screen.dataset.playing = 'true';
+			return;
+		}
+
+		const lines = Array.from(screen.querySelectorAll<HTMLElement>('[data-term-line]'));
+		const texts = new Map<HTMLElement, string>();
+		for (const typed of screen.querySelectorAll<HTMLElement>('[data-term-type]')) {
+			texts.set(typed, typed.textContent ?? '');
+		}
+		screen.dataset.playing = 'true';
+		if (lines.length === 0) {
+			return;
+		}
+
+		while (document.contains(root)) {
+			clearCarets(screen);
+			await playSession(lines, texts);
+			await wait(LOOP_PAUSE_MS);
+		}
+	}
+
+	document.querySelectorAll<HTMLElement>('[data-hero-terminal]').forEach((root) => {
+		void runTerminal(root);
+	});
+</script>

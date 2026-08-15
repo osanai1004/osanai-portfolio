@@ -5,6 +5,7 @@ import Atmosphere from '../../components/Atmosphere.astro';
 import StrengthCard from '../../components/StrengthCard.astro';
 import BrandLogo from '../../components/BrandLogo.astro';
 import PersonName from '../../components/PersonName.astro';
+import HeroTerminal from '../../components/HeroTerminal.astro';
 import Contributions from '../../components/Contributions.astro';
 import { LOCALES, SITE, type Locale } from '../../lib/site';
 import { useTranslations, type UiKey } from '../../lib/i18n/ui';
@@ -56,7 +57,8 @@ const qaItems = [1, 2, 3].map((n) => ({
 					<span class="chrome-dot"></span>
 					<span class="chrome-title caption">{t('hero.panel.label')}</span>
 				</div>
-				<p class="panel-role body-sm">{t('hero.panel.role')}</p>
+				<HeroTerminal locale={locale} />
+				<p class="caption panel-stack-label">{t('hero.panel.stack')}</p>
 				<ul class="panel-stack">
 					{
 						HERO_STACK.map((item) => (
@@ -73,7 +75,18 @@ const qaItems = [1, 2, 3].map((n) => ({
 
 	<!-- About -->
 	<Section id="about" eyebrow={t('about.eyebrow')} title={t('about.title')} atmosphere="about">
-		<p class="about-intro body-lg">{t('about.intro')}</p>
+		<p class="about-intro body-lg">
+			{t('about.intro.before')}
+			<a
+				class="about-company-link"
+				href={SITE.companyUrl}
+				rel="noopener noreferrer"
+				target="_blank"
+			>
+				{t('about.intro.company')}
+			</a>
+			{t('about.intro.after')}
+		</p>
 		<div class="about-grid">
 			<div class="about-col">
 				<p class="caption about-col-label">{t('about.timelineLabel')}</p>
@@ -92,21 +105,21 @@ const qaItems = [1, 2, 3].map((n) => ({
 			</div>
 			<div class="about-col">
 				<p class="caption about-col-label">{t('about.qaLabel')}</p>
-				<dl class="qa-list">
+				<div class="qa-list">
 					{
 						qaItems.map((item) => (
-							<div class="qa-card">
-								<dt class="qa-q">
+							<details class="qa-card">
+								<summary class="qa-q">
 									<span class="qa-mark" aria-hidden="true">
 										Q
 									</span>
 									<span class="qa-q-text">{item.q}</span>
-								</dt>
-								<dd class="body-sm qa-a">{item.a}</dd>
-							</div>
+								</summary>
+								<p class="body-sm qa-a">{item.a}</p>
+							</details>
 						))
 					}
-				</dl>
+				</div>
 			</div>
 		</div>
 	</Section>
@@ -149,7 +162,7 @@ const qaItems = [1, 2, 3].map((n) => ({
 				<h2 class="headline cta-title">{t('contact.title')}</h2>
 				<p class="cta-body">{t('contact.body')}</p>
 			</div>
-			<a class="button-primary" href={SITE.githubUrl} rel="noopener noreferrer" target="_blank">
+			<a class="button-primary" href={SITE.linkedinUrl} rel="noopener noreferrer" target="_blank">
 				{t('contact.cta')} ↗
 			</a>
 		</div>
@@ -289,11 +302,12 @@ const qaItems = [1, 2, 3].map((n) => ({
 		font-family: var(--font-mono);
 	}
 
-	.panel-role {
-		color: var(--color-ink-subtle);
-		margin-bottom: var(--space-md);
-		padding-bottom: var(--space-md);
-		border-bottom: 1px solid var(--color-hairline);
+	.panel-stack-label {
+		margin-top: var(--space-md);
+		padding-top: var(--space-md);
+		border-top: 1px solid var(--color-hairline);
+		color: var(--color-ink-tertiary);
+		font-family: var(--font-mono);
 	}
 
 	.panel-stack {
@@ -327,6 +341,17 @@ const qaItems = [1, 2, 3].map((n) => ({
 		margin-top: calc(var(--space-md) * -1);
 		margin-bottom: var(--space-xl);
 		color: var(--color-ink-muted);
+	}
+
+	.about-company-link {
+		font-weight: 500;
+		color: var(--color-primary);
+		text-decoration: underline;
+		text-underline-offset: 0.18em;
+	}
+
+	.about-company-link:hover {
+		color: var(--color-primary-hover);
 	}
 
 	.about-grid {
@@ -437,6 +462,38 @@ const qaItems = [1, 2, 3].map((n) => ({
 		gap: 10px;
 		font-weight: 600;
 		letter-spacing: -0.01em;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.qa-q:hover .qa-q-text {
+		color: var(--color-ink);
+	}
+
+	.qa-q::-webkit-details-marker {
+		display: none;
+	}
+
+	.qa-q-text {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.qa-q::after {
+		content: '';
+		flex-shrink: 0;
+		width: 0.4em;
+		height: 0.4em;
+		margin-left: auto;
+		margin-top: 0.35em;
+		border-right: 1.5px solid var(--color-ink-subtle);
+		border-bottom: 1.5px solid var(--color-ink-subtle);
+		transform: rotate(45deg);
+	}
+
+	.qa-card[open] .qa-q::after {
+		margin-top: 0.55em;
+		transform: rotate(-135deg);
 	}
 
 	.qa-mark {
@@ -587,6 +644,11 @@ const qaItems = [1, 2, 3].map((n) => ({
 		.reveal,
 		.reveal-delay {
 			animation: none;
+		}
+
+		.qa-q::after,
+		.qa-card[open] .qa-q::after {
+			transition: none;
 		}
 	}
 </style>
