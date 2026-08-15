@@ -31,7 +31,7 @@ export const ui = {
 		'about.eyebrow': 'About',
 		'about.title': '営業 7 年から、エンジニアリングの世界へ',
 		'about.intro.before': '',
-		'about.intro.company': '株式会社MOLキャリア',
+		'about.intro.company': '株式会社MOL CAREER',
 		'about.intro.after':
 			'のエンジニアチームリーダー。営業出身の回り道キャリアだからこそ、「誰の・どんな課題を・なぜ今解くのか」から逆算してプロダクトを作ります。',
 		'about.timelineLabel': 'Career',
@@ -50,7 +50,7 @@ export const ui = {
 		'about.tl4.period': '現在',
 		'about.tl4.title': 'エンジニアチームリーダー',
 		'about.tl4.desc':
-			'B2B 外国人材マッチング SaaS の開発・仕様FIX・チームマネジメントを担当。CTO への段階的な移行に取り組み中。',
+			'B2B 外国人材マッチング SaaS の開発・仕様FIX・チームマネジメントを担当。',
 		'about.qaLabel': 'Q&A',
 		'about.qa1.q': 'なぜ営業からエンジニアに？',
 		'about.qa1.a':
@@ -60,7 +60,7 @@ export const ui = {
 			'プロダクトは目的ではなく、事業課題を解決する手段だということ。実装の前に「誰の・どんな課題を・なぜ今解くのか」を固めてから作り始めます。',
 		'about.qa3.q': 'チームリーダーとして意識していること',
 		'about.qa3.a':
-			'正解を配るのではなく、判断材料（背景・優先度・受け入れ条件）を揃えて渡すこと。手戻りの多くは技術ではなく認識ズレから生まれるので、作る前に仕様を固める場を大事にしています。',
+			'仕様FIXの場で、今やる範囲を切ること。手戻りの多くは技術ではなく、作る前の認識ズレから生まれる。',
 		'skills.eyebrow': 'Skills',
 		'skills.title': '技術スタック',
 		'skills.backend': 'バックエンド',
@@ -77,7 +77,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': '課題解決として届けられること',
 		'strengths.lead':
-			'キャリアの延長線上で、いま提供できる価値です。「意図を掘る」「検証してから届ける」「判断材料を渡す」——営業で染みついた習慣を、そのまま開発現場の課題解決に変えています。',
+			'キャリアの延長線上で、いま提供できる価値です。「意図を掘る」「検証してから届ける」「手戻りを先に潰す」——営業で染みついた習慣を、そのまま開発現場の課題解決に変えています。',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'お気軽にご連絡ください',
 		'contact.body':
@@ -136,7 +136,7 @@ export const ui = {
 		'about.tl4.period': 'Now',
 		'about.tl4.title': 'Engineering team leader',
 		'about.tl4.desc':
-			'Leading development, spec-fix sessions, and team management for a B2B global-talent-matching SaaS, while working toward a CTO role.',
+			'Leading development, spec-fix sessions, and team management for a B2B global-talent-matching SaaS.',
 		'about.qaLabel': 'Q&A',
 		'about.qa1.q': 'Why move from sales to engineering?',
 		'about.qa1.a':
@@ -146,7 +146,7 @@ export const ui = {
 			'A product is never the goal — it is a means to solve a business problem. I nail down “whose problem, which problem, and why now” before writing code.',
 		'about.qa3.q': 'What do you focus on as a team leader?',
 		'about.qa3.a':
-			'Handing the team what they need to decide — background, priorities, acceptance criteria — instead of handing out answers. Most rework comes from misalignment, not technology, so we fix the spec before we build.',
+			'Cutting scope in spec-fix sessions. Most rework comes from misalignment before we build, not from the technology itself.',
 		'skills.eyebrow': 'Skills',
 		'skills.title': 'Tech stack',
 		'skills.backend': 'Backend',
@@ -163,7 +163,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': 'Problems I can help solve',
 		'strengths.lead':
-			'The value I deliver today is a straight line from that career: dig out the intent, verify before shipping, hand over context — sales-honed habits turned into everyday problem-solving.',
+			'The value I deliver today is a straight line from that career: dig out the intent, verify before shipping, kill rework early — sales-honed habits turned into everyday problem-solving.',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'Let’s connect',
 		'contact.body':
