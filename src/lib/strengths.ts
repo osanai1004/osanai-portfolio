@@ -86,7 +86,7 @@ export const STRENGTHS: Strength[] = [
 				problem:
 					'少人数だと、仕様が固まる前に実装が走り、レビューで初めてズレが分かる。速さの問題というより、認識ズレの後始末が重い。',
 				approach:
-					'正解を配るのではなく、背景・優先度・受け入れ条件という判断材料を揃えて渡す。実装仕様FIXの型づくり、1on1 とチケット伴走、Cursor 等の AI 活用で、考える時間と手を動かす時間の両方を短くする。',
+					'正解を配るのではなく、背景・優先度・受け入れ条件という判断材料を揃えて渡す。実装仕様FIXの型づくりと、1on1・チケット伴走で、着手前にズレを潰す。',
 				outcome:
 					'自分が全部書くのではなく、着手前にズレを潰せる状態に近づける。速さより、後からやり直さないこと。',
 			},
@@ -95,7 +95,7 @@ export const STRENGTHS: Strength[] = [
 				problem:
 					'On a small team, implementation often starts before the spec is settled — and the gap only shows up in review. The real cost is not speed, but cleaning up misalignment.',
 				approach:
-					'Instead of handing out answers, I hand over what people need to decide: background, priorities, acceptance criteria. A lightweight spec-fix rhythm, 1:1 ticket coaching, and AI tools like Cursor shorten both thinking and typing time.',
+					'Instead of handing out answers, I hand over what people need to decide: background, priorities, acceptance criteria. A lightweight spec-fix rhythm and 1:1 ticket coaching catch the gap before work starts.',
 				outcome:
 					'The win is not writing everything myself — it’s catching the gap before work starts. Less about speed, more about not redoing it later.',
 			},
