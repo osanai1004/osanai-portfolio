@@ -61,7 +61,7 @@ export const ui = {
 		'about.tl1.period': '〜2025',
 		'about.tl1.title': '法人フィールドセールス 7 年',
 		'about.tl1.desc':
-			'延べ 300 社と商談。その大半が経営者・役職者との直接交渉。扱っていたのは設備投資クラスの有形商材。',
+			'延べ 数百社と商談。その大半が経営者・役職者との直接交渉。扱っていたのは設備投資クラスの有形商材。',
 		'about.tl2.period': '〜2025',
 		'about.tl2.title': 'いま思えば、PoC 型の営業',
 		'about.tl2.desc':
@@ -170,7 +170,7 @@ export const ui = {
 		'about.tl1.period': 'Until 2025',
 		'about.tl1.title': '7 years in B2B field sales',
 		'about.tl1.desc':
-			'Negotiated with roughly 300 companies — almost always directly with executives and decision-makers — selling capital-investment-grade tangible equipment.',
+			'Negotiated with hundreds of companies — almost always directly with executives and decision-makers — selling capital-investment-grade tangible equipment.',
 		'about.tl2.period': 'Until 2025',
 		'about.tl2.title': 'PoC-style sales, before I knew the term',
 		'about.tl2.desc':

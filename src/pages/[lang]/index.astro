@@ -105,21 +105,21 @@ const qaItems = [1, 2, 3].map((n) => ({
 			</div>
 			<div class="about-col">
 				<p class="caption about-col-label">{t('about.qaLabel')}</p>
-				<dl class="qa-list">
+				<div class="qa-list">
 					{
 						qaItems.map((item) => (
-							<div class="qa-card">
-								<dt class="qa-q">
+							<details class="qa-card">
+								<summary class="qa-q">
 									<span class="qa-mark" aria-hidden="true">
 										Q
 									</span>
 									<span class="qa-q-text">{item.q}</span>
-								</dt>
-								<dd class="body-sm qa-a">{item.a}</dd>
-							</div>
+								</summary>
+								<p class="body-sm qa-a">{item.a}</p>
+							</details>
 						))
 					}
-				</dl>
+				</div>
 			</div>
 		</div>
 	</Section>
@@ -462,6 +462,38 @@ const qaItems = [1, 2, 3].map((n) => ({
 		gap: 10px;
 		font-weight: 600;
 		letter-spacing: -0.01em;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.qa-q:hover .qa-q-text {
+		color: var(--color-ink);
+	}
+
+	.qa-q::-webkit-details-marker {
+		display: none;
+	}
+
+	.qa-q-text {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.qa-q::after {
+		content: '';
+		flex-shrink: 0;
+		width: 0.4em;
+		height: 0.4em;
+		margin-left: auto;
+		margin-top: 0.35em;
+		border-right: 1.5px solid var(--color-ink-subtle);
+		border-bottom: 1.5px solid var(--color-ink-subtle);
+		transform: rotate(45deg);
+	}
+
+	.qa-card[open] .qa-q::after {
+		margin-top: 0.55em;
+		transform: rotate(-135deg);
 	}
 
 	.qa-mark {
@@ -612,6 +644,11 @@ const qaItems = [1, 2, 3].map((n) => ({
 		.reveal,
 		.reveal-delay {
 			animation: none;
+		}
+
+		.qa-q::after,
+		.qa-card[open] .qa-q::after {
+			transition: none;
 		}
 	}
 </style>
