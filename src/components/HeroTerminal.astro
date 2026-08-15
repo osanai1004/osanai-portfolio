@@ -7,7 +7,6 @@ import {
 	HERO_TERMINAL_CHROME,
 	HERO_TERMINAL_SWITCH,
 	formatHeroTerminalTranscript,
-	type HeroTerminalStep,
 } from '../lib/hero-terminal';
 
 interface Props {
@@ -17,33 +16,6 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const prompt = t('hero.terminal.prompt');
-
-function renderSteps(steps: readonly HeroTerminalStep[]) {
-	return steps.map((step) => {
-		if (step.kind === 'blank') {
-			return <p class="term-line term-blank" data-term-line="blank">&nbsp;</p>;
-		}
-		if (step.kind === 'command') {
-			return (
-				<p class="term-line term-command" data-term-line="command">
-					<span class="term-prompt">{prompt}</span>
-					<span class="term-cmd" data-term-type>
-						{t(step.cmdKey)}
-					</span>
-				</p>
-			);
-		}
-		return (
-			<p
-				class:list={['term-line', 'term-output', `term-output-${step.tone}`]}
-				data-term-line="output"
-				data-term-tone={step.tone}
-			>
-				<span data-term-type>{t(step.textKey)}</span>
-			</p>
-		);
-	});
-}
 ---
 
 <div class="hero-terminal" data-hero-terminal>
@@ -72,7 +44,36 @@ function renderSteps(steps: readonly HeroTerminalStep[]) {
 					data-cli-chrome={t(HERO_TERMINAL_CHROME[variant])}
 					aria-hidden="true"
 				>
-					{renderSteps(HERO_TERMINAL_SCRIPTS[variant])}
+					{
+						HERO_TERMINAL_SCRIPTS[variant].map((step) => {
+							if (step.kind === 'blank') {
+								return (
+									<p class="term-line term-blank" data-term-line="blank">
+										&nbsp;
+									</p>
+								);
+							}
+							if (step.kind === 'command') {
+								return (
+									<p class="term-line term-command" data-term-line="command">
+										<span class="term-prompt">{prompt}</span>
+										<span class="term-cmd" data-term-type>
+											{t(step.cmdKey)}
+										</span>
+									</p>
+								);
+							}
+							return (
+								<p
+									class:list={['term-line', 'term-output', `term-output-${step.tone}`]}
+									data-term-line="output"
+									data-term-tone={step.tone}
+								>
+									<span data-term-type>{t(step.textKey)}</span>
+								</p>
+							);
+						})
+					}
 				</div>
 			</div>
 		))
