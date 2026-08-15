@@ -1,0 +1,1 @@
+document.querySelectorAll(`[data-lang-switch]`).forEach(e=>{e.addEventListener(`click`,()=>{try{localStorage.setItem(`locale`,e.dataset.langSwitch??``)}catch{}})});

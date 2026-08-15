@@ -1,0 +1,1 @@
+document.querySelectorAll(`[data-theme-toggle]`).forEach(e=>{e.addEventListener(`click`,()=>{let e=document.documentElement.dataset.theme===`light`?`dark`:`light`;document.documentElement.dataset.theme=e;try{localStorage.setItem(`theme`,e)}catch{}})});
