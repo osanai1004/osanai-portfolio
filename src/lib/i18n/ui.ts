@@ -104,8 +104,8 @@ export const ui = {
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'お気軽にご連絡ください',
 		'contact.body':
-			'お仕事のご相談・技術の話題など、GitHub からお声がけください。プロフィールに活動履歴をまとめています。',
-		'contact.cta': 'GitHub で見る',
+			'お仕事のご相談は LinkedIn からお声がけください。コードと活動履歴は GitHub にまとめています。',
+		'contact.cta': 'LinkedIn で連絡',
 		'notFound.title': 'ページが見つかりません',
 		'notFound.body': 'お探しのページは移動または削除された可能性があります。',
 		'notFound.cta': 'トップへ戻る',
@@ -213,8 +213,8 @@ export const ui = {
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'Let’s connect',
 		'contact.body':
-			'For work inquiries or tech conversations, reach out via GitHub — my profile is the best summary of what I’m up to.',
-		'contact.cta': 'Find me on GitHub',
+			'For work inquiries, reach out on LinkedIn. Code and activity live on GitHub.',
+		'contact.cta': 'Message on LinkedIn',
 		'notFound.title': 'Page not found',
 		'notFound.body': 'The page you are looking for may have been moved or removed.',
 		'notFound.cta': 'Back to top',
