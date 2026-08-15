@@ -5,7 +5,7 @@ export const ui = {
 	ja: {
 		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'小山内つかさ（Tsukasa Osanai）— エンジニアチームリーダー。営業経験×Laravel / React / AWS で、曖昧な要望を届く B2B SaaS に変えます。',
+			'小山内つかさ（Tsukasa Osanai）— エンジニアチームリーダー。営業で培った課題整理力と、開発で培った実装力で、曖昧な要望を届く B2B SaaS に変えます。',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.strengths': 'Strengths',
@@ -16,7 +16,7 @@ export const ui = {
 		'hero.eyebrow': 'Engineering Team Leader',
 		'hero.name': SITE.nameJaReadable,
 		'hero.tagline':
-			'営業で培った課題整理力と、Laravel / React / AWS の実装力で、曖昧な要望を「届くプロダクト」に変えます。技術自慢ではなく、解決できることにフォーカスしています。',
+			'営業で培った課題整理力と、開発で培った実装力で、曖昧な要望を「届くプロダクト」に変えます。技術自慢ではなく、解決できることにフォーカスしています。',
 		'hero.cta.strengths': '強みを見る',
 		'hero.cta.github': 'GitHub',
 		'hero.panel.label': 'git log',
@@ -90,7 +90,7 @@ export const ui = {
 	en: {
 		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'Tsukasa Osanai — Engineering Team Leader. Bridging sales-honed discovery with Laravel / React / AWS to ship B2B SaaS that teams can trust.',
+			'Tsukasa Osanai — Engineering Team Leader. Bridging sales-honed discovery with hands-on engineering to ship B2B SaaS that teams can trust.',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.strengths': 'Strengths',
@@ -101,7 +101,7 @@ export const ui = {
 		'hero.eyebrow': 'Engineering Team Leader',
 		'hero.name': SITE.nameEn,
 		'hero.tagline':
-			'I turn ambiguous business needs into shipped product — combining sales-honed problem framing with hands-on Laravel, React, and AWS delivery. Less about tools for their own sake; more about the outcomes I can own.',
+			'I turn ambiguous business needs into shipped product — combining sales-honed problem framing with hands-on engineering. Less about tools for their own sake; more about the outcomes I can own.',
 		'hero.cta.strengths': 'See strengths',
 		'hero.cta.github': 'GitHub',
 		'hero.panel.label': 'git log',
