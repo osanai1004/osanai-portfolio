@@ -1,7 +1,6 @@
 ---
 import type { Locale } from '../lib/site';
 import type { Strength } from '../lib/strengths';
-import BrandLogo from './BrandLogo.astro';
 
 interface Props {
 	strength: Strength;
@@ -43,15 +42,6 @@ const labels =
 				<dd class="body-sm outcome">{copy.outcome}</dd>
 			</div>
 		</dl>
-		<ul class="tech-list" aria-label="Tech">
-			{
-				strength.tech.map((id) => (
-					<li class="tech-chip">
-						<BrandLogo id={id} size={14} />
-					</li>
-				))
-			}
-		</ul>
 	</div>
 </article>
 
@@ -159,25 +149,6 @@ const labels =
 
 	.outcome {
 		color: var(--color-ink) !important;
-	}
-
-	.tech-list {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 6px;
-		margin-top: auto;
-		padding-top: var(--space-xs);
-	}
-
-	.tech-chip {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 28px;
-		height: 28px;
-		border-radius: var(--rounded-md);
-		background: var(--color-surface-2);
-		border: 1px solid var(--color-hairline);
 	}
 
 	@media (prefers-reduced-motion: reduce) {

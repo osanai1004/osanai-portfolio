@@ -1,4 +1,3 @@
-import type { BrandId } from './brands';
 import type { Locale } from './site';
 
 /**
@@ -18,7 +17,6 @@ export type StrengthCopy = {
 export type Strength = {
 	id: StrengthId;
 	order: number;
-	tech: BrandId[];
 	image: string;
 	imageAlt: string;
 	copy: Record<Locale, StrengthCopy>;
@@ -28,7 +26,6 @@ export const STRENGTHS: Strength[] = [
 	{
 		id: 'bridge',
 		order: 1,
-		tech: ['laravel', 'typescript', 'react'],
 		image: '/images/strengths/bridge.webp',
 		imageAlt: 'Digging the intent behind messy requests and turning them into a clear spec',
 		copy: {
@@ -55,7 +52,6 @@ export const STRENGTHS: Strength[] = [
 	{
 		id: 'saas',
 		order: 2,
-		tech: ['php', 'laravel', 'aws', 'docker'],
 		image: '/images/strengths/saas.webp',
 		imageAlt: 'Handing a verified SaaS product to trusting people in the field',
 		copy: {
@@ -82,7 +78,6 @@ export const STRENGTHS: Strength[] = [
 	{
 		id: 'lead',
 		order: 3,
-		tech: ['github', 'cursor', 'typescript'],
 		image: '/images/strengths/lead.webp',
 		imageAlt: 'A team lead handing context so a small team ships with less rework',
 		copy: {
