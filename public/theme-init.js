@@ -10,4 +10,16 @@
 		/* localStorage 無効環境では既定（ダーク）を使う */
 	}
 	document.documentElement.dataset.theme = stored === 'light' ? 'light' : 'dark';
+
+	// ヒーローの打鍵演出がある場合、描画前に「全文が一瞬出る」のを防ぐ。
+	// JS 無効時はフラグが付かないので、静的な全文表示のまま残る。
+	var reduceMotion = false;
+	try {
+		reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	} catch (_) {
+		/* matchMedia 非対応環境では演出を使わない */
+	}
+	if (!reduceMotion) {
+		document.documentElement.dataset.terminalMotion = 'on';
+	}
 })();

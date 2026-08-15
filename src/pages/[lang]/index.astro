@@ -5,6 +5,7 @@ import Atmosphere from '../../components/Atmosphere.astro';
 import StrengthCard from '../../components/StrengthCard.astro';
 import BrandLogo from '../../components/BrandLogo.astro';
 import PersonName from '../../components/PersonName.astro';
+import HeroTerminal from '../../components/HeroTerminal.astro';
 import Contributions from '../../components/Contributions.astro';
 import { LOCALES, SITE, type Locale } from '../../lib/site';
 import { useTranslations, type UiKey } from '../../lib/i18n/ui';
@@ -56,7 +57,8 @@ const qaItems = [1, 2, 3].map((n) => ({
 					<span class="chrome-dot"></span>
 					<span class="chrome-title caption">{t('hero.panel.label')}</span>
 				</div>
-				<p class="panel-role body-sm">{t('hero.panel.role')}</p>
+				<HeroTerminal locale={locale} />
+				<p class="caption panel-stack-label">{t('hero.panel.stack')}</p>
 				<ul class="panel-stack">
 					{
 						HERO_STACK.map((item) => (
@@ -289,11 +291,12 @@ const qaItems = [1, 2, 3].map((n) => ({
 		font-family: var(--font-mono);
 	}
 
-	.panel-role {
-		color: var(--color-ink-subtle);
-		margin-bottom: var(--space-md);
-		padding-bottom: var(--space-md);
-		border-bottom: 1px solid var(--color-hairline);
+	.panel-stack-label {
+		margin-top: var(--space-md);
+		padding-top: var(--space-md);
+		border-top: 1px solid var(--color-hairline);
+		color: var(--color-ink-tertiary);
+		font-family: var(--font-mono);
 	}
 
 	.panel-stack {
