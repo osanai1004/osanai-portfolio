@@ -27,7 +27,7 @@ const prompt = t('hero.terminal.prompt');
 					type="button"
 					role="tab"
 					data-cli-tab={variant}
-					aria-selected={variant === 'a' ? 'true' : 'false'}
+					aria-selected={variant === 'c' ? 'true' : 'false'}
 				>
 					{t(HERO_TERMINAL_SWITCH[variant])}
 				</button>
@@ -36,7 +36,7 @@ const prompt = t('hero.terminal.prompt');
 	</div>
 	{
 		HERO_TERMINAL_VARIANTS.map((variant) => (
-			<div class="cli-pane" data-cli-pane={variant} hidden={variant !== 'a'}>
+			<div class="cli-pane" data-cli-pane={variant} hidden={variant !== 'c'}>
 				<pre class="sr-only">{formatHeroTerminalTranscript(t, HERO_TERMINAL_SCRIPTS[variant])}</pre>
 				<div
 					class="hero-terminal-screen"
@@ -219,7 +219,7 @@ const prompt = t('hero.terminal.prompt');
 	}
 
 	function parseVariant(value: string | null): CliVariant {
-		return CLI_VARIANTS.find((item) => item === value) ?? 'a';
+		return CLI_VARIANTS.find((item) => item === value) ?? 'c';
 	}
 
 	function variantFromLocation(): CliVariant {
@@ -228,7 +228,7 @@ const prompt = t('hero.terminal.prompt');
 
 	function writeVariantToUrl(variant: CliVariant): void {
 		const url = new URL(window.location.href);
-		if (variant === 'a') {
+		if (variant === 'c') {
 			url.searchParams.delete(CLI_QUERY);
 		} else {
 			url.searchParams.set(CLI_QUERY, variant);
@@ -367,7 +367,7 @@ const prompt = t('hero.terminal.prompt');
 
 		tabs.forEach((tab) => {
 			tab.addEventListener('click', () => {
-				activate(parseVariant(tab.dataset.cliTab ?? 'a'), true);
+				activate(parseVariant(tab.dataset.cliTab ?? 'c'), true);
 			});
 		});
 

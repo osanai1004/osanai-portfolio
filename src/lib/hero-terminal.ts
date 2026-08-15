@@ -42,15 +42,15 @@ export const HERO_TERMINAL_SCRIPTS: Record<HeroTerminalVariant, readonly HeroTer
 		{ kind: 'blank' },
 		{ kind: 'command', cmdKey: 'hero.terminal.b.cmd.commit' },
 	],
-	/** 案C — キャリアを git log 風に */
+	/** 案C — キャリアを git log 風に（起承転結の時系列） */
 	c: [
 		{ kind: 'command', cmdKey: 'hero.terminal.c.cmd.log' },
-		{ kind: 'output', textKey: 'hero.terminal.c.log.now', tone: 'ink' },
-		{ kind: 'output', textKey: 'hero.terminal.c.log.switch', tone: 'muted' },
-		{ kind: 'output', textKey: 'hero.terminal.c.log.sales', tone: 'muted' },
+		{ kind: 'output', textKey: 'hero.terminal.c.log.ki', tone: 'muted' },
+		{ kind: 'output', textKey: 'hero.terminal.c.log.sho', tone: 'muted' },
+		{ kind: 'output', textKey: 'hero.terminal.c.log.ten', tone: 'ink' },
 		{ kind: 'blank' },
 		{ kind: 'command', cmdKey: 'hero.terminal.c.cmd.why' },
-		{ kind: 'output', textKey: 'hero.terminal.c.out.why', tone: 'success' },
+		{ kind: 'output', textKey: 'hero.terminal.c.out.ketsu', tone: 'success' },
 	],
 };
 
