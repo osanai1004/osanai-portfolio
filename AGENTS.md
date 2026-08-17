@@ -20,3 +20,13 @@ npx astro check && npm run build
 ```
 
 ビルド後、`dist/**/*.html` に `<script>` インライン出力がないことを確認する（CSP 違反防止）。
+
+## Cursor Cloud specific instructions
+
+依存は起動時の update script（`npm ci`）で導入済み。手順の正本は `README.md`（開発コマンド）と上記「変更後の確認」。ここには非自明な注意点だけを残す。
+
+- **サービスは 1 つ（静的サイト）**: `npm run dev` で Astro dev サーバが `http://localhost:4321` に起動。ルート `/` は言語判定でリダイレクト、実体は `/ja/` と `/en/`。長時間動かすので tmux 上で起動する。
+- **lint / test / build**: 独立した lint・テストは無い。型チェック `npx astro check` が実質の lint、ビルドは `npm run build`（`dist/` に静的出力）。自動テストのフレームワークは未導入。
+- **Node バージョン差異は無害**: `package.json` の `engines` は `24.x` だが Astro 7 は Node 22.12+ で動作し、VM の Node 22.x で問題ない。`npm ci` 時の `EBADENGINE` 警告は無視してよい（`engine-strict` 未設定のため失敗しない）。
+- **`/api/contributions` は dev では動かない**: これはリポジトリ直下 `api/` の Vercel サーバレス関数で、`astro dev` は実行せず JS ソースをそのまま返す（`Content-Type: text/javascript`）。関数の実挙動（草グラフ SVG）は Vercel か `vercel dev` でのみ確認できる。ローカルで GitHub 草が表示されないのは既知で正常。
+- **UI 検証時は localStorage をリセット**: テーマ（`theme`）と言語（`locale`）の選好は localStorage に保存され、ページ遷移をまたいで持続する。テーマトグルと言語切替は独立（トグルは色のみ、言語切替は `/ja/`↔`/en/` のリンク遷移）。決め打ちの初期状態（ダーク＋日本語）で検証したい場合は `localStorage.clear()` 後にリロードする。
