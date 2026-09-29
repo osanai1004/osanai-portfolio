@@ -5,7 +5,7 @@ export const ui = {
 	ja: {
 		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'小山内つかさ（Tsukasa Osanai）— エンジニアチームリーダー。営業で培った課題整理力と、開発で培った実装力で、曖昧な要望を届く B2B SaaS に変えます。',
+			'小山内つかさ（Tsukasa Osanai）— エンジニアチームリーダー。曖昧な要望を、認識ズレと手戻りで止めず届くまで担います。',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.strengths': 'Strengths',
@@ -16,7 +16,7 @@ export const ui = {
 		'hero.eyebrow': 'Engineering Team Leader',
 		'hero.name': SITE.nameJaReadable,
 		'hero.tagline':
-			'営業で培った課題整理力と、開発で培った実装力で、曖昧な要望を「届くプロダクト」に変えます。技術自慢ではなく、解決できることにフォーカスしています。',
+			'要望が曖昧なまま開発が進むと、認識ズレと手戻りで止まりやすい。営業出身のエンジニアだからこそ、曖昧な要望を「届くまで」担えます。',
 		'hero.cta.strengths': '強みを見る',
 		'hero.cta.github': 'GitHub',
 		'hero.panel.label': 'git log',
@@ -33,7 +33,7 @@ export const ui = {
 		'about.intro.before': '',
 		'about.intro.company': '株式会社MOL CAREER',
 		'about.intro.after':
-			'のエンジニアチームリーダー。営業出身の回り道キャリアだからこそ、「誰の・どんな課題を・なぜ今解くのか」から逆算してプロダクトを作ります。',
+			'のエンジニアチームリーダー。営業出身の回り道だからこそ、曖昧な要望を「今やる／後回し／やらない」まで切ってから作り、検証して届けるところまで担います。',
 		'about.timelineLabel': 'Career',
 		'about.tl1.period': '〜2025',
 		'about.tl1.title': '法人フィールドセールス 7 年',
@@ -77,7 +77,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': '課題解決として届けられること',
 		'strengths.lead':
-			'キャリアの延長線上で、いま提供できる価値です。「意図を掘る」「検証してから届ける」「手戻りを先に潰す」——営業で染みついた習慣を、そのまま開発現場の課題解決に変えています。',
+			'曖昧な要望を「今やる／後回し／やらない」に切り分けて、仕様のFIXまで持っていきます。検証つきで本番を守りながら、改善を積み上げます。判断材料を渡すので、少人数の現場でも実装が途中で折れにくくなります。',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'お気軽にご連絡ください',
 		'contact.body':
@@ -90,7 +90,7 @@ export const ui = {
 	en: {
 		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'Tsukasa Osanai — Engineering Team Leader. Bridging sales-honed discovery with hands-on engineering to ship B2B SaaS that teams can trust.',
+			'Tsukasa Osanai — Engineering Team Leader. I carry ambiguous requests through to delivery, so misalignment and rework do not stall the work.',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.strengths': 'Strengths',
@@ -101,7 +101,7 @@ export const ui = {
 		'hero.eyebrow': 'Engineering Team Leader',
 		'hero.name': SITE.nameEn,
 		'hero.tagline':
-			'I turn ambiguous business needs into shipped product — combining sales-honed problem framing with hands-on engineering. Less about tools for their own sake; more about the outcomes I can own.',
+			'When development moves ahead while the request is still vague, misalignment and rework tend to stall it. As an engineer who came from sales, I can carry an ambiguous request through until it is delivered.',
 		'hero.cta.strengths': 'See strengths',
 		'hero.cta.github': 'GitHub',
 		'hero.panel.label': 'git log',
@@ -119,7 +119,7 @@ export const ui = {
 		'about.intro.before': 'Engineering team leader at ',
 		'about.intro.company': 'MOL CAREER Inc.',
 		'about.intro.after':
-			' My roundabout path through sales is exactly why I build products by working backwards from “whose problem, which problem, and why now.”',
+			' A roundabout path through sales is why I cut ambiguous requests into “do now,” “later,” or “not at all” before building, then verify and carry them through to delivery.',
 		'about.timelineLabel': 'Career',
 		'about.tl1.period': 'Until 2025',
 		'about.tl1.title': '7 years in B2B field sales',
@@ -163,7 +163,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': 'Problems I can help solve',
 		'strengths.lead':
-			'The value I deliver today is a straight line from that career: dig out the intent, verify before shipping, kill rework early — sales-honed habits turned into everyday problem-solving.',
+			'I sort ambiguous requests into “do now,” “later,” or “not at all,” and take them through to a fixed spec. I protect production with verification while improvements stack up. I pass along the basis for decisions, so a small team is less likely to stall mid-implementation.',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'Let’s connect',
 		'contact.body':
