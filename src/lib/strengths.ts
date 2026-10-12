@@ -34,7 +34,7 @@ export const STRENGTHS: Strength[] = [
 				problem:
 					'現場の要望は熱量がある一方で、「本当に解きたい課題」が言語化されないまま開発に入ると、手戻りや認識ズレが起きやすい。',
 				approach:
-					'延べ 数百社の商談で染みついた「意思決定者は何を見て判断するか」の逆算で、要望の裏にある意図・優先度・受け入れ条件を掘り、仕様FIXの場で裁断する。',
+					'営業で身についた「意思決定者は何を見て判断するか」の逆算で、要望の裏にある意図・優先度・受け入れ条件を掘り、仕様FIXの場で裁断する。',
 				outcome:
 					'「作ってほしいもの」を、「今やる範囲／後回し／やらない」まで含めた、チームが迷わない実装の切り口にできる。',
 			},
@@ -43,7 +43,7 @@ export const STRENGTHS: Strength[] = [
 				problem:
 					'Requests arrive with energy, but when the real problem is never articulated, coding starts on fuzzy ground — and rework follows.',
 				approach:
-					'Negotiating with hundreds of companies taught me to work backwards from what decision-makers judge by. I dig into the intent, priority, and acceptance criteria behind each request, then cut scope in spec-fix sessions.',
+					'Sales taught me to work backwards from what decision-makers judge by. I dig into the intent, priority, and acceptance criteria behind each request, then cut scope in spec-fix sessions.',
 				outcome:
 					'I turn “build this” into a clear slice: what we do now, what waits, and what we won’t do — so the team can execute without guessing.',
 			},
@@ -79,25 +79,25 @@ export const STRENGTHS: Strength[] = [
 		id: 'lead',
 		order: 3,
 		image: '/images/strengths/lead.webp',
-		imageAlt: 'A team lead handing context so a small team ships with less rework',
+		imageAlt: 'Shaping the development process so a small team ships quickly and safely',
 		copy: {
 			ja: {
-				title: '判断材料を渡して、チームの手戻りを減らす',
+				title: '開発の進め方そのものを整えて、速く・安全に回る状態をつくる',
 				problem:
-					'少人数だと、仕様が固まる前に実装が走り、レビューで初めてズレが分かる。速さの問題というより、認識ズレの後始末が重い。',
+					'少人数の現場ほど、Git運用・デプロイ手順・ドキュメントが属人化して、速度も品質も人に依存しやすい。',
 				approach:
-					'正解を配るのではなく、背景・優先度・受け入れ条件という判断材料を揃えて渡す。実装仕様FIXの型づくりと、1on1・チケット伴走で、着手前にズレを潰す。',
+					'Git運用ルール・デプロイフロー・ドキュメント化を整え、AIエージェントで作業を速めつつ、出力は自分で検証してから出す。',
 				outcome:
-					'自分が全部書くのではなく、着手前にズレを潰せる状態に近づける。速さより、後からやり直さないこと。',
+					'特定の人に頼らず、チームとして速く安全にリリースし続けられる開発体制。',
 			},
 			en: {
-				title: 'Hand the team context, not answers — and cut rework',
+				title: 'Shape how we build, so the team runs fast and safe',
 				problem:
-					'On a small team, implementation often starts before the spec is settled — and the gap only shows up in review. The real cost is not speed, but cleaning up misalignment.',
+					'The smaller the team, the more Git practices, deploy steps, and documentation live in one person’s head — so speed and quality end up depending on individuals.',
 				approach:
-					'Instead of handing out answers, I hand over what people need to decide: background, priorities, acceptance criteria. A lightweight spec-fix rhythm and 1:1 ticket coaching catch the gap before work starts.',
+					'I set up Git rules, a deploy flow, and documentation, and use AI agents to move faster — while verifying their output myself before it ships.',
 				outcome:
-					'The win is not writing everything myself — it’s catching the gap before work starts. Less about speed, more about not redoing it later.',
+					'A development setup where the team, not any one person, keeps shipping quickly and safely.',
 			},
 		},
 	},

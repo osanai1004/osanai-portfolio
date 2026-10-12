@@ -16,7 +16,7 @@ export const ui = {
 		'hero.eyebrow': 'Engineering Team Leader',
 		'hero.name': SITE.nameJaReadable,
 		'hero.tagline':
-			'要望が曖昧なまま開発が進むと、認識ズレと手戻りで止まりやすい。営業出身のエンジニアだからこそ、曖昧な要望を「届くまで」担えます。',
+			'要望が曖昧なまま開発が進むと、認識ズレと手戻りで止まりやすい。営業で身につけた「相手が何で判断するか」を起点に、曖昧な要望を仕様に落として、届けるところまで進めます。',
 		'hero.cta.strengths': '強みを見る',
 		'hero.cta.github': 'GitHub',
 		'hero.panel.label': 'git log',
@@ -25,7 +25,7 @@ export const ui = {
 		'hero.terminal.cmd.log': 'git log --reverse --oneline --about',
 		'hero.terminal.log.ki': '3b9 営業7年。数百社と商談。課題は見えていた',
 		'hero.terminal.log.sho': '7e2 でも営業だけでは、解決まで届かない場面が何度かあった',
-		'hero.terminal.log.ten': 'a1c だから作る側へ回った。いまは提案から解決まで一気通貫で担える',
+		'hero.terminal.log.ten': 'a1c だから作る側へ回った。いまは提案から実装・検証まで自分で手を動かしている',
 		'hero.terminal.cmd.why': 'git show HEAD:why.txt',
 		'hero.terminal.out.ketsu': '提案では終わらせず、プロダクトを通して課題解決まで導く。',
 		'about.eyebrow': 'About',
@@ -33,12 +33,12 @@ export const ui = {
 		'about.intro.before': '',
 		'about.intro.company': '株式会社MOL CAREER',
 		'about.intro.after':
-			'のエンジニアチームリーダー。営業出身の回り道だからこそ、曖昧な要望を「今やる／後回し／やらない」まで切ってから作り、検証して届けるところまで担います。',
+			'のエンジニアチームリーダー。営業での経験を活かして、曖昧な要望を「今やる／後回し／やらない」まで切ってから作り、検証して届けるところまで担います。',
 		'about.timelineLabel': 'Career',
 		'about.tl1.period': '〜2025',
 		'about.tl1.title': '法人フィールドセールス 7 年',
 		'about.tl1.desc':
-			'延べ 数百社と商談。その大半が経営者・役職者との直接交渉。扱っていたのは設備投資クラスの有形商材。',
+			'経営者・役職者との商談を中心に、設備投資クラスの有形商材を担当。',
 		'about.tl2.period': '〜2025',
 		'about.tl2.title': 'いま思えば、PoC 型の営業',
 		'about.tl2.desc':
@@ -77,7 +77,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': '課題解決として届けられること',
 		'strengths.lead':
-			'曖昧な要望を「今やる／後回し／やらない」に切り分けて、仕様のFIXまで持っていきます。検証つきで本番を守りながら、改善を積み上げます。判断材料を渡すので、少人数の現場でも実装が途中で折れにくくなります。',
+			'曖昧な要望を「今やる／後回し／やらない」に切り分けて、仕様のFIXまで持っていきます。検証つきで本番を守りながら、改善を積み上げます。開発の進め方も整えて、少人数でも速く安全にリリースし続けられる体制をつくります。',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'お気軽にご連絡ください',
 		'contact.body':
@@ -101,7 +101,7 @@ export const ui = {
 		'hero.eyebrow': 'Engineering Team Leader',
 		'hero.name': SITE.nameEn,
 		'hero.tagline':
-			'When development moves ahead while the request is still vague, misalignment and rework tend to stall it. As an engineer who came from sales, I can carry an ambiguous request through until it is delivered.',
+			'When development moves ahead while the request is still vague, misalignment and rework tend to stall it. Starting from what I learned in sales—what the other side actually decides by—I turn ambiguous requests into specs and carry them through to delivery.',
 		'hero.cta.strengths': 'See strengths',
 		'hero.cta.github': 'GitHub',
 		'hero.panel.label': 'git log',
@@ -111,7 +111,7 @@ export const ui = {
 		'hero.terminal.log.ki': '3b9 7 years in sales. Hundreds of meetings. I could see the problems.',
 		'hero.terminal.log.sho': '7e2 But sales alone could not finish the fix — more than once.',
 		'hero.terminal.log.ten':
-			'a1c So I moved to building. Now I take it from proposal to solution, end to end.',
+			'a1c So I moved to building. Now I do the hands-on work myself, from proposal to implementation and verification.',
 		'hero.terminal.cmd.why': 'git show HEAD:why.txt',
 		'hero.terminal.out.ketsu': 'I do not stop at the proposal. I lead the problem through to a product.',
 		'about.eyebrow': 'About',
@@ -119,12 +119,12 @@ export const ui = {
 		'about.intro.before': 'Engineering team leader at ',
 		'about.intro.company': 'MOL CAREER Inc.',
 		'about.intro.after':
-			' A roundabout path through sales is why I cut ambiguous requests into “do now,” “later,” or “not at all” before building, then verify and carry them through to delivery.',
+			' Drawing on my sales experience, I cut ambiguous requests into “do now,” “later,” or “not at all” before building, then verify and carry them through to delivery.',
 		'about.timelineLabel': 'Career',
 		'about.tl1.period': 'Until 2025',
 		'about.tl1.title': '7 years in B2B field sales',
 		'about.tl1.desc':
-			'Negotiated with hundreds of companies — almost always directly with executives and decision-makers — selling capital-investment-grade tangible equipment.',
+			'Handled capital-investment-grade tangible equipment, mostly in meetings with executives and decision-makers.',
 		'about.tl2.period': 'Until 2025',
 		'about.tl2.title': 'PoC-style sales, before I knew the term',
 		'about.tl2.desc':
@@ -163,7 +163,7 @@ export const ui = {
 		'strengths.eyebrow': 'Strengths',
 		'strengths.title': 'Problems I can help solve',
 		'strengths.lead':
-			'I sort ambiguous requests into “do now,” “later,” or “not at all,” and take them through to a fixed spec. I protect production with verification while improvements stack up. I pass along the basis for decisions, so a small team is less likely to stall mid-implementation.',
+			'I sort ambiguous requests into “do now,” “later,” or “not at all,” and take them through to a fixed spec. I protect production with verification while improvements stack up. I also shape the development process itself, so even a small team can keep shipping quickly and safely.',
 		'contact.eyebrow': 'Contact',
 		'contact.title': 'Let’s connect',
 		'contact.body':
