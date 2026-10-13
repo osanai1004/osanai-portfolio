@@ -5,7 +5,7 @@ export const ui = {
 	ja: {
 		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'小山内つかさ（Tsukasa Osanai）— エンジニアチームリーダー。曖昧な要望を、認識ズレと手戻りで止めず届くまで担います。',
+			'小山内つかさ（Tsukasa Osanai）— エンジニアチームリーダー。曖昧な要望を仕様に落として届け、認識ズレと手戻りを減らします。',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.strengths': 'Strengths',
@@ -23,7 +23,7 @@ export const ui = {
 		'hero.panel.stack': 'Focus stack',
 		'hero.terminal.prompt': 'osanai@lead:~$',
 		'hero.terminal.cmd.log': 'git log --reverse --oneline --about',
-		'hero.terminal.log.ki': '3b9 営業7年。数百社と商談。課題は見えていた',
+		'hero.terminal.log.ki': '3b9 商談では、相手の課題は見えていた',
 		'hero.terminal.log.sho': '7e2 でも営業だけでは、解決まで届かない場面が何度かあった',
 		'hero.terminal.log.ten': 'a1c だから作る側へ回った。いまは提案から実装・検証まで自分で手を動かしている',
 		'hero.terminal.cmd.why': 'git show HEAD:why.txt',
@@ -46,7 +46,7 @@ export const ui = {
 		'about.tl3.period': '2025',
 		'about.tl3.title': '開発職へ転身',
 		'about.tl3.desc':
-			'働きながらの独学を経てエンジニアに。営業で染みついた「意思決定者から逆算する習慣」を、今度は作る側で活かす。',
+			'働きながらの独学を経てエンジニアに。営業で身につけた「意思決定者は何を見て判断するか」を起点に、作る範囲を切ってから仕様に落とす。',
 		'about.tl4.period': '現在',
 		'about.tl4.title': 'エンジニアチームリーダー',
 		'about.tl4.desc':
@@ -90,7 +90,7 @@ export const ui = {
 	en: {
 		'meta.title': `${SITE.nameEn} | Portfolio`,
 		'meta.description':
-			'Tsukasa Osanai — Engineering Team Leader. I carry ambiguous requests through to delivery, so misalignment and rework do not stall the work.',
+			'Tsukasa Osanai — Engineering Team Leader. I turn ambiguous requests into specs and deliver them, which cuts misalignment and rework.',
 		'nav.about': 'About',
 		'nav.skills': 'Skills',
 		'nav.strengths': 'Strengths',
@@ -108,7 +108,7 @@ export const ui = {
 		'hero.panel.stack': 'Focus stack',
 		'hero.terminal.prompt': 'osanai@lead:~$',
 		'hero.terminal.cmd.log': 'git log --reverse --oneline --about',
-		'hero.terminal.log.ki': '3b9 7 years in sales. Hundreds of meetings. I could see the problems.',
+		'hero.terminal.log.ki': '3b9 In the meetings, I could see the problems.',
 		'hero.terminal.log.sho': '7e2 But sales alone could not finish the fix — more than once.',
 		'hero.terminal.log.ten':
 			'a1c So I moved to building. Now I do the hands-on work myself, from proposal to implementation and verification.',
@@ -132,7 +132,7 @@ export const ui = {
 		'about.tl3.period': '2025',
 		'about.tl3.title': 'Switched to engineering',
 		'about.tl3.desc':
-			'Taught myself to code while working full-time, then moved into engineering — bringing the habit of working backwards from decision-makers to the building side.',
+			'Taught myself to code while working full-time, then moved into engineering. Starting from what decision-makers judge by, I cut the scope and turn the request into a spec before building.',
 		'about.tl4.period': 'Now',
 		'about.tl4.title': 'Engineering team leader',
 		'about.tl4.desc':
